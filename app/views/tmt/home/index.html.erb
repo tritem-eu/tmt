@@ -1,0 +1,24 @@
+<%= left_navigation_for_dashboard(active: :home) %>
+
+<div class='height-separator-20'></div>
+<div class='row'>
+  <div class='col-lg-12'>
+    <div class="jumbotron">
+      <h1><%= Tmt::Cfg.first.hello_message %></h1>
+      <p> <%= Tmt::Cfg.first.hello_subtitle %></p>
+    </div>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-lg-12'>
+    <% unless current_user.nil? %>
+      <% if @projects.any? %>
+        <h3><%= t(:listing_projects, scope: :home) %></h3>
+      <% end %>
+      <%= render partial: "/admin/projects/table", locals: {
+        projects: @projects,
+        with_edit: true
+      } %>
+    <% end %>
+  </div>
+</div>

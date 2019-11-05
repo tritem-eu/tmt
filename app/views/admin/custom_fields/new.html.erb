@@ -1,0 +1,42 @@
+<%= left_navigation_for_admin active: :custom_fields %>
+
+<% present(@custom_field, Tmt::CustomFieldPresenter) do |custom_field_present|%>
+  <%= page_header(custom_field_present.header_name) %>
+
+  <%= breadcrumbs(
+    :admin,
+    admin_cfgs_path,
+    custom_field_present.full_model_name,
+    custom_field_present.index_path,
+    :new
+  ) %>
+
+  <ul class="nav nav-tabs">
+    <% params[:type_name] ||= 'string' %>
+    <% @type_names.each do |type_name| %>
+      <li class="<%= :active if params[:type_name] == type_name.to_s %>">
+        <% if custom_field_present.model_name.to_s == 'test_run' %>
+          <%= link_to t(type_name, scope: :custom_fields), new_admin_test_run_custom_field_path(type_name: type_name) %>
+        <% else %>
+          <%= link_to t(type_name, scope: :custom_fields), new_admin_test_case_custom_field_path(type_name: type_name) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <div class='height-separator'></div>
+  <% @type_name ||= :string %>
+  <% if @type_names.include?(@type_name.to_s) %>
+    <div class='col-lg-6'>
+      <%= render 'form',
+        custom_field: @custom_field,
+        type_names: @type_names,
+        projects: @projects,
+        url: custom_fields_path(@custom_field),
+        type_name: @type_name
+      %>
+    </div>
+  <% end %>
+
+  <%= select_tag 'type_name', options_for_select(@type_names.map {|type_name| [type_name, type_name]}), class: "change-custom-field-type hidden"  %>
+<% end %>

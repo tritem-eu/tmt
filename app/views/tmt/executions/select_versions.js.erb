@@ -1,0 +1,26 @@
+app.modal.add("<%= render_modal({
+  header: 'Selecting Versions',
+  subject: add_tag do |tag|
+    tag.space " for"
+    tag.space h(@test_run.name)
+    tag.space "test run"
+    tag.add link_edit select_test_run_project_campaign_executions_path(@project, @campaign, test_case_ids: @test_cases.map(&:id), test_run_id: params[:test_run_id]), name: ''
+  end,
+  subheader: crop_text(h("Project: "), project_link(@project, {target: '_blank'}), h(" Campaign: "), campaign_link(@campaign, {target: '_blank'})),
+  class_name: 'col-lg-6 sets',
+  body: render(partial: "select_versions", locals: {
+    campaign: @campaign,
+    project: @project,
+    version_ids: @version_ids,
+    used_version_ids: @used_version_ids,
+    test_cases: @test_cases,
+    test_run: @test_run,
+  })
+}) %>")
+
+app.executions.event.showHiddenVersions();
+app.executions.event.keyUpSearchTestCase();
+app.executions.event.showAllVersions();
+app.executions.event.unselectAllVersions();
+app.executions.event.notAddVersionsUsed();
+app.executions.event.selectVersionsMannually(app.modal.jLastModal());

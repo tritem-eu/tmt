@@ -1,0 +1,133 @@
+<% present @test_run do |test_run_present| %>
+  <%= left_navigation_for_dashboard active: :test_run, project: @project, test_run: @test_run %>
+
+  <%= page_header(
+    test_run_present.header_name,
+    subject: h(@test_run.name)
+  ) %>
+
+  <%= breadcrumbs(
+    t(:projects, scope: :test_runs),
+    projects_or_root_path(),
+    @project.name,
+    project_path(@project),
+    t(:test_runs, scope: :test_runs),
+    project_test_runs_path(@project, campaign_id: @campaign.id),
+    test_run_present.name
+  ) %>
+
+  <% unless @test_run.deleted_at.nil? %>
+    <p class='text-danger text-center'>This object is deleted.</p>
+  <% else %>
+    <%= page_description @test_run.description %>
+    <div>
+      <div class="row">
+        <div class= "col-lg-4">
+          <dl class="dl-horizontal">
+            <dt><%= t(:campaign, scope: :test_runs) %></dt>
+            <dd><%= campaign_link(@test_run.campaign) %></dd>
+
+            <dt><%= t(:due_date, scope: :test_runs) %></dt>
+            <dd><%= test_run_present.due_date %></dd>
+
+            <dt><%= t(:created_at, scope: :test_runs) %></dt>
+            <dd><%= test_run_present.created_at %></dd>
+
+            <% @test_run.custom_field_values.each do |custom_field_value| %>
+              <dt><%= h(custom_field_value.custom_field_name) %></dt>
+              <dd><%= show_value custom_field_value.value %></dd>
+            <% end %>
+
+            <dt><%= t(:creator, scope: :test_runs) %></dt>
+            <dd><%= test_run_present.link_creator %></dd>
+
+            <dt><%= t(:executor, scope: :test_runs) %></dt>
+            <dd><%= test_run_present.link_executor %></dd>
+            </dd>
+          </dl>
+        </div>
+        <div class="col-lg-8">
+          <%= render "status",
+            test_run: @test_run,
+            project: @project,
+            campaign: @campaign,
+            test_cases: @test_cases
+          %>
+          <% if @test_run.has_status?(:done, :executing) %>
+            <br />
+            <%= test_run_present.execution_progress %>
+          <% end %>
+        </div>
+      </div>
+
+      <div>
+        <% if @versions.any? %>
+          <table class="table test-run-with-test-cases">
+            <thead>
+              <tr>
+                <th class='col-lg-4'><%= t(:test_case, scope: :test_runs) %></th>
+                <th class='col-lg-4'><%= t(:version_id, scope: :test_runs) %></th>
+                <th class='col-lg-2'><%= t(:author, scope: :test_runs) %></th>
+                <th class='col-lg-1'><%= t(:progress, scope: :test_runs) %></th>
+                <th class='col-lg-1'><%= t(:status, scope: :test_runs) %></th>
+                <% unless @test_run.has_status?(:done) %>
+                  <th class='col-lg-1'><%= t(:action, scope: :test_runs)%></th>
+                <% end %>
+              </tr>
+            </thead>
+            <tbody>
+              <% @versions.order(created_at: :desc).each do |execution| %>
+                <% version = execution.version %>
+                <% test_case = version.test_case %>
+                <tr>
+                  <td><%= present(test_case).link_show(@project) %></td>
+                  <td><%= present(version).link_with_id(@project, test_case) %> </td>
+                  <td><%= present(version).author %></td>
+                  <td><%= present(execution).progress %></td>
+                  <td><%= present(execution).result_label(@project) %></td>
+                  <% unless @test_run.has_status?(:done) %>
+                    <td>
+                      <% if @test_run.has_status?(:new) %>
+                        <div class="btn-group dropdown">
+                          <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                          <ul class="dropdown-menu dropdown-menu-hover pull-right" role="menu">
+                            <li><%= link_delete project_campaign_execution_path(@project, @campaign, execution) %></li>
+                          </ul>
+                        </div>
+                      <% else %>
+                        <% unless @test_run.executor_machine? %>
+                          <% if execution.can_be_executed? and current_user == @executor %>
+                            <%= link_to icon('play'), project_campaign_execution_path(@project, @campaign, execution), disabled: true %>
+                          <% else %>
+                            <%= icon('play', style: 'color: #eeeeee') %>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p class='text-muted'><%= t(:list_of_versions_is_empty, scope: :test_runs) %></p>
+        <% end %>
+        <div class='text-center'><%= test_run_present.link_to_report(@project, @campaign) %></div>
+        <% if current_user.member_for_project(@project) %>
+          <% if can? :editable, @test_run %>
+            <%= link_to select_test_cases_project_campaign_executions_path(@project, @campaign, test_run_id: @test_run.id), remote: true do %>
+              <%= icon('plus-sign') %>
+              <%= t(:add_versions, scope: :test_runs) %>
+            <% end %>
+            &nbsp;
+            <%= link_to upload_csv_project_campaign_executions_path(@project, @campaign, test_run_id: @test_run.id), remote: false do %>
+              <%= icon('upload') %>
+              <%= t(:import_from_csv_file, scope: :test_runs) %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <%= render partial: 'tmt/user_activities/history', locals: {activities: @test_run.user_activities, is_remote: true} %>
+  <% end %>
+<% end %>

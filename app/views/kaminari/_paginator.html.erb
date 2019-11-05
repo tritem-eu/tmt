@@ -1,0 +1,18 @@
+<% pagination_class ||= "pagination-sm" %>
+<% params_page = params[:page].to_i %>
+<%= paginator.render do %>
+  <div class='text-center'>
+    <ul class="pagination <%= pagination_class %> nonselectable">
+      <%= first_page_tag %>
+      <%= prev_page_tag %>
+      <% result = ::Tmt::Lib::Pagination.array_for(total_pages, params_page, window) %>
+      <%= gap_tag if result.first.nil? %>
+      <% each_page.each do |page| %>
+        <%= page_tag page if result.include?(page.to_s.to_i) %>
+      <% end %>
+      <%= gap_tag if result.last.nil? %>
+      <%= next_page_tag %>
+      <%= last_page_tag %>
+    </ul>
+  </div>
+<% end %>

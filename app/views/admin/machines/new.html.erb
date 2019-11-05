@@ -1,0 +1,18 @@
+<%= left_navigation_for_admin active: :machines %>
+
+<%= page_header t(:machine, scope: :machines) %>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:machines, scope: :machines),
+  admin_machines_path,
+  t(:new, scope: :machines)
+) %>
+
+<div class='col-lg-6'>
+  <%= render 'form',
+    machine: @machine,
+    url: admin_machines_path(@machine, user_id: @user.id)
+  %>
+</div>

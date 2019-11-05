@@ -1,0 +1,8 @@
+<p><%= t :welcome, scope: [:devise, :mailer] %> <%= @user.name %>!</p>
+
+<p><%= t :you_can_confirm_your_, scope: [:devise, :mailer] %></p>
+<div class="row">
+  <div class="col-lg-4 col-lg-offset-4">
+    <p><%= link_to 'Confirm my account', confirmation_url(@resource, :confirmation_token => @token), class: "btn btn-lg btn-primary btn-block" %></p>
+  </div>
+</div>

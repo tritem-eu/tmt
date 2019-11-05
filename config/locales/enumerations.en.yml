@@ -1,0 +1,18 @@
+# encoding: utf-8
+
+en:
+  enumerations:
+    action: Action
+    attached_files: Attached files
+    edit: Edit
+    enumerations: Enumerations
+    enumeration: Enumeration
+    text_value: Text value
+    save: Save
+    text: Text
+    listing_users: Listing users
+    name: Name
+    new_enumeration: New enumeration
+    new_project: New project
+    name_for_value: Name for value
+    value: Value

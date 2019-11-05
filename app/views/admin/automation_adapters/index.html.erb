@@ -1,0 +1,17 @@
+<%= left_navigation_for_admin active: :automation_adapters %>
+
+<%= page_header t(:automation_adapters, scope: :automation_adapters),
+  right_side: link_new(new_admin_automation_adapter_url)
+%>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:automation_adapters, scope: :automation_adapters)
+) %>
+
+<%= page_description t(:_description, scope: :automation_adapters) %>
+
+<div class='height-separator'></div>
+
+<%= render "table", adapters: @adapters %>

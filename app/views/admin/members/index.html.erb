@@ -1,0 +1,73 @@
+<%= left_navigation_for_admin active: :members %>
+
+<%= page_header t(:members, scope: :members)%>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:members, scope: :members),
+  admin_campaigns_path
+) %>
+
+<%= page_description t(:list_of_users, scope: :members) %>
+
+<div class='height-separator-20'></div>
+<div class='row'>
+  <% if @projects.any? %>
+    <div class='col-lg-3'>
+      <div class="list-group">
+        <div class="list-group-item active">
+          <%= t(:list_of_project, scope: :members) %>
+        </div>
+        <% @projects.each do |project| %>
+          <% class_name = ''%>
+          <% if @project_id.to_s == project.id.to_s %>
+            <% class_name = 'disabled' %>
+          <% end %>
+          <%= link_to project.name, admin_members_path(project_id: project.id), class: "list-group-item #{class_name}"%>
+        <% end %>
+      </div>
+    </div>
+    <div class='col-lg-9'>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th><%= t(:user, scope: :members) %></th>
+            <th><%= t(:email, scope: :members) %></th>
+            <th><%= t(:active, scope: :members) %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <% member = @members_with_objects[user.id] %>
+              <% unless member.nil? %>
+                <td><b><%= link_to crop_string(user.name), user_path(user) %></b></td>
+                <td> <%= user.email %></td>
+                <td class='col-lg-1'>
+                  <%= form_for @members_with_objects[user.id], url: admin_member_path(@members_with_objects[user.id]), method: :delete do |f| %>
+                    <input type="checkbox" checked="" class="switch-small hidden">
+                    <%= f.submit t(:remove, scope: :members), class: "btn btn-default" %>
+                  <% end %>
+                </td>
+              <% else %>
+                <td> <%= link_to crop_string(user.name), user_path(user) %></td>
+                <td> <%= user.email %></td>
+                <td class='col-lg-1'>
+                  <%= form_for Tmt::Member.new, url: admin_members_path, as: :member do |f| %>
+                    <%= f.hidden_field :user_id, value: user.id %>
+                    <%= f.hidden_field :project_id, value: @project_id %>
+                    <input type="checkbox" class="switch-small hidden">
+                    <%= f.submit t(:add, scope: :members), class: "btn btn-default" %>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class='text-center'>Before using this section, please create at least one <%= link_to "project", new_admin_project_path, remote: true %></div>
+  <% end %>
+</div>

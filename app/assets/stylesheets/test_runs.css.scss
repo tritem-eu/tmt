@@ -1,0 +1,68 @@
+.test-runs.calendar, .test-runs.calendar-day {
+  .search-calendar-form {
+    select, input {
+      width: auto;
+      margin: 0 5px
+    }
+  }
+
+  .wrapper-calendar {
+    .calendar-day-lock {
+      background: #fbfbfb;
+    }
+
+    th {
+      width: 14%;
+    }
+
+    td {
+      height: 140px;
+      padding: 0;
+      vertical-align: top !important;
+
+      .calendar-day-number {
+        background: #fbfbfb;
+        padding: 2px 5px;
+        a {
+          float: right;
+        }
+      }
+
+      ul {
+        padding: 5px;
+
+        li {
+          border: 0px solid #aab;
+          border-radius: 5px;
+          padding-left: 5px;
+        }
+      }
+    }
+  }
+
+  .calendar-day-table {
+    td {
+      height: 150px;
+      padding: 0px;
+
+      .text-muted {
+        font-size: 20px;
+      }
+
+      .calendar-day-number {
+        background: #fbfbfb;
+        padding: 10px;
+        font-size: 20px;
+      }
+
+      ul {
+        padding: 10px;
+        li {
+          padding: 5px;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,30 @@
+<%= left_navigation_for_dashboard active: [:test_run, :execution], project: @project, test_run: @test_run, execution: @execution %>
+
+<%= page_header t(:execution, scope: :executions),
+  subject: h(@version.comment)
+%>
+
+<%= breadcrumbs(
+  :projects,
+  projects_or_root_path,
+  h(@project.name),
+  project_path(@project),
+  t(:test_runs, scope: :executions),
+  project_test_runs_path(@project),
+  h(@test_run.name),
+  project_campaign_test_run_path(@project, @campaign, @test_run),
+  "#{t(:execution, scope: :executions)} '#{h(@version.comment)}'",
+  [@project, @campaign, @execution],
+  'Result'
+) %>
+<% if can? :planned_or_executing, @execution.test_run %>
+  <div class='row'>
+    <div class='col-lg-6'>
+      <%= render 'form',
+        url: project_campaign_execution_path(@project, @execution.test_run.campaign, id: @execution.id),
+        version: @version,
+        execution: @execution
+      %>
+    </div>
+  </div>
+<% end %>

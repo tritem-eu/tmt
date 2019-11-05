@@ -1,0 +1,9 @@
+# encoding: utf-8
+
+en:
+  home:
+    home: Home
+    listing_projects: Select your project
+    listing_users: Listing users
+    new_project: New project
+    projects: Projects

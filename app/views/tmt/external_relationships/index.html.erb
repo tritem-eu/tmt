@@ -1,0 +1,23 @@
+<table>
+  <thead>
+    <tr>
+      <th>Value</th>
+      <th>URL</th>
+      <th>Remote ID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @external_relationships.each do |external_relationship| %>
+      <tr>
+        <td><%= external_relationship.value %></td>
+        <td><%= external_relationship.url %></td>
+        <td><%= external_relationship.rq_id %></td>
+        <td><%= link_to 'Destroy', external_relationship, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

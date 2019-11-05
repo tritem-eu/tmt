@@ -1,0 +1,9 @@
+<hr>
+<dl>
+<h5><%= t(:Recent_activity, scope: :test_cases) %></h5>
+  <% @user.activities_recent_first.each do |entry|%>
+    <% present entry do |activity_present| %>
+      <%= activity_present.activity_for_user %>
+    <% end %>
+ <% end %>
+ </dl>

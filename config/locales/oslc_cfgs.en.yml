@@ -1,0 +1,5 @@
+en:
+  oslc_cfgs:
+    oslc_configuration: OSLC configuration
+    save: Save
+    unable_to_save: prohibited this cfg from being saved

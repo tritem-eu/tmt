@@ -1,0 +1,21 @@
+<%= left_navigation_for_admin active: :oslc_cfg %>
+
+<%= page_header t(:oslc_configuration, scope: :oslc_cfgs) %>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:oslc_configuration, scope: :oslc_cfgs),
+  admin_cfgs_path
+) %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <%= render 'form',
+        cfg: @oslc_cfg,
+        url: admin_oslc_cfg_path(@oslc_cfg)
+      %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,84 @@
+<% case type_name.to_s.to_sym %>
+<% when :bool %>
+  <div class="form-group">
+    <%= f.label t(:default_value, scope: :custom_fields), class: "control-label col-lg-3" %>
+    <div class="col-lg-9">
+      <%= f.select :default_value,
+        options_for_select([[t(:false_value, scope: :custom_fields)], [t(:true_value, scope: :custom_fields), true]]),
+        {prompt: t(:no_value, scope: :custom_fields)}, class: "form-control"
+      %>
+    </div>
+  </div>
+<% when :date %>
+  <div class="form-group">
+    <%= f.label t(:default_value, scope: :custom_fields), class: "control-label col-lg-3" %>
+    <div class="col-lg-9">
+      <%= add_datetime({
+        f: f,
+        name: :default_value,
+        type: :date
+      }) %>
+    </div>
+  </div>
+<% when :enum %>
+  <div class="form-group">
+    <%= f.label :enumeration_id, class: "control-label col-lg-3" do %>
+        <%= t(:enum, scope: :custom_fields) %>
+        <br />
+        <%= link_new(new_admin_enumeration_path) %>
+    <% end %>
+    <div class="col-lg-9">
+      <%= f.select :enumeration_id,
+        options_from_collection_for_select(@enumerations, :id, :name, pasta(custom_field, :enumeration, :id)),
+        {prompt: t(:no_value, scope: :custom_fields)}, class: "form-control"
+      %>
+    </div>
+  </div>
+<% when :int %>
+  <div class="form-group">
+    <%= f.label t(:upper_limit, scope: :custom_fields), class: "control-label col-lg-3", for: "custom_field_upper_limit" %>
+    <div class="col-lg-9">
+      <%= f.text_field :upper_limit, type: :number, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:lower_limit, scope: :custom_fields), class: "control-label col-lg-3", for: "custom_field_lower_limit" %>
+    <div class="col-lg-9">
+      <%= f.text_field :lower_limit, type: :number, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:default_value, scope: :custom_fields), class: "control-label col-lg-3", for: "custom_field_default_value" %>
+    <div class="col-lg-9">
+      <%= f.text_field :default_value, type: :number, class: "form-control" %>
+    </div>
+  </div>
+<% when :string %>
+  <div class="form-group">
+    <%= f.label t(:upper_limit, scope: :custom_fields), class: "control-label col-lg-3", for: "custom_field_upper_limit" %>
+    <div class="col-lg-9">
+      <%= f.text_field :upper_limit, type: :number, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:default_value, scope: :custom_fields), class: "control-label col-lg-3", for: "custom_field_default_value" %>
+    <div class="col-lg-9">
+      <%= f.text_field :default_value, class: "form-control" %>
+    </div>
+  </div>
+<% when :text %>
+  <div class="form-group">
+    <%= f.label t(:upper_limit, scope: :custom_fields), class: "control-label col-lg-3", for: "custom_field_upper_limit" %>
+    <div class="col-lg-9">
+      <%= f.text_field :upper_limit, type: :number, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label t(:lower_limit, scope: :custom_fields), class: "control-label col-lg-3", for: "custom_field_default_value" %>
+    <div class="col-lg-9">
+      <%= f.text_field :default_value, class: "form-control" %>
+    </div>
+  </div>
+<% else %>
+Didn't define type!"
+<% end %>

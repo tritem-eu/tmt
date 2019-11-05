@@ -1,0 +1,18 @@
+# encoding: utf-8
+
+en:
+  machines:
+    action: Action
+    edit: Edit
+    create: Create
+    list_of_machines_is_empty: A list of machines is empty.
+    fully_qualified_domain_name: Fully qualified domain name
+    hostname: Hostname
+    ip_address: IP address
+    mac_address: MAC address
+    machine: Machine
+    machines: Machines
+    new: New
+    new_machine: New machine
+    user_name: User name
+    _description: A list of all users who are machines.

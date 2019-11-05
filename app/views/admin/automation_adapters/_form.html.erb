@@ -1,0 +1,76 @@
+<%= form_for(adapter, url: url, as: :automation_adapter, html: {class: "form-horizontal"}) do |f| %>
+  <div class="form-group required">
+    <label class='col-lg-3 control-label'>
+      <%= t(:user, scope: :automation_adapters) %>
+    </label>
+    <div class='controls col-lg-9'>
+      <%= f.select :user_id, add_options_of_select(User.undeleted.pluck(:id, :name, :email),
+        value: 0,
+        content: 1,
+        additional_content: 2,
+        default_value: adapter.user_id
+      ), {}, {class: 'form-control'} %>
+
+    </div>
+  </div>
+
+  <div class="form-group required">
+    <label class='col-lg-3 control-label'>
+      <%= t(:project, scope: :automation_adapters) %>
+    </label>
+    <div class='controls col-lg-9'>
+      <%= f.select :project_id, add_options_of_select(Tmt::Project.all.pluck(:id, :name),
+        value: 0,
+        content: 1,
+        default_value: adapter.project_id,
+      ), {}, {class: 'form-control'} %>
+    </div>
+  </div>
+
+  <div class="form-group required">
+    <label class='col-lg-3 control-label'>
+      <%= t(:name, scope: :automation_adapters) %>
+    </label>
+    <div class='controls col-lg-9'>
+      <%= f.text_field :name, class: "form-control", placeholder: t(:name, scope: :automation_adapters) %>
+    </div>
+  </div>
+
+  <div class="form-group required">
+    <label class='col-lg-3 control-label'>
+      <%= t(:type, scope: :automation_adapters) %>
+    </label>
+    <div class='controls col-lg-9'>
+      <%= f.select :adapter_type, add_options_of_select([Tmt::AutomationAdapter.adapter_types],
+        value: 0,
+        content: 0,
+        default_value: adapter.adapter_type,
+      ), {}, {class: 'form-control'} %>
+
+    </div>
+  </div>
+
+  <div class="form-group required">
+    <label class='col-lg-3 control-label'>
+      <%= t(:polling_interval, scope: :automation_adapters) %>
+    </label>
+    <div class='controls col-lg-9'>
+      <%= f.text_field :polling_interval, class: "form-control", placeholder: t(:polling_interval, scope: :automation_adapters) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='col-lg-3 control-label'>
+      <%= t(:description, scope: :automation_adapters) %>
+    </label>
+    <div class='controls col-lg-9'>
+      <%= f.text_area :description, class: "form-control", placeholder: t(:description, scope: :automation_adapters) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-3 col-lg-9 controls">
+      <%= button_submit_for(f, adapter, class: 'only-one-click') %>
+    </div>
+  </div>
+<% end %>

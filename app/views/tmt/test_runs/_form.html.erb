@@ -1,0 +1,56 @@
+<%= form_for(test_run, url: url, as: :test_run, remote: true, html: {class: "form-horizontal"}) do |f| %>
+  <div class="form-group required">
+    <label class="col-lg-3 control-label">
+      <%= t(:name, scope: :test_runs) %>
+    </label>
+    <div class="col-lg-9 controls">
+      <%= f.text_field :name, class: "form-control js-input-down-counter-#{Tmt::Cfg.max_name_length}" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-lg-3 control-label">
+      <%= t(:description, scope: :test_runs) %>
+    </label>
+    <div class="col-lg-9 controls">
+      <%= f.text_area :description, class: "form-control no-resize-vertical" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="col-lg-3 control-label">
+      <%= f.label :due_date %>
+    </label>
+    <div class="col-lg-9 controls">
+      <%= add_datetime({
+        f: f,
+        name: "due_date",
+        value: test_run.due_date
+      }) %>
+    </div>
+  </div>
+  <% test_run.custom_field_values.each do |custom_field_value| %>
+    <div class="form-group">
+      <%= f.fields_for :custom_field_values do |sub_f| %>
+        <label class="col-lg-3 control-label">
+          <%= h custom_field_value.custom_field.name %>
+        </label>
+        <div class="controls col-lg-9">
+          <%= present(custom_field_value.custom_field, Tmt::CustomFieldPresenter).field_tag(custom_field_value, sub_f) %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="col-lg-3 control-label">
+      <%= f.label :executor_id %>
+    </label>
+    <div class="col-lg-9 controls">
+      <%= f.select :executor_id, options_from_collection_for_select(executors, :id, :name, test_run.executor_id.to_s), {include_blank: true}, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-offset-3 col-lg-9 controls">
+      <%= f.submit t(:save, scope: :test_runs), class: "btn btn-primary in-modal-footer only-one-click" %>
+    </div>
+  </div>
+<% end %>

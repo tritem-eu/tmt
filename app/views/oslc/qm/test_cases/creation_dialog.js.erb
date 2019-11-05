@@ -1,0 +1,9 @@
+<% if @test_case.id %>
+  // Send message when object @test_case was created
+  var response = "<%= @response %>";
+  $('[data-response]').remove();
+  $('body').append("<div class='hidden' data-response='" + response + "'></div>");
+  app.oslc.init();
+  app.oslc.uiProvider.postMessage(response);
+  app.oslc.uiProvider.windowName(response);
+<% end %>

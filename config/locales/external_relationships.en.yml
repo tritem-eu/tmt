@@ -1,0 +1,9 @@
+# encoding: utf-8
+
+en:
+  external_relationships:
+    relationship: Relationship
+    external_relationship: External relationship
+    relationship_value: Relationship value
+    relationship_id: ID in remote system
+    value: Value

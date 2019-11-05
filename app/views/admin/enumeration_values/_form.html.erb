@@ -1,0 +1,23 @@
+<%= form_for([:admin, enumeration, value], as: :enumeration_value, html: {class: 'form-horizontal', remote: true}) do |f| %>
+  <div class='form-group required'>
+    <label class="control-label col-lg-3"><%= t(:value, scope: :enumerations) %></label>
+    <div class='col-lg-9'>
+      <% if enumeration.unassigned? or value.id.nil? %>
+        <%= f.text_field :numerical_value, class: "form-control", require: true %>
+      <% else %>
+        <%= f.text_field :numerical_value, class: "form-control", require: true, disabled: :disabled %>
+      <% end %>
+    </div>
+  </div>
+  <div class='form-group required'>
+    <label class="control-label col-lg-3"><%= t(:name, scope: :enumerations) %></label>
+    <div class='col-lg-9'>
+      <%= f.text_field :text_value, class: "form-control js-input-down-counter-#{Tmt::Cfg.max_name_length}", placeholder: "for order #{value.numerical_value}" %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='col-lg-offset-3 col-lg-9'>
+      <%= button_submit_for(f, value, class: 'only-one-click')  %>
+    </div>
+  </div>
+<% end %>

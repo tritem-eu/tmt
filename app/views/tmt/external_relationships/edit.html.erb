@@ -1,0 +1,7 @@
+<%= breadcrumbs(h(@source.name)) %>
+<%= t(:external_relationship, scope: :external_relationships) %>
+
+<%= render 'form',
+  external_relationship: @external_relationship,
+  source: @source
+%>

@@ -1,0 +1,72 @@
+<%= left_navigation_for_admin active: :custom_fields %>
+
+<%= page_header(t("custom_fields_for_#{params[:model_name]}", scope: :custom_fields),
+  right_side: present(@model.new, Tmt::CustomFieldPresenter).button_to_new
+) %>
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:custom_fields, scope: :custom_fields)
+) %>
+
+<ul class="nav nav-tabs">
+  <li class="<%= :active if params[:model_name] == "test_case" %>">
+    <%= link_to t(:test_case_custom_fields, scope: :admin), admin_test_case_custom_fields_path %>
+  </li>
+  <li class="<%= :active if params[:model_name] == "test_run" %>">
+    <%= link_to t(:test_run_custom_fields, scope: :admin), admin_test_run_custom_fields_path %>
+  </li>
+</ul>
+<div class='height-separator'></div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <%
+        [
+          [:name, 'col-lg-2'],
+          [:description, 'col-lg-3'],
+          [:type, 'col-lg-1'],
+          [:lower_limit, 'col-lg-1'],
+          [:upper_limit, 'col-lg-1'],
+          [:default_value, 'col-lg-1'],
+          [:project, 'col-lg-2'],
+          [:action, 'col-lg-1']
+        ].each do |name, class_name|
+       %>
+          <th class='<%= class_name %>'><%= crop_string t(name, scope: :custom_fields) %></th>
+        <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @custom_fields.each do |custom_field| %>
+      <% present(custom_field, Tmt::CustomFieldPresenter) do |custom_field_present| %>
+        <tr>
+          <td><%= link_to crop_string(custom_field.name), custom_field_path(custom_field) %></td>
+          <td><%= custom_field.description %></td>
+          <td><%= custom_field.type_name %></td>
+          <td><%= custom_field.lower_limit %></td>
+          <td><%= custom_field.upper_limit %></td>
+          <td><%= show_value(custom_field.default_value) %></td>
+          <td>
+            <% if custom_field.project %>
+              <%= link_to crop_string(custom_field.project.name), project_path(custom_field.project) %>
+            <% else %>
+              <%= content_or_none(nil) %>
+            <% end %>
+          </td>
+          <td>
+            <%= dropdown_menu_caret(ul_class: 'pull-right') do |tag| %>
+              <% tag << link_edit(edit_custom_field_path(custom_field), remote: false) %>
+              <% tag << add_link(clone_custom_field_path(custom_field), class: :btn) do |link| %>
+                <% link.space fa_icon('columns') %>
+                <% link << t(:clone, scope: :custom_fields) %>
+              <% end %>
+              <% tag << link_delete_for_custom_field(custom_field) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

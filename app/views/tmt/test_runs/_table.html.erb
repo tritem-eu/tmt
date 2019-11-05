@@ -1,0 +1,45 @@
+<% unless test_runs.empty? %>
+  <% show_cloning_link = (not project.open_campaign.nil?) %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class='col-lg-3 crop'><%= t(:name, scope: :test_runs) %></th>
+        <th class='col-lg-3 crop'><%= t(:executor, scope: :test_runs) %></th>
+        <th class='col-lg-3 crop'><%= t(:due_date, scope: :test_runs) %></th>
+        <th class='col-lg-2 crop'><%= t(:status, scope: :test_runs) %></th>
+        <th class='col-lg-1 crop'></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% open_campaign = project.open_campaign %>
+      <% test_runs.each do |test_run| %>
+        <% test_run_present = present(test_run) %>
+        <tr>
+          <td class='crop'><%= link_to h(test_run.name), [project, test_run.campaign, test_run] %></td>
+          <td class='crop'><%= test_run_present.link_executor %></td>
+          <td><%= test_run_present.due_date(:short) %></td>
+          <td class='text-center without-padding'>
+            <%= test_run_present.status_small %>
+            <%= present(test_run).execution_progress(type: :thin) %></td>
+          <td>
+            <%= dropdown_menu_caret(ul_class: 'pull-right', popover: t(:no_actions, scope: :test_runs)) do |array| %>
+              <% if can? :editable, test_run %>
+                <% array << link_edit([:edit, project, open_campaign, test_run]) %>
+                <% array << link_delete(project_campaign_test_run_path(project, test_run.campaign, test_run)) %>
+              <% end %>
+              <% if test_run.deleted_at.nil? and show_cloning_link %>
+                <% array << test_run_present.link_clone(project) %>
+              <% end %>
+              <% array << link_with_icon([project, test_run.campaign, test_run],
+                name: t(:properties, scope: :test_runs),
+                fa_icon: 'file-text'
+              ) %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class='text-muted'><%= t(:no_test_runs_to_display, scope: :test_runs) %></p>
+<% end %>

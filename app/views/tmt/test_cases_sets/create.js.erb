@@ -1,0 +1,14 @@
+app.modal.removeLast();
+
+$(".sets .list-sets-content").html("<%= j(render partial: "/tmt/sets/sub_set",
+  locals: {
+    is_modal: false,
+    set_ids: (@set_ids),
+    hash_tree: @hash_tree,
+    project: @project,
+    nesting: Tmt::Lib::Nesting.new
+  }
+) %>")
+$('.messages').replaceWith("<%= j(render(partial: '/layouts/messages'))%>")
+app.sets.init().event.findPlaceForDropdownMenu();
+app._bootstrap.dropdownMenu();

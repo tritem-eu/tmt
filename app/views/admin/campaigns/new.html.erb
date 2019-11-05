@@ -1,0 +1,22 @@
+<%= left_navigation_for_admin active: :campaigns %>
+
+<%= page_header t(:new_campaign, scope: :campaigns) %>
+
+<%= breadcrumbs(
+  :projects,
+  admin_projects_path,
+  @project.name,
+  project_path(@project),
+  t(:campaigns, scope: :campaigns),
+  admin_campaigns_path,
+  :new
+) %>
+
+<div class='col-lg-8'>
+  <%= render(partial: 'form',
+    locals: {
+      campaign: @campaign,
+      url: admin_campaign_path(@campaign)
+    }
+  ) %>
+</div>

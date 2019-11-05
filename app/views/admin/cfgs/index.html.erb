@@ -1,0 +1,21 @@
+<%= left_navigation_for_admin active: :cfg %>
+
+<%= page_header t(:instance_configuration, scope: :cfgs) %>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:instance_configuration, scope: :cfgs),
+  admin_cfgs_path
+) %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <%= render 'form',
+        cfg: @cfg,
+        url: admin_cfg_path(@cfg)
+      %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<% style = (defined?(:is_modal) ? 'padding: 5px' : '') %>
+<div class='modal-messages' >
+  <% if flash[:alert] %>
+    <div class="alert alert-danger" style='<%= style%>'>
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <%= add_tag :div, flash[:alert], :id => "flash_alert" %>
+    </div>
+  <% end %>
+
+  <% if flash[:notice] %>
+    <div class="alert alert-success" style='<%= style %>'>
+      <a class="close" data-dismiss="alert">&#215;</a>
+      <%= add_tag :div, flash[:notice], :id => "flash_notice" %>
+    </div>
+  <% end %>
+</div>

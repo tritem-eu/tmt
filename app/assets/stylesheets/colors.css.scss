@@ -1,0 +1,69 @@
+.switch-left {
+  background-color: #789abc !important;
+}
+
+.background-error {
+  background-color: #f0ad4e !important;
+}
+
+.background-failed {
+  background-color: #d9534f !important;
+}
+
+.background-executing {
+  background-color: #3276b1 !important;
+}
+
+.background-passed {
+  background-color: #5cb85c !important;
+}
+
+.background-grey {
+  background-color: #808080 !important;
+}
+
+.background-default {
+  background-color: #eeeeee
+}
+
+.background-status-executing {
+  background-color: #428bca;
+  color: #fff;
+  * {
+    color: #fff;
+  }
+
+}
+
+.background-status-planned {
+  background-color: #5bc0de;
+  color: #fff;
+  * {
+    color: #fff;
+  }
+
+}
+
+.background-status-new {
+  background-color: #999999;
+  color: #fff;
+  * {
+    color: #fff;
+  }
+}
+
+.background-status-done {
+  background-color: #398439;
+  color: #fff;
+  * {
+    color: #fff;
+  }
+}
+
+.color-gray {
+  color: #bbb;
+}
+
+.color-red {
+  color: #d9534f;
+}

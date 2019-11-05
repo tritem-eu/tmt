@@ -1,0 +1,55 @@
+<%= left_navigation_for_dashboard active: [:test_run, :execution], project: @project, test_run: @test_run, execution: @execution %>
+
+<%= page_header t(:execution_report, scope: :executions),
+  subject: h(@version.comment)
+%>
+
+<%= breadcrumbs(
+  :projects,
+  projects_or_root_path,
+  h(@project.name),
+  project_path(@project),
+  t(:test_runs, scope: :executions),
+  project_test_runs_path(@project),
+  h(@test_run.name),
+  project_campaign_test_run_path(@project, @campaign, @test_run),
+  t(:execution, scope: :executions),
+  [:report, @project, @campaign, @execution],
+  h(@version.comment)
+) %>
+
+<nav>
+  <ul class="nav nav-tabs">
+    <li><%= link_to t(:execution, scope: :executions), project_campaign_execution_path(@project, @campaign, @execution) %></li>
+    <li class='active'><%= link_to t(:report, scope: :executions), report_project_campaign_execution_path(@project, @campaign, @execution) %></li>
+  </ul>
+</nav>
+<div class='height-separator'></div>
+
+<div class="col-lg-4">
+  <dl class="dl-horizontal">
+    <dt><%= t(:campaign, scope: :executions) %></dt>
+    <dd><%= campaign_link(@campaign)%></dd>
+    <dt><%= t(:comment, scope: :executions) %></dt>
+    <dd><%= show_value @execution.comment %></dd>
+    <dt><%= t(:id, scope: :executions) %></dt>
+    <dd><%= @execution.id %></dd>
+    <dt><%= t(:progress, scope: :executions) %></dt>
+    <dd><%= present(@execution).progress %></dd>
+    <dt><%= t(:project, scope: :executions) %></dt>
+    <dd><%= link_to(h(@project.name), [@project]) %></dd>
+    <dt><%= t(:result, scope: :executions) %></dt>
+    <dd><%= present(@execution).result_label(@project) %></dd>
+    <dt><%= t(:test_case, scope: :executions) %></dt>
+    <dd><%= link_to(h(@test_case.name), [@project, @test_case]) %></dd>
+    <dt><%= t(:test_run, scope: :executions) %></dt>
+    <dd><%= link_to(h(@test_run.name), project_campaign_test_run_path(@project, @campaign, @test_run)) %></dd>
+    <dt><%= t(:version, scope: :executions) %></dt>
+    <dd><%= test_case_version_link(@version) %></dd>
+    <dt><%= t(:attached_files, scope: :executions) %></dt>
+    <dd><%= present(@execution).attached_file_links %></dd>
+  </dl>
+</div>
+<div class="col-lg-8">
+  <%= present(@execution).result_content %>
+</div>

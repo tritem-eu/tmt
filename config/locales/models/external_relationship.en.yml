@@ -1,0 +1,8 @@
+# encoding: utf-8
+
+en:
+  models:
+    external_relationship:
+      rq_id: doesn't exist
+      doesnt_match_the_pattern: "doesn't match the pattern http(s)://.*"
+      cannot_create_relationship_: "Cannot create a relationship with no data in it. Fill at least one field"

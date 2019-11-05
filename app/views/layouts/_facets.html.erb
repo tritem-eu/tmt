@@ -1,0 +1,18 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+        <%= t(param_name, scope: :test_cases) %>
+    </h4>
+  </div>
+  <ul class="list-group">
+    <% search.facet(facet_name).rows.each do |row| %>
+      <li class="list-group-item">
+        <% if params[param_name].blank? %>
+          <%= link_to row.value, params.merge({param_name => row.value}) %> <span class="badge pull-right"><%= row.count %></span>
+        <% else %>
+          <strong class="text-primary"><%= row.value %></strong> <%= link_to '<span class="pull-right glyphicon glyphicon-remove-circle"></span>'.html_safe, params.merge({param_name => nil}) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

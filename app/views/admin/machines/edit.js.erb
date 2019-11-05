@@ -1,0 +1,10 @@
+app.modal.add("<%= render_modal({
+  header: t(:machine, scope: :machines),
+  subject: h(@user.name),
+  body: render(partial: "form",
+    locals: {
+      machine: @machine,
+      url: admin_machine_path(@machine)
+    }
+  )
+})%>")

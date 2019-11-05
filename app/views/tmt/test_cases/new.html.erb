@@ -1,0 +1,20 @@
+<%= page_header t(:new_test_case, scope: :test_cases),
+  right_side: link_to(t(:back, scope: :test_cases), project_path(@project))
+%>
+<div class='height-separator'></div>
+<%= breadcrumbs(
+  t(:projects, scope: :projects),
+  projects_or_root_path,
+  @project.name,
+  project_path(@project),
+  t(:new_test_case, scope: :test_cases)
+) %>
+<div class='rwo'>
+  <div class='col-lg-6'>
+    <%= render 'form',
+      url: project_test_cases_path(@project),
+      project: @project,
+      test_case: @test_case
+    %>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+# encoding: utf-8
+
+en:
+  executions:
+    add: Add
+    attached_files: Attached files
+    campaign: Campaign
+    campaigns: Campaigns
+    change_test_run: Change test run
+    comment: Comment
+    datafile: Datafile
+    description_upload_csv: "You can send many test cases using a *.csv file. The file should contain header 'id,name', where id is identifier of test case\n\nFor example:\n\tid,name\n\t1,\n\t,\"TC name\"\n\t13,"
+    execution: Execution
+    execution_report: Execution report
+    execution_result: Execution result
+    for_test_run: For test run
+    id: Identifier
+    import_from_csv_file: Import from CSV file
+    result: Result
+    select: Select
+    select_test_cases: Select test cases
+    select_versions: Select Versions
+    test_case: Test case
+    test_run: Test run
+    test_runs: Test runs
+    next: Next
+    version: version
+    list_of_versions_is_empty: List of versions is empty
+    name: Name
+    new_test_run: New test run
+    progress: Progress
+    project: Project
+    projects: Projects
+    report: Report
+    save: Save
+    select_test_run: Select test run
+    select_versions_manually: Select versions mannually
+    set_result: Set result
+    show_all_versions: Show all versions
+    take_newest_versions_of_all_test_cases: Take newest versions of all Test Cases
+    test_case: Test case
+    unselect_all_versions: Unselect all versions
+    upload: Upload
+    upload_csv: Upload CSV
+    versions_of_test_cases: Versions of Test Cases

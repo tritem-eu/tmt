@@ -1,0 +1,23 @@
+<%= left_navigation_for_admin automation_adapter: @adapter, active: :automation_adapter %>
+
+<%= page_header(
+  t(:automation_adapter, scope: :automation_adapters),
+  subject: h(@adapter.name),
+) %>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:automation_adapters, scope: :automation_adapters),
+  admin_automation_adapters_url,
+  @adapter.name,
+  nil,
+  t(:edit, scope: :automation_adapters)
+) %>
+
+<div class='col-lg-6'>
+  <%= render 'form',
+    adapter: @adapter,
+    url: admin_automation_adapter_path(@adapter)
+  %>
+</div>

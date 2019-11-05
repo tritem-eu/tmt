@@ -1,0 +1,42 @@
+<%= left_navigation_for_dashboard active: :campaign, project: @project, campaign: @campaign %>
+
+<%= page_header t(:campaign, scope: :campaigns),
+  subject: h(@campaign.name)
+%>
+
+<%= breadcrumbs(
+  :projects,
+  projects_or_root_path,
+  h(@project.name),
+  project_path(@project),
+  :campaigns,
+  admin_campaigns_path(project_id: @project.id),
+  h(@campaign.name)
+) %>
+
+<dl class="dl-horizontal">
+  <dt><%= t(:project, scope: :campaigns) %>:</dt>
+  <dd><%= project_link(@project) %></dd>
+
+  <dt><%= t(:is_open, scope: :campaigns) %>:</dt>
+  <dd><%= present(@campaign).is_open %></dd>
+
+  <dt><%= t(:test_runs, scope: :campaigns) %>:</dt>
+  <dd><%= @test_runs.size %></dd>
+
+  <dt><%= t(:done_test_runs, scope: :campaigns) %>:</dt>
+  <dd><%= @done_test_runs.count %></dd>
+
+  <dt><%= t(:created_at, scope: :campaigns) %>:</dt>
+  <dd><%= present(@campaign).created_at %></dd>
+  <dt><%= t(:deadline, scope: :campaigns) %>:</dt>
+  <dd><%= present(@campaign).deadline_at %></dd>
+</dl>
+<%= render partial: "/tmt/test_runs/table_in_panel",
+  locals: {
+    project: @project,
+    campaign: @campaign,
+    test_runs: @test_runs,
+    title: t(:recent_test_cases, scope: :test_cases)
+  }
+%>

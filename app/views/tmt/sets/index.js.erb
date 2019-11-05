@@ -1,0 +1,26 @@
+if($('.modal').size()) {
+  $(".sets .list-sets-content").html("<%= j(render partial: "/tmt/sets/sub_set",
+    locals: {
+      is_modal: true,
+      set_ids: (@set_ids || []),
+      project: @project,
+      hash_tree: @hash_tree,
+      test_run: @test_run,
+      nesting: Tmt::Lib::Nesting.new
+    }
+  ) %>")
+} else {
+  $(".sets .list-sets-content").html("<%= j(render partial: "/tmt/sets/sub_set",
+    locals: {
+      is_modal: false,
+      set_ids: (@set_ids || []),
+      project: @project,
+      hash_tree: @hash_tree,
+      test_run: @test_run,
+      nesting: Tmt::Lib::Nesting.new
+    }
+  ) %>")
+}
+app.testCases.init().event.changeCheckbox();
+app.sets.init().event.findPlaceForDropdownMenu();
+app._bootstrap.dropdownMenu();

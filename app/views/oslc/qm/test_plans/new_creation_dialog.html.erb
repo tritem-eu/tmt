@@ -1,0 +1,11 @@
+<div class='oslc-creation-dialog'>
+  <%= render partial: '/tmt/test_runs/form',
+    locals: {
+      url: creation_dialog_oslc_qm_service_provider_test_plans_url(@service_provider),
+      test_run: @test_plan,
+      project: @service_provider,
+      campaign: @campaign,
+      executors: @executors
+    }
+  %>
+</div>

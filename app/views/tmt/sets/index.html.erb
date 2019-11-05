@@ -1,0 +1,57 @@
+<%= left_navigation_for_dashboard active: :test_cases, project: @project %>
+
+<%= page_header t(:test_cases, scope: :sets) %>
+
+<%= breadcrumbs(
+  t(:projects, scope: :projects),
+  projects_or_root_path,
+  @project.name,
+  project_path(@project),
+  t(:listing_test_case, scope: :projects)
+) %>
+
+
+<%= render 'tmt/test_cases/toggle_tab',
+  project: @project,
+  member: @member,
+  campaign: @campaign
+%>
+
+<div class='height-separator'></div>
+
+<div class='col-lg-6 list-test-cases'>
+  <div class='col-lg-6'>
+    <%= render "/tmt/test_cases/search_form",
+      test_run: @test_run,
+      search: @search
+    %>
+  </div>
+  <div class='height-separator'></div>
+  <ul class='well col-lg-6 nonselectable'>
+    <% @test_cases.each do |test_case| %>
+      <li class="original crop" value="<%= test_case.id %>"><%= present(test_case).text_show() %></li>
+    <% end %>
+  </ul>
+    <div class='hesght-separator'></div>
+    <%= paginate @test_cases %>
+</div>
+
+<div class='list-sets'>
+  <div class='list-sets-header'>
+    <span class='pull-left list-sets-test-cases glyphicon glyphicon-chevron-right'></span>
+    <div class='pull-right'>
+      <div class='inline-block'><%= present(::Tmt::TestCase).add_submit_for_checkboxes(params, @project) %> </div>
+      <div class='inline-block' style='right: 0px'><%= link_new(new_project_set_path(@project), name: t(:new_set, scope: :presenter)) %></div>
+    </div>
+  </div>
+  <div class='well list-sets-content'>
+    <%= render "/tmt/sets/sub_set",
+      is_modal: false,
+      set_ids: @set_ids,
+      hash_tree: @hash_tree,
+      project: @project,
+      test_run: @test_run,
+      nesting: Tmt::Lib::Nesting.new
+    %>
+  </div>
+</div>

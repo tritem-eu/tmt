@@ -1,0 +1,5 @@
+<%= breadcrumbs(h(@source.name)) %>
+<%= t(:external_relationship, scope: :external_relationships) %>
+<%= render "show",
+  external_relationship: @external_relationship
+%>

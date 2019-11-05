@@ -1,0 +1,5 @@
+en:
+  controllers:
+    test_case_versions:
+      alert_for_create: The comment is empty or did not attach file
+      notice_for_create: Test case version was successfully created

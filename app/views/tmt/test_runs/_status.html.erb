@@ -1,0 +1,68 @@
+<div class="">
+  <div class="row">
+    <% if [1, 2, 3, 4].include?(test_run.status) %>
+      <!-- status new -->
+      <div class="col-lg-3">
+        <% if test_run.status == 1 %>
+          <%= button_to nil, method: :get, class: 'btn btn-default active btn-block default-cursor' do %>
+            <%= t(:new, scope: [:test_runs, :_status]) %>
+            <%= icon('chevron-right') %>
+          <% end %>
+        <% elsif test_run.status == 2 %>
+          <%= button_to set_status_new_project_campaign_test_run_path(project, campaign, test_run), method: :put, class: 'btn btn-default btn-block background-default' do %>
+            <%= t(:set_status_new, scope: :test_runs) %>
+          <% end %>
+        <% else %>
+          <%= button_to nil, method: :get, class: 'btn btn-default disabled btn-block background-default' do %>
+            <%= t(:new, scope: [:test_runs, :_status]) %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <!-- status planned -->
+      <div class="col-lg-3">
+        <% if test_run.status == 1 and test_run.can_set_status_planned? %>
+          <%= button_to set_status_planned_project_campaign_test_run_path(project, campaign, test_run), method: :put, class: 'btn btn-info btn-block' do %>
+            <%= t(:set_planned, scope: :test_runs) %>
+          <% end %>
+        <% elsif test_run.status == 2 %>
+          <%= button_to nil, method: :get, class: 'btn btn-info btn-block active default-cursor' do %>
+            <%= t(:planned, scope: [:test_runs, :_status]) %>
+            <%= icon('chevron-right') %>
+          <% end %>
+        <% else %>
+          <%= button_to nil, method: :get, class: 'btn btn-info btn-block disabled' do %>
+            <%= t(:planned, scope: [:test_runs, :_status]) %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <!-- status executing -->
+      <div class="col-lg-3">
+        <% if test_run.status == 3 %>
+          <%= button_to nil, method: :get, class: 'btn btn-primary active btn-block default-cursor' do %>
+            <%= t(:executing, scope: [:test_runs, :_status]) %>
+            <%= icon('chevron-right') %>
+          <% end %>
+        <% else %>
+          <%= button_to nil, method: :get, class: 'btn btn-primary btn-block disabled' do %>
+            <%= t(:executing, scope: [:test_runs, :_status]) %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <!-- status done -->
+      <div class="col-lg-3">
+        <% if test_run.status == 4 %>
+          <%= button_to nil, method: :get, class: 'btn btn-success active btn-block default-cursor' do %>
+            <%= t(:done, scope: [:test_runs, :_status]) %>
+          <% end %>
+        <% else %>
+          <%= button_to nil, method: :get, class: 'btn btn-success btn-block disabled' do %>
+            <%= t(:done, scope: [:test_runs, :_status]) %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

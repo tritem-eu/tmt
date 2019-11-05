@@ -1,0 +1,42 @@
+<%= form_for(project, url: url, as: :project, html: {class: "form-horizontal"}) do |f| %>
+  <div class="form-group required">
+    <label class='control-label col-lg-3'>
+      <%= t(:name, scope: :projects) %>
+    </label>
+    <div class='controls col-lg-9'>
+      <%= f.text_field :name, class: "form-control js-input-down-counter-#{Tmt::Cfg.max_name_length}", placeholder: t(:add_name_of_project, scope: :projects) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='control-label col-lg-3'>
+      <%= t(:description, scope: :projects) %>
+    </label>
+    <div class='controls col-lg-9'>
+      <%= f.text_area :description, class: "form-control no-resize-vertical", placeholder: t(:description, scope: :projects) %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class='control-label col-lg-3'>
+      <%= t(:default_type, scope: :projects) %>
+    </label>
+    <div class='controls col-lg-9'>
+      <%= f.select :default_type_id,
+        options_from_collection_for_select(
+          test_case_types,
+          :id,
+          :name,
+          selected: project.default_type_id
+        ),{},
+        {prompt: t(:none, scope: :projects), class: "form-control"}
+      %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-3 col-lg-9 controls">
+      <%= button_submit_for(f, project, class: 'only-one-click') %>
+    </div>
+  </div>
+<% end %>

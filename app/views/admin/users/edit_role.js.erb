@@ -1,0 +1,17 @@
+app.modal.add("<%= render_modal(header: t(:user_roles, scope: :users),
+  subheader: add_tag do |tag|
+    tag << add_tag(:strong){t(:name, scope: :users)}
+    tag << ': '
+    tag << h(@user.name)
+    tag << ' '
+    tag << add_tag(:strong){t(:email, scope: :users)}
+    tag << ': '
+    tag << h(@user.email)
+  end,
+  body: render(partial: 'edit_role',
+    locals: {
+      user: @user,
+      url: admin_user_path(@user)
+    }
+  )
+) %>")

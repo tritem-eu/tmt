@@ -1,0 +1,6 @@
+en:
+  controllers:
+    test_cases_sets:
+      notice_for_create: Test case was successfully joined with branch
+      alert_for_create: Incorrect attributes
+      notice_for_destroy: Test case was successfully deleted from branch

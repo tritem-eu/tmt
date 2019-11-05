@@ -1,0 +1,28 @@
+<%= render 'toggle_tab',
+  project: project,
+  member: member,
+  campaign: campaign,
+  test_run: test_run
+%>
+
+<div class='height-separator'></div>
+<div class='col-lg-3'>
+  <%= render"/tmt/test_cases/search_form",
+    remote: true,
+    test_run: test_run,
+    search: search
+  %>
+</div>
+<div class='col-lg-9'>
+  <%= render "/tmt/test_cases/table",
+    is_modal: true,
+    project: project,
+    campaign: campaign,
+    test_cases: test_cases,
+    no_active_columns: no_active_columns
+  %>
+
+  <div class='height-separator'></div>
+  <%= paginate test_cases, remote: true %>
+</div>
+<div class='clear-both'></div>

@@ -1,0 +1,18 @@
+<%= breadcrumbs(t(:projects, scope: :sets),
+  projects_or_root_path,
+  @project.name,
+  project_path(@project),
+  t(:sets, scope: :sets),
+  project_sets_path(@project),
+  t(:new, scope: :sets)
+) %>
+
+<%= page_header present(@set).header_name %>
+
+<%= render 'form',
+  set: @set,
+  sets: @sets,
+  project: @project,
+  parent: @parent,
+  url: project_sets_path(@project, set_ids: @set_ids)
+%>

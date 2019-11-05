@@ -1,0 +1,64 @@
+# encoding: utf-8
+en:
+  test_cases:
+    action: Action
+    active: Active
+    add: Add
+    add_to_test_run: Add to test run
+    author: Author
+    back: Back
+    category: Category
+    comment: Comment
+    commit_new_version_of_file: "Upload a new version:"
+    create: Create
+    created_at: Created at
+    created_by: Created by
+    creator: Creator
+    datafile: Datafile
+    description: Description
+    description_of_test_case: Description of test case
+    done_percent: Done percent
+    edit: Edit
+    edit_test_case: Edit test case
+    executor: Executor
+    file_name: File name
+    file_size: size
+    flat: Flat
+    history: History
+    identifier: Identifier
+    list_of_executions: List of executions
+    list_of_versions: List of versions
+    message: Message
+    name: Name
+    name_of_test_case: Name of Test Case
+    new_test_case: New Test Case
+    no_version_to_show: No version to show
+    no_test_cases_to_display: No test cases to display
+    only_i_can_edit: Only I can edit
+    priority: Priority
+    progress: Progress
+    project: Project
+    projects: Projects
+    properties: Properties
+    recent_changes: Recent changes
+    recent_test_cases: Recent test cases
+    relations: Relations
+    requirements: Requirements
+    save: Save
+    search: Search
+    select_all: Select all
+    show: Show
+    spent_time: Spent time
+    status: Status
+    test_case: Test Case
+    test_case_types: Test Case Types
+    test_cases: Test Cases
+    test_run: Test Run
+    tree: Tree
+    type: Type
+    unreadable: Unreadable
+    updated_at: Updated at
+    uploaded_file: Uploaded file
+    version_id: Version id
+    versions: Versions
+    view_all_test_cases: View all test cases

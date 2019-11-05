@@ -1,0 +1,23 @@
+<%= left_navigation_for_admin project: @project, active: :projects %>
+
+<%= page_header(
+  t(:project, scope: :projects),
+  subject: h(@project.name),
+  subheader: present(@project).subheader
+) %>
+
+<%= breadcrumbs(
+  t(:projects, scope: :projects),
+  projects_or_root_path,
+  @project_name,
+  project_path(@project),
+  t(:edit, scope: :projects)
+) %>
+
+<div class='col-lg-6'>
+  <%= render 'form',
+    project: @project,
+    url: admin_project_path(@project),
+    test_case_types: @test_case_types
+  %>
+</div>

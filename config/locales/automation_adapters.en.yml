@@ -1,0 +1,18 @@
+# encoding: utf-8
+
+en:
+  automation_adapters:
+    action: Action
+    automation_adapter: Automation adapter
+    automation_adapters: Automation adapters
+    description: Description
+    _description: The list of Automation Adapter resources.
+    edit: Edit
+    list_of_automation_adapter_is_empty: The list of Automatin Adapter is empty.
+    polling_interval: Polling interval
+    project: Project
+    name: Name
+    new: New
+    new_automation_adapter: New automation adapter
+    type: Type
+    user: User

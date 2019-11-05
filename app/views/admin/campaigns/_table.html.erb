@@ -1,0 +1,40 @@
+<% if campaigns.any? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class='col-lg-5'><%= t(:name, scope: :campaigns) %></th>
+        <th class='col-lg-2'>
+        <%= t(:test_runs, scope: :campaigns) %>
+        <%= info_point("Amount test runs (amount test runs with 'done' status)") %></th>
+        <th class='col-lg-3'><%= t(:created, scope: :campaigns) %></th>
+        <th class='col-lg-3'><%= t(:deadline, scope: :campaigns) %></th>
+        <th class='col-lg-1 text-center'><%= t(:action, scope: :campaigns)%></th>
+      </th>
+    </thead>
+    <tbody>
+      <% campaigns.each do |campaign| %>
+        <tr>
+        <% present campaign do |present_campaign| %>
+          <td><%= link_to h(crop_string(campaign.name)), project_campaign_path(project, campaign) %></td>
+          <td><b>
+            <%= @amount_test_runs_per_campaign[campaign] || 0 %>
+            (<%= @amount_done_test_runs_per_campaign[campaign] || 0 %>)
+          </b></td>
+          <td><%= present_campaign.created_at %></td>
+          <td><%= present_campaign.deadline_at %></td>
+          <td class='text-center'>
+            <%= dropdown_menu_caret(ul_class: 'pull-right', popover: t(:is_closed, scope: :campaigns)) do |array| %>
+              <% if campaign.is_open %>
+                <% array << present_campaign.link_close %>
+                <% array << present_campaign.link_edit %>
+              <% end %>
+            <% end %>
+          </td>
+        <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <span><%= t(:content_of_table_is_empty, scope: :campaigns) %></span>
+<% end %>

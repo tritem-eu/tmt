@@ -1,0 +1,133 @@
+.sets {
+  .list-sets {
+    padding: 0;
+    height: 500px;
+
+    margin-left: 10px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    li {
+      padding: 5px 0px 0 5px;
+      font-size: 18px;
+    }
+
+    .header {
+      padding-left: 0px;
+      border-radius: 5px;
+
+      a.tree-li {
+        color: #003366;
+      }
+
+      .dropdown-toggle {
+        margin-left: 30px;
+      }
+
+      .display-cell {
+        padding-left: 5px;
+      }
+    }
+
+    .list-sets-header {
+      border-bottom: 1px solid #ffffff;
+      height: 40px;
+
+      .btn {
+        padding: 0 12px;
+      }
+
+      span {
+        font-size: 15px;
+        padding: 10px;
+      }
+
+
+    }
+
+    .list-sets-content {
+      margin: 15px 0 15px 0;
+      padding: 10px 0 0 20px;
+      height: 457px;
+      overflow-x: none;
+      overflow-y: auto;
+
+      ul.dropdown-menu {
+        padding: 0 0 5px 0;
+        li {
+          padding: 5px 0 0 0;
+          font-size: 100%;
+        }
+      }
+    }
+
+    .list-sets-test-cases:hover {
+      opacity: 0.7;
+    }
+
+    .list-sets-test-cases {
+      display: none;
+    }
+
+
+    ul {
+      padding-top: 0px;
+      padding-left: 10px;
+    }
+
+    .active {
+      background: #bbddff !important;
+      border-radius: 5px;
+    }
+
+    .grey-list {
+      font-size: 15px;
+      color: #aaa;
+    }
+
+    .yellow-folder {
+      font-size: 15px;
+      color: #dba901;
+    }
+  }
+
+  .list-test-cases {
+    display: none;
+    padding: 0px;
+    margin-right: 10px;
+
+    .form-search {
+      padding: 5px 0;
+      border-bottom: 1px solid #fff;
+      input{
+        height: 30px;
+      }
+      div[type=submit] {
+        padding: 4px
+      }
+    }
+
+    ul.well {
+      top: 25px;
+      padding: 5px 20px;
+      overflow-x: none;
+      overflow-y: auto;
+
+      li {
+        padding: 5px;
+      }
+
+      li:hover {
+        background: #bbddff !important;
+        cursor: move;
+        border-radius: 5px;
+      }
+    }
+
+  }
+
+}

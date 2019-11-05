@@ -1,0 +1,33 @@
+<%= form_for(set,
+  url: url,
+  as: :set,
+  html: {class: "form-horizontal"},
+  remote: true
+) do |f| %>
+  <div class="form-group">
+    <%= f.label :name, t(:name, scope: :sets), class: 'control-label col-lg-3' %>
+    <div class="controls col-lg-9">
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :parent, t(:parent, scope: :sets), class: "control-label col-lg-3" %>
+    <div class='controls col-lg-9'>
+      <% unless set.id.nil? %>
+        <%= f.select :parent_id, options_of_select(sets, :id, :name, set.parent_id, prompt: t(:no_parent, scope: :sets)), {}, class: 'form-control' %>
+      <% else %>
+        <% if parent %>
+          <%= hidden_field_tag "set[parent_id]", parent.id %>
+          <%= text_field_tag "", h(parent.name), disabled: :disabled, class: 'form-control' %>
+        <% else %>
+          <%= text_field_tag "", t(:no_parent, scope: :sets), disabled: :disabled, class: 'form-control' %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="controls col-lg-offset-3 col-lg-9">
+      <%= button_submit_for(f, set, class: 'only-one-click') %>
+    </div>
+  </div>
+<% end %>

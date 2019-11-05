@@ -1,0 +1,25 @@
+<%= left_navigation_for_admin active: :campaigns %>
+
+<%= page_header t(:campaign, scope: :campaigns),
+  subject: h(@campaign.name)
+%>
+
+<%= breadcrumbs(
+  t(:projects, scope: :test_runs),
+  projects_or_root_path(),
+  @project.name,
+  project_path(@project),
+  t(:campaigns, scope: :campaigns),
+  admin_campaigns_path,
+  h(@campaign.name),
+  admin_campaign_path(@campaign),
+  t(:edit, scope: :campaigns)
+) %>
+
+<%= render(
+  partial: 'form',
+  locals: {
+    campaign: @campaign,
+    url: admin_campaign_path(@campaign)
+  }
+) %>

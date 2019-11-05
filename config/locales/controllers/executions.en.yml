@@ -1,0 +1,6 @@
+en:
+  controllers:
+    executions:
+      alert_for_push_version: Test run has not "new" status
+      alert_for_select_test_run: Please select test run
+      file_is_incorrect: File is incorrect

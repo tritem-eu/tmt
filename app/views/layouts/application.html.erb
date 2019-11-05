@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <% if current_user %>
+    <head data-user_id="<%= current_user.id %>" >
+  <% else %>
+    <head>
+  <% end %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : Tmt::Cfg.first.instance_name %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "TMT" %>">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= yield(:head) %>
+  </head>
+
+  <body>
+    <div class="<%= spinal_case(controller_name).gsub("tmt-", "") %> <%= spinal_case(action_name) %> break-word">
+      <div id="wrapper" class="<%= 'wrapper-padding-left' unless current_user %>">
+        <%= render 'layouts/navigation' %>
+        <div id="page-wrapper">
+          <div class="container">
+            <div class="row">
+              <%= render 'layouts/messages' %>
+              <%= yield %>
+            </div>
+          </div>
+        </div>
+        <footer>
+          <% if Rails.env.production? %>
+            <div class="container">
+              <div class="row">
+                <h6 class='text-muted'>Build: <%= ApplicationHelper.version %></h6>
+              </div>
+            </div>
+          <% end %>
+        </footer>
+      </div><!-- /#wrapper -->
+    </div>
+  </body>
+</html>

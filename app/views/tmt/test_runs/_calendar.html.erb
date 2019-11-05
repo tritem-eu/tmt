@@ -1,0 +1,42 @@
+<table class='table table-bordered wrapper-calendar'>
+  <thead>
+    <tr>
+      <% t(:day_names, scope: :date).each do |day_name| %>
+        <th class='text-center crop'><%= day_name %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% ::Tmt::TestRun.calendar_with_records(test_runs, year, month).each do |row| %>
+      <tr>
+        <% row.each do |day| %>
+          <% if day %>
+            <td>
+              <div class='calendar-day-number'>
+                <%= link_to(day[:number], calendar_month_day_project_test_runs_path(project, year, month, day[:number]) ) %>
+                <div class='clear-both'></div>
+              </div>
+              <div>
+                <% if day[:test_runs] %>
+                  <ul>
+                    <% day[:test_runs].each_with_index do |test_run, index| %>
+                      <% if index > 3 %>
+                        <% break %>
+                      <% end %>
+                      <li class='crop <%= present(test_run).background_css %>', style='margin-top: 1px'><%= link_to crop_string(test_run.name), project_campaign_test_run_path(project, test_run.campaign_id, test_run) %></li>
+                    <% end %>
+                    <% if day[:test_runs].size > 4 %>
+                      <li class='pull-right crop'><%= link_to(t(:more, scope: :test_runs), calendar_month_day_project_test_runs_path(project, year, month, day[:number]) ) %></li>
+                    <% end %>
+                  </ul>
+                <% end %>
+              </div>
+            </td>
+          <% else %>
+            <td class='calendar-day-lock'></td>
+          <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,92 @@
+<% if can? :no_lock, test_case %>
+  <% remote = (defined?(remote) ? remote : false) %>
+  <%= form_for(test_case, as: :test_case, url: url, remote: true, html: {class: "form-horizontal"}) do |f| %>
+    <div class="form-group required">
+      <label class="col-lg-3 control-label">
+        <%= t(:name, scope: :test_cases) %>
+      </label>
+      <div class="col-lg-9">
+        <%= f.text_field :name, placeholder: t(:name_of_test_case, scope: :test_cases), class: "form-control js-input-down-counter-#{Tmt::Cfg.max_name_length}" %>
+      </div>
+    </div>
+    <div class="form-group required">
+      <label class="col-lg-3 control-label">
+        <%= t(:type, scope: :test_cases) %>
+      </label>
+      <div class="col-lg-9">
+        <% default_type, disabled = test_case.type_id, false %>
+        <% if test_case.id %>
+          <% disabled = true %>
+        <% else %>
+          <% default_type ||= project.default_type_id %>
+        <% end %>
+        <%= f.select :type_id, add_options_of_select(Tmt::TestCaseType.undeleted.pluck(:id, :name, :has_file, :extension),
+          value: 0,
+          content: 1,
+          default_value: default_type,
+          data: {'has-file' => 2, 'extension' => 3}
+        ), {}, {disabled: disabled, class: 'form-control'} %>
+      </div>
+    </div>
+    <% unless test_case.id %>
+      <div class="form-group hidden">
+        <label class="col-lg-3 control-label">
+          <%= t(:datafile, scope: :test_cases) %>
+        </label>
+        <div class="controls">
+          <%= f.fields_for :versions do |ff| %>
+            <div class="controls col-lg-4", style='margin-top: 5px'>
+              <%= ff.text_field :comment, class: "form-control", placeholder: t(:comment, scope: :test_cases) %>
+              <div class='hidden'><%= t(:uploaded_file, scope: :test_cases) %></div>
+            </div>
+            <div class="controls col-lg-5", style='margin-top: 5px'>
+              <%= ff.file_field :datafile, style: 'width: 210px', accept: "*" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <label class="col-lg-3 control-label">
+        <%= t(:description, scope: :test_cases) %>
+      </label>
+      <div class="controls col-lg-9">
+        <%= f.text_area :description,
+          placeholder: t(:description_of_test_case, scope: :test_cases),
+          cols: 20,
+          rows: 5,
+          class: "form-control no-resize-vertical"
+        %>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-3 control-label">
+        <%= t(:only_i_can_edit, scope: :test_cases) %>
+      </label>
+      <div class="controls col-lg-9">
+        <%= f.check_box :locked, class: 'switch-small' %>
+      </div>
+    </div>
+    <% test_case.custom_field_values.each do |custom_field_value| %>
+      <div class="form-group">
+        <%= f.fields_for :custom_field_values do |sub_f| %>
+          <label class="col-lg-3 control-label">
+            <%= h custom_field_value.custom_field.name %>
+          </label>
+          <div class="controls col-lg-9">
+            <%= present(custom_field_value.custom_field, Tmt::CustomFieldPresenter).field_tag(custom_field_value, sub_f) %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <div class="col-lg-offset-3 col-lg-9 controls">
+        <%= f.submit t(:save, scope: :test_cases), class: "btn btn-primary in-modal-footer only-one-click" %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class='height-separator'></div>
+  <p class='text-center text-info'>At the moment you can't edit because <%= link_user(test_case.steward_id) %> user lock this action.</p>
+  <div class='height-separator'></div>
+<% end %>

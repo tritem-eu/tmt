@@ -1,0 +1,134 @@
+<%= left_navigation_for_dashboard active: :test_case, project: @project, test_case: @test_case %>
+<%= page_header(
+  t(:test_case, scope: :test_cases),
+  subject: h(@test_case.name),
+  subject_after: present(@test_case).header_name(project: @project, steward: @test_case.steward),
+  subheader: present(@test_case).subheader
+) %>
+
+<%= breadcrumbs(
+  t(:projects, scope: :test_cases),
+  projects_or_root_path,
+  @project.name,
+  project_path(@project),
+  t(:test_cases, scope: :test_cases),
+  project_sets_test_cases_path(@project),
+  @test_case.name
+) %>
+
+<% unless @test_case.deleted_at.nil? %>
+  <p class='text-danger text-center'>This object is deleted.</p>
+<% else %>
+  <%= page_description @test_case.description %>
+  <div class="row test-case">
+    <div class="col-lg-4">
+      <dl class="dl-horizontal">
+        <dt><%= t(:type, scope: :test_cases) %></dt>
+        <dd><%= link_to h(@test_case.type_name), admin_test_case_type_path(@test_case.type), remote: true %></dd>
+        <% @test_case.custom_field_values.each do |custom_field_value| %>
+          <dt><%= custom_field_value.custom_field_name %></dt>
+          <dd><%= show_value(custom_field_value.value) %></dd>
+        <% end %>
+        <dt><%= t(:relations, scope: :test_cases) %></dt>
+        <dd>
+          <ul class="break-word" style='margin: 0; padding: 0;'>
+            <% if @test_case.external_relationships.any? %>
+              <% @test_case.external_relationships.each do |external_relationship| %>
+                <li>
+                  <%= present(@test_case).link_external_relationship(external_relationship) %>
+                  <% if can? :no_lock, @test_case %>
+                    <%= link_to([:edit, @test_case, external_relationship], remote: true) do
+                      icon('pencil')
+                    end %>
+                    <%= link_to([@test_case, external_relationship], method: :delete, remote: true) do
+                      icon('trash')
+                    end %>
+                  <% end %>
+                </li>
+              <% end %>
+            <% else %>
+              <%= content_or_none %>
+            <% end %>
+            <% if can? :no_lock, @test_case %>
+              <li>
+                <%= link_to new_test_case_external_relationship_path(@test_case), remote: true, class: 'btn btn-xs no-left-padding' do %>
+                  <%= icon('plus-sign') %> <%= t(:add, scope: :test_cases) %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </dd>
+      </dl>
+      <% if @test_case.type_file? %>
+        <% if can? :no_lock, @test_case %>
+          <div class="height-separator"></div>
+            <div class="panel panel-tmt">
+              <div class="panel-heading">
+                <h5 class="panel-title">
+                  <%= t(:commit_new_version_of_file, scope: :test_cases) %>
+                </h5>
+              </div>
+              <div class="panel-body">
+              <%= render "/tmt/test_case_versions/form",
+                version: @new_version,
+                url: project_test_case_versions_path(@project, @test_case, @new_version)
+              %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="col-lg-8">
+      <% if @test_case.type_file? %>
+        <% if @version %>
+          <%= present(@version).file_content if @version %>
+        <% else %>
+          <div class='height-separator'></div>
+          <div class='height-separator'></div>
+          <div class='height-separator'></div>
+          <%= info(body: t(:no_version_to_show, scope: :test_cases)) %>
+        <% end %>
+      <% else %>
+        <% if can? :no_lock, @test_case %>
+          <%= present(@new_version).edit_file_content(@project, @test_case, @version) %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="height-separator"></div>
+  <% if @versions.any? %>
+    <div class="panel panel-tmt">
+      <div class="panel-heading">
+        <h5 class="panel-title"><%= t(:list_of_versions, scope: :test_cases)%></h5>
+      </div>
+      <div class="panel-body">
+        <%= render "table_versions",
+          project: @project,
+          versions: @versions,
+          test_case: @test_case,
+          dispenser_versions: @dispenser_versions
+        %>
+      </div>
+    </div>
+  <% end %>
+  <% if @executions.any? %>
+    <div class="panel panel-tmt">
+      <div class="panel-heading">
+        <h5 class="panel-title"><%= t(:list_of_executions, scope: :test_cases)%></h5>
+      </div>
+      <div class="panel-body">
+        <%= render "table_executions",
+          project: @project,
+          executions: @executions,
+          dispenser_executions: @dispenser_executions,
+          more_dots_path: project_test_case_path(@project, @test_case, executions: :all),
+          less_dots_path:  project_test_case_path(@project, @test_case)
+        %>
+      </div>
+    </div>
+  <% end %>
+  <%= render 'tmt/user_activities/history',
+    activities: @test_case.user_activities,
+    is_remote: true
+  %>
+<% end %>

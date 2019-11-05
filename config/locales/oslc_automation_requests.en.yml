@@ -1,0 +1,5 @@
+en:
+  oslc_automation_requests:
+    new_automation_request: New Automation Request
+    automation_request: Automation request
+    save: Save

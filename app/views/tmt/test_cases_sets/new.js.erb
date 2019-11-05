@@ -1,0 +1,22 @@
+<% if @set.test_case_ids.include?(params[:test_case_id].to_i) %>
+  app.modal.add('<%= render_modal(
+    {
+      header: "Adding test case to set",
+      body: add_tag(:p, class: 'text-center') do |tag|
+        tag.space add_tag(:div, class: 'height-separator') {}
+        tag.space "Set #{h(@set.name)} include selected test case."
+        tag.space add_tag(:div, class: 'height-separator') {}
+
+      end
+    }
+  ) %>')
+<% else %>
+  app.modal.add('<%= render_modal(
+    {
+      header: "Adding test case to set",
+      body: render(partial: "form",
+        locals: {test_cases: @test_cases, set: @set, project: @project, set_ids: @set_ids}
+      )
+    }
+  ) %>')
+<% end %>

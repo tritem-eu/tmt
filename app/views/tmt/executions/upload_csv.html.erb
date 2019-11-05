@@ -1,0 +1,46 @@
+<%= left_navigation_for_dashboard project: @project, test_run: @test_run, show_upload_csv: true %>
+
+<%= page_header t(:import_from_csv_file, scope: :executions),
+  subject: add_tag { |tag|
+    tag.space t(:for_test_run, scope: :executions)
+    tag << add_tag(:strong){ h(@test_run.name) }
+  },
+  subheader: add_tag { |tag|
+    tag.space add_tag(:strong) { t(:project, scope: :executions) }
+    tag.space link_to(h(@project.name), project_path(@project))
+    tag.space add_tag(:strong) { t(:campaign, scope: :executions) }
+    tag.space campaign_link(@campaign)
+  }
+%>
+
+<%= breadcrumbs(
+  t(:projects, scope: :executions),
+  projects_or_root_path,
+  h(@project.name),
+  project_path(@project),
+  t(:test_runs, scope: :executions),
+  project_test_runs_path(@project),
+  h(@test_run.name),
+  project_test_run_path(@project, @test_run),
+  t(:import_from_csv_file, scope: :executions)
+) %>
+
+<%= page_description t(:description_upload_csv, scope: :executions) %>
+
+<%= form_tag accept_csv_project_campaign_executions_url(@project, @campaign, test_run_id: @test_run.id), {method: :post, :multipart => true} do %>
+  <div class='form-group required col-lg-6'>
+    <label class='col-lg-3 control-label'><%= t(:datafile, scope: :executions) %></label>
+    <div class='col-lg-9 controls'>
+      <div class='input-group'>
+        <%= file_field_tag 'datafile' %>
+      </div>
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='col-lg-9 col-lg-offset-3 controls'>
+      <div class='input-group'>
+        <%= submit_tag t(:upload, scope: :executions), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  </div>
+<% end %>

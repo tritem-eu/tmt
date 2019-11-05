@@ -1,0 +1,18 @@
+<%= left_navigation_for_admin active: :enumerations %>
+
+<%= page_header t(:enumeration, scope: :enumerations) %>
+
+<%= breadcrumbs(
+  :admin,
+  admin_cfgs_path,
+  t(:enumerations, scope: :enumerations),
+  admin_enumerations_path,
+  :new
+) %>
+
+<div class="col-lg-6">
+  <%= render 'form',
+    enumeration: @enumeration,
+    is_remote: false
+  %>
+</div>

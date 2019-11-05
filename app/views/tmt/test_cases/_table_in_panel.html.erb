@@ -1,0 +1,21 @@
+<div class="panel panel-tmt">
+  <div class="panel-heading">
+    <h5 class="panel-title"><%= title %><span class='pull-right'><%= present(project).link_to_new_test_case_small %></span></h5>
+  </div>
+  <div class="panel-body">
+    <%= render partial: "/tmt/test_cases/table",
+      locals: {
+        project: project,
+        campaign: project.open_campaign,
+        test_cases: test_cases,
+        title: t(:listing_test_case, scope: :projects)
+      }
+    %>
+    <div class="text-left">
+      <%= link_to project_sets_test_cases_path(project) do %>
+        <small><%= t(:view_all_test_cases, scope: :test_cases) %>
+        <%= icon('circle-arrow-right') %></small>
+      <% end %>
+    </div>
+  </div>
+</div>

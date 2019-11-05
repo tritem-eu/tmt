@@ -1,0 +1,57 @@
+# encoding: utf-8
+
+en:
+  test_runs:
+    action: Action
+    add_versions: Add Test Cases
+    campaign: Campaign
+    campaigns: Campaigns
+    clone: Clone
+    create_campaign: Create campaign
+    created_at: Created at
+    creator: Creator
+    description: Description
+    due_date: Due date
+    edit: Edit
+    edit_test_run: Edit test run
+    test_case: Test Case
+    author: Author
+    empty_list: Empty list
+    execution: Execution
+    execution_status: Progress
+    execution_result: Result
+    execution_result_none: none
+    execution_of: Execution of
+    executor: Executor
+    terminate: terminate
+    no_test_runs_to_display: No Test Runs to display
+    list_of_versions_is_empty: No Test Cases added
+    more: more...
+    name: Name
+    new: New
+    new_test_run: New test run
+    no_actions: No actions
+    projects: Projects
+    properties: Properties
+    report: Report
+    progress: Progress
+    save: Save
+    search: Search
+    set_planned: Set planned
+    set_status_new: "Set New"
+    set_status_planned: "Set Planned"
+    show: Show
+    status: Status
+    _status:
+      executing: "Executing"
+      done: "Done"
+      planned: "Planned"
+      new: "New"
+    status_error: Error
+    test_runs: Test runs
+    test_run: Test run
+    update_list: Update list
+    import_from_csv_file: Import from CSV file
+    version: Version
+    version_id: version id
+    view_all_test_runs: View all test runs

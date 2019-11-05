@@ -1,0 +1,57 @@
+<%= form_for cfg, url: url, as: :cfg, :html => {:class => "form-horizontal"} do |f| %>
+  <div class="form-group">
+    <%= f.label :instance_name, :class => 'control-label col-lg-4' %>
+    <div class='controls col-lg-8 input-append'>
+      <%= f.text_field :instance_name, :class => 'form-control' %>
+      <%= info_for_input 'The name which you can see in top left corner of the application' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :records_per_page, class: 'control-label col-lg-4' %>
+    <div class='controls col-lg-8'>
+      <%= f.text_field :records_per_page, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :max_name_length, class: 'control-label col-lg-4' %>
+    <div class='controls col-lg-8'>
+      <%= f.text_field :max_name_length, class: 'form-control' %>
+      <%= info_for_input('You can set the maximum length of name for Test Case, Test Run, Project and Campaign') %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :file_size, 'File Size (MB)', class: 'control-label col-lg-4' %>
+    <div class='controls col-lg-8'>
+      <%= f.text_field :file_size, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :hello_message , :class => 'control-label col-lg-4' %>
+    <div class='controls col-lg-8'>
+      <%= f.text_field :hello_message, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :hello_subtitle, :class => 'col-lg-4 control-label' %>
+    <div class='controls col-lg-8'>
+      <%= f.text_field :hello_subtitle, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :time_zone, :class => 'col-lg-4 control-label' %>
+    <div class='controls col-lg-8'>
+      <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, {default: Time.zone.name}, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :user_creates_account, :class => 'col-lg-4 control-label' %>
+    <div class='controls col-lg-8'>
+      <%= f.check_box :user_creates_account, class: 'switch-normal' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class='col-lg-offset-4 col-lg-8 controls'>
+      <%= button_submit_for(f, cfg, class: 'only-one-click') %>
+    </div>
+  </div>
+<% end %>

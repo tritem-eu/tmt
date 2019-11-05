@@ -1,0 +1,38 @@
+# encoding: utf-8
+
+en:
+  custom_fields:
+    action: Action
+    admin: Admin
+    all: All
+    change: Change
+    clone: clone
+    create: Create
+    custom_field: Custom Field
+    custom_fields: Custom Fields
+    default_value: Default value
+    description: Description
+    false_value: False
+    lower_limit: Lower limit
+    int: Integer
+    string: String
+    bool: Boolean
+    text: Text
+    true_value: True
+    date: Date
+    enum: Enumeration
+    update: Update
+    upper_limit: Upper limit
+    no_value: "---"
+    any_value: "all"
+    project: Project
+    name: Name
+    new_custom_field: "New custom field"
+    none: None
+    custom_fields_for_test_run: "Custom fields for Test Run"
+    custom_fields_for_test_case: "Custom fields for Test Case"
+    test_case_custom_fields: Test Case Custom Fields
+    test_run_custom_fields: Test Run Custom Fields
+    test_case_custom_field: Test Case Custom Field
+    test_run_custom_field: Test Run Custom Field
+    type: Type

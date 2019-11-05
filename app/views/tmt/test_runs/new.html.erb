@@ -1,0 +1,23 @@
+<%= page_header present(@test_run).header_name %>
+
+<%= breadcrumbs(
+  t(:projects, scope: :test_runs),
+  projects_or_root_path(),
+  @project.name,
+  project_path(@project),
+  t(:test_runs, scope: :test_runs),
+  nil,
+  t(:new, scope: :test_runs)
+) %>
+
+<div class='row'>
+  <div class='col-lg-6'>
+    <%= render 'form',
+      url: [@project, @campaign, @test_run],
+      project: @project,
+      campaign: @campaign,
+      test_run: @test_run,
+      executors: @project_users
+    %>
+  </div>
+</div>

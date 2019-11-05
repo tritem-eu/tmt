@@ -1,0 +1,15 @@
+<%= left_navigation_for_admin active: :machines %>
+
+<%= page_header t(:machines, scope: :machines) %>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:machines, scope: :machines)
+) %>
+
+<%= page_description t(:_description, scope: :machines) %>
+
+<div class='height-separator'></div>
+
+<%= render "table", users: @users %>

@@ -1,0 +1,12 @@
+app.modal.add("<%= render_modal({
+  header: present(@set).header_name,
+  body: render(partial: "form", locals: {
+    set: @set,
+    sets: @sets,
+    project: @project,
+    parent: @parent,
+    url: project_sets_path(@project, set_ids: @set_ids)
+  })
+}) %>")
+app.sets.init().event.findPlaceForDropdownMenu();
+app._bootstrap.dropdownMenu();

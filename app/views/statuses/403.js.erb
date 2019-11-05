@@ -1,0 +1,11 @@
+app.modal.add(
+  "<div class='modal col-lg-9' data-signature='error 403'>" +
+    "<div class='modal-content'>" +
+      "<div class='modal-header'><button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button><h3>HTTP Forbidden 403</h3></div>"+
+      "<div class='modal-body'><div class='col-lg-9 col-lg-offset-1'><br /><br /><h3><i class='fa fa-exclamation' style='font-size: 40px;'></i>You don't have permission to this action (403)</h3><br /><p></p><br /><br /><br /></div><div class='clear-both'></div></div>" +
+      "<div class='modal-footer hide'></div>" +
+    "</div>"+
+  "</div>"
+, function(){
+  $('.modal .modal-body pre').html(ajaxOptions.responseText);
+})

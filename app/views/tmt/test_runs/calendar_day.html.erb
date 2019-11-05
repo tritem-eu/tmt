@@ -1,0 +1,40 @@
+<%= left_navigation_for_dashboard active: :test_cases, project: @project %>
+
+<%= page_header(
+  t(:test_runs, scope: :test_runs),
+  right_side: present(@project).link_to_new_test_run
+) %>
+
+<%= breadcrumbs(
+  :projects,
+  root_path,
+  @project.name,
+  project_path(@project),
+  t(:test_runs, scope: :test_runs)
+) %>
+
+<div class='row'>
+  <div class='col-lg-3'>
+    <%= render 'search_form',
+      active_tab: @active_tab,
+      search: @search
+    %>
+  </div>
+  <div class='col-lg-9'>
+    <%= render 'toggle_tab',
+      action: params['action'],
+      project: @project,
+      campaign: @campaign
+    %>
+
+    <div class='height-separator'></div>
+    <%= render 'calendar_day',
+      test_runs: @test_runs,
+      project: @project,
+      campaign: @campaign,
+      month: @month,
+      year: @year,
+      date: @date
+    %>
+  </div>
+</div>

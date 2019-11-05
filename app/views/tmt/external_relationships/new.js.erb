@@ -1,0 +1,30 @@
+app.modal.add("<%= render_modal({
+  header: t(:external_relationship, scope: :external_relationships),
+  subject: 'New',
+  body: render( partial: 'form',
+    locals: {
+      external_relationship: @external_relationship,
+      source: @source
+    })
+}) %>");
+
+app.oslc.uiConsumer.addFrame({
+  pickerURL: "http://0.11.0.155:3000/tmt_production/oslc/qm/service-providers/1/test-cases/new-creation-dialog",
+  //pickerURL: "http://0.0.0.0:8080/rio-cm/creator/changerequest",
+  protocol: "#oslc-core-postMessage-1.0",
+  returnURL: document.location.origin,
+  appendTo: $(".form-iframe")
+});
+
+$('.modal .glyphicon-plus').click(function(){
+  $('.form-iframe').toggleClass("hide");
+  $(this).toggleClass("glyphicon-plus glyphicon-minus");
+});
+
+app.oslc.uiConsumer.listenRespond(function(e){
+  var url = e.data.match('rdf:resource.*:.*(http.*);')[1];
+  $('.modal #external_relationship_url').val(url);
+  $('.form-iframe').addClass("hide");
+});
+
+app.externalRelationships.init().event.changeKind()

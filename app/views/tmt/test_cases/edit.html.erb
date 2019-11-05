@@ -1,0 +1,26 @@
+<%= left_navigation_for_dashboard active: [:test_case, :edit], project: @project, test_case: @test_case %>
+
+<%= page_header t(:test_case, scope: :test_cases),
+  subject: h(@test_case.name),
+  subject_after: present(@test_case).header_name(project: @project, steward: @test_case.steward)
+%>
+
+<%= breadcrumbs(
+  t(:projects, scope: :projects),
+  projects_or_root_path,
+  @project.name,
+  project_path(@project),
+  @test_case.name,
+  project_test_case_path(@project, @test_case),
+  t(:edit, scope: :test_cases)
+) %>
+
+<div class='col-lg-6'>
+  <%= render 'form',
+    url: project_test_case_path(@project, @test_case),
+    project: @project,
+    test_case: @test_case
+  %>
+</div>
+<div class='clear-both'></div>
+<%= render partial: 'tmt/user_activities/history', locals: {activities: @test_case.user_activities} %>

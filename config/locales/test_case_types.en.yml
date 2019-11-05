@@ -1,0 +1,17 @@
+en:
+  test_case_types:
+    action: Action
+    admin: admin
+    allows_file_upload: Allows file upload?
+    converter: Converter
+    edit: Edit
+    extension: Extension
+    file_extension: File extension
+    has_file: Has file
+    name: Name
+    new: New
+    new_test_case_type: New Test Case Type
+    none: None
+    test_case_types: Test case types
+    this_type_is_used: This type is used
+    update_type: Edit Type

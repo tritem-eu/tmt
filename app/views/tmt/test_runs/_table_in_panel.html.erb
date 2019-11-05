@@ -1,0 +1,37 @@
+<div class="panel panel-tmt">
+  <div class="panel-heading">
+    <h5 class="panel-title"><%= t(:recent_test_runs, scope: :projects) %>
+      <div class='pull-right'><%=  present(project).link_to_new_test_run_small %></div>
+    </h5>
+  </div>
+  <div class="panel-body">
+    <% if campaign %>
+      <%= render partial: "/tmt/test_runs/table",
+        locals: {
+          project: project,
+          test_runs: test_runs,
+          title: t(:listing_test_case, scope: :projects)
+        }
+      %>
+    <% else %>
+      <%= info_empty({
+        name: 'Campaign',
+        admin_block: add_link(admin_campaigns_path(project_id: project.id)) do |content|
+          content.space(icon 'plus-sign')
+          content << t(:create_campaign, scope: :test_runs)
+        end
+      }) %>
+    <% end %>
+    <div class="text-left">
+      <% if project.open_campaign %>
+        <% path = project_test_runs_path(project_id: project.id, campaign_id: project.open_campaign.id) %>
+      <% else %>
+        <% path = project_test_runs_path(project_id: project.id) %>
+      <% end %>
+      <%= link_to path do %>
+        <small><%= t(:view_all_test_runs, scope: :test_runs) %>
+        <%= icon('circle-arrow-right') %></small>
+      <% end %>
+    </div>
+  </div>
+</div>

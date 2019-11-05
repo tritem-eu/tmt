@@ -1,0 +1,41 @@
+<% if users.any? %>
+  <table class="table table-hover project-table">
+    <thead>
+      <tr>
+        <th class='col-lg-2'><%= t(:user_name, scope: :machines) %></th>
+        <th class='col-lg-2'><%= t(:hostname, scope: :machines)%></th>
+        <th class='col-lg-2'><%= t(:ip_address, scope: :machines)%></th>
+        <th class='col-lg-2'><%= t(:mac_address, scope: :machines)%></th>
+        <th class='col-lg-3'><%= t(:fully_qualified_domain_name, scope: :machines)%></th>
+        <th class='col-lg-2'><%= t(:action, scope: :machines)%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.each do |user| %>
+        <% machine = user.machine %>
+        <tr>
+          <td class='crop'><%= link_to user.name, [user] %></td>
+          <% if machine %>
+            <% present machine do |presenter| %>
+              <td class='crop'><%= presenter.hostname %></td>
+              <td class='crop'><%= presenter.ip_address %></td>
+              <td class='crop'><%= presenter.mac_address %></td>
+              <td class='crop'><%= presenter.fully_qualified_domain_name %></td>
+              <td class='crop'><%= link_edit([:edit, :admin, machine], remote: true) %></td>
+            <% end %>
+          <% else %>
+            <td class='crop'><%= content_or_none %></td>
+            <td class='crop'><%= content_or_none %></td>
+            <td class='crop'><%= content_or_none %></td>
+            <td class='crop'><%= content_or_none %></td>
+            <td class='crop'><%= link_to t(:create, scope: :machines), new_admin_machine_url(user_id: user.id), remote: true %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <%= info({
+    head: t(:list_of_machines_is_empty, scope: :machines)
+  }) %>
+<% end %>

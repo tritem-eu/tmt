@@ -1,0 +1,22 @@
+<%= page_header t(:scripts, scope: :scripts) %>
+
+<%= breadcrumbs(
+  t(:scripts, scope: :scripts)
+) %>
+
+<p>
+  <%= form_tag({controller: 'tmt/scripts', action: 'execute'}, class: 'col-lg-4', multipart: true) do %>
+    <div class="form-group">
+      <label><%= t(:project, scope: :scripts) %></label>
+      <%= select_tag 'script[project_id]', options_for_select(@projects.map { |project| [project.name, project.id] }), {class: 'form-control'} %>
+    </div>
+    <div class="form-group">
+      <label><%= t(:script, scope: :scripts) %></label>
+      <%= select_tag 'script[engine]', options_for_select([['import Versions', 'import_versions']]), {class: 'form-control'}%>
+    </div>
+    <%= file_field_tag 'script[zip_file]' %>
+    <div class="form-group">
+      <%= button_tag 'send', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+</p>

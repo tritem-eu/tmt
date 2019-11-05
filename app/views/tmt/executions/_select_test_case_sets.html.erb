@@ -1,0 +1,21 @@
+<%= render 'toggle_tab',
+  project: project,
+  member: member,
+  campaign: campaign,
+  test_run: test_run
+%>
+
+<div class='height-separator'></div>
+<div class='well list-sets'>
+  <div class='list-sets-content'>
+    <%= render "/tmt/sets/sub_set",
+      is_modal: true,
+      test_run: test_run,
+      set_ids: set_ids,
+      sets: sets,
+      project: project,
+      hash_tree: hash_tree,
+      nesting: Tmt::Lib::Nesting.new
+    %>
+  </div>
+</div>

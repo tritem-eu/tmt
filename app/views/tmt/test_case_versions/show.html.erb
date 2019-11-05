@@ -1,0 +1,45 @@
+<%= left_navigation_for_dashboard active: :dashboard, project: @project %>
+
+<%= page_header(t(:version, scope: :test_case_versions),
+  subject: add_tag(:span, class: 'crop') { @version.comment },
+  subheader: add_tag do |tag|
+    tag.space t(:created_by, scope: :test_case_versions)
+    tag.space link_to(@version.author.name, user_path(@version.author))
+    tag.space t(:created_at, scope: :test_case_versions)
+    tag.space l(@version.created_at, format: :medium)
+  end
+) %>
+<%= breadcrumbs(
+  t(:projects, scope: :test_case_versions),
+  projects_or_root_path,
+  @project.name,
+  project_path(@project),
+  @test_case.name,
+  project_test_case_path(@project, @test_case),
+  @version.comment
+) %>
+
+<%= render "content",
+  version: @version,
+  author: @author,
+  test_case: @test_case,
+  project: @project
+%>
+
+<% if @executions.any? %>
+  <div class='height-separator'></div>
+  <div class="panel panel-tmt">
+    <div class="panel-heading">
+      <h5 class="panel-title"><%= t(:list_of_executions, scope: :test_cases)%></h5>
+    </div>
+    <div class="panel-body">
+      <%= render "/tmt/test_cases/table_executions",
+        project: @project,
+        executions: @executions,
+        dispenser_executions: @dispenser_executions,
+        more_dots_path: project_test_case_version_path(@project, @test_case, @version, executions: :all),
+        less_dots_path: project_test_case_version_path(@project, @test_case, @version)
+      %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+var jProgress = $("a[href*='" + "<%= @request_path %>" + "']")
+jProgress.replaceWith("<%= j(present(@version).progress(@project, @test_case)) %>")

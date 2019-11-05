@@ -1,0 +1,22 @@
+<%= page_header present(@set).header_name %>
+
+<%= breadcrumbs(t(:projects, scope: :sets),
+  projects_or_root_path,
+  @project.name,
+  project_path(@project),
+  t(:sets, scope: :sets),
+  project_sets_path(@project),
+  @set.name,
+  project_sets_path(@project),
+  t(:edit, scope: :sets)
+) %>
+
+<div class='col-lg-6'>
+  <%= render 'form',
+    set: @set,
+    sets: @sets,
+    project: @project,
+    parent: @parent,
+    url: project_set_path(@project, @set)
+  %>
+</div>

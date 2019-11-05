@@ -1,0 +1,14 @@
+app.modal.onlyRemoveLast();
+app.modal.add("<%= render_modal({
+  header: present(@test_run).header_name,
+  body: render(partial: "form",
+    locals: {
+      url: [@project, @campaign, @test_run],
+      project: @project,
+      campaign: @campaign,
+      test_run: @test_run,
+      executors: @project_users,
+    }
+  )
+}) %>")
+app.dateTimePicker.add()

@@ -1,0 +1,65 @@
+<%= left_navigation_for_dashboard active: :users, user: @user %>
+
+<%= page_header(
+  t(:user, scope: :users),
+  subject: " " + @user.name
+) %>
+
+<%= breadcrumbs(
+  @user.name
+) %>
+
+<table>
+  <tr>
+    <td class='col-lg-offset-2'>
+      <div class='col-lg-offset-6'>
+        <%= @user.machine? ? icon('th', type: :blue_big) : icon('user', type: :blue_big) %>
+      </div>
+    </td>
+    <% if can? :read, @user %>
+      <td class='col-lg-5'>
+        <% if @user.deleted_at.nil? %>
+          <dl class='dl-horizontal'>
+            <dt><%= t(:name, scope: :users) %></dt>
+            <dd><%= show_value(@user.name) %></dd>
+            <dt><%= t(:email, scope: :users) %></dt>
+            <dd><%= show_value(@user.email) %></dd>
+            <dt><%= t(:created_at, scope: :users) %></dt>
+            <dd><%= l @user.created_at, format: :long %></dd>
+            <dt><%= t(:active_projects, scope: :users) %></dt>
+            <dd><%= present(@user).active_projects %></dd>
+            <dt><%= t(:roles, scope: :users) %></dt>
+            <dd><%= present(@user).roles %></dd>
+            <dt><%= t(:is_machine, scope: :users) %></dt>
+            <dd><%= show_value @user.machine? %></dd>
+          </dl>
+        <% else %>
+          <%= info body: t(:this_user_was_deleted_at, scope: :users, time: long_datetime(@user.deleted_at)) %>
+        <% end %>
+      </td>
+      <td class='col-lg-5'>
+        <% if @user.deleted_at.nil? and @user.is_machine? and @machine %>
+          <dl class='dl-horizontal'>
+            <dt><%= t(:ip_address, scope: :machines) %></dt>
+            <dd><%= show_value(@machine.ip_address) %></dd>
+            <dt><%= t(:mac_address, scope: :machines) %></dt>
+            <dd><%= show_value(@machine.mac_address) %></dd>
+            <dt><%= t(:hostname, scope: :machines) %></dt>
+            <dd><%= show_value(@machine.hostname) %></dd>
+            <dt><%= t(:fully_qualified_domain_name, scope: :machines) %></dt>
+            <dd><%= show_value(@machine.fully_qualified_domain_name) %></dd>
+          </dl>
+        <% end %>
+      </td>
+    <% else %>
+      <td class='col-lg-10'>
+        <%= info body: "you have not permission to read the user information" %>
+      </td>
+    <% end %>
+  </tr>
+</table>
+<% if current_user == @user %>
+  <p>
+    <%= render partial: 'tmt/user_activities/history', locals: {activities: @user.user_activities, type: :user} %>
+  </p>
+<% end %>

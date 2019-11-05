@@ -1,0 +1,13 @@
+# encoding: utf-8
+
+en:
+  members:
+    active: Active
+    add: Select
+    email: Email
+    user: User
+    list_of_project: "Projects on this instance:"
+    list_of_projects_is_empty: List of projects is empty
+    list_of_users: Users in selected project
+    project_membeships: Project members
+    remove: Remove

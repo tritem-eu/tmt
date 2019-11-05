@@ -1,0 +1,35 @@
+# encoding: utf-8
+
+en:
+  admin:
+    admin_panel: Admin panel
+    administration: Administration
+    administration_intro: Welcome to the administrative panel. It allows you to take full control over this installation.
+    automation_adapters: Automation Adapters
+    campaigns: Campaigns
+    custom_fields: Custom Fields
+    enumerations: Enumerations
+    _description:
+      automation_adapters: A list of all Automation Adapters.
+
+      users: Adding and editing users accounts
+      instance_configuration: Instance configuration lets you determine some of the detailed parameters of this installation, like hello messages, UI layouts, size of tables etc.
+      oslc_configuration: OSLC configuration lets you determine some of the detailed parameters of OSLC installation, like test case type, etc.
+      custom_fields: Manage custom fields for both Test Cases and Test Runs on this instalation, either globally or in per-project fashion. Custom fields may use enumerations.
+      enumerations: Configure Enumerations available to this instance. They can be used to assingn predefined values to a custom field, or to add new values on-the-run.
+      test_case_types: Test case types
+      members: Members
+      machines: A list of all users who are machines.
+      projects: Projects
+      projects: Projects
+      campaigns: Campaigns
+    instance_configuration: Instance Configuration
+    test_case_custom_fields: Custom fields for Test Cases
+    test_case_types: Test case types
+    test_run_custom_fields: Custom fields for Test Runs
+    users: Users
+    machines: Machines
+    members: Members
+    projects: Projects
+    oslc_instance_configuration: OSLC Instance Configuration
+    oslc_configuration: OSLC Configuration

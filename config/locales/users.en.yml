@@ -1,0 +1,21 @@
+en:
+  users:
+    active_projects: Active projects
+    admin: Admin
+    cancel_your_account: Cancel your account
+    create: Create
+    created_at: Created at
+    delete_user: Delete user
+    edit: Edit
+    email: Email
+    is_machine: Is machine?
+    name: Name
+    new_user: New user
+    roles: Roles
+    user_roles: User's roles
+    sign_up: Sign up
+    this_user_was_deleted_at: This user was deleted at %{time}
+    unhappy?: Unhappy?
+    update_password: Update Password
+    user: User
+    users: Users

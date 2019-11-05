@@ -1,0 +1,14 @@
+app.modal.onlyRemoveLast();
+app.modal.add("<%= render_modal({
+  header: "#{t(:test_case, scope: :test_cases)}",
+  body: render(partial: 'form',
+    locals: {
+      url: project_test_case_path(@project, @test_case),
+      project: @project,
+      test_case: @test_case
+    }
+  )
+}) %>")
+app.dateTimePicker.add();
+app.testCases.init().event.versionComment();
+app.testCases.init().addChangeEvent();

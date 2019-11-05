@@ -1,0 +1,7 @@
+app.modal.add("<%= render_modal({
+  header: t(:test_case_types, scope: :test_case_types),
+  subject: @test_case_type.name,
+  body: render(partial: '/admin/test_case_types/show',
+   locals: {type: @test_case_type}
+  )
+}) %>")

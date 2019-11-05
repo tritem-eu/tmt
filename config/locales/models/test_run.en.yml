@@ -1,0 +1,6 @@
+# encoding: utf-8
+
+en:
+  models:
+    test_run:
+      does_not_have_length_between_and: "does not have length between %{from} and %{to}"

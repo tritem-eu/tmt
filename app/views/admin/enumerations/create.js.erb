@@ -1,0 +1,9 @@
+<% if @enumeration.id %>
+  <% if request.referrer =~ /custom-fields\/new/%>
+    $('#custom_field_enumeration_id').append("<option value='<%= @enumeration.id%>'><%= @enumeration.name %></option>");
+    $('#custom_field_enumeration_id option[value="<%= @enumeration.id%>"]').attr('selected', 'selected');
+    app.modal.removeAll();
+  <% else %>
+    location.reload();
+  <% end %>
+<% end %>

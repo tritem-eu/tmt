@@ -1,0 +1,11 @@
+app.modal.add("<%= render_modal(
+  {
+    header: t(:enumeration_value, scope: :enumeration_values),
+    body: render(partial: '/tmt/enumeration_values/form',
+      locals: {
+        value: @value,
+        enumeration: @enumeration
+      }
+    )
+  }
+) %>")

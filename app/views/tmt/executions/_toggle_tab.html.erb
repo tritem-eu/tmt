@@ -1,0 +1,10 @@
+<% active = member.reload.get_nav_tab(:execution).to_sym %>
+<nav>
+  <ul class="nav nav-tabs">
+    <li class='<%= "active" if [:list, nil, :flat].include?(active) %>'><%= link_to t(:flat, scope: :test_cases), select_test_cases_project_campaign_executions_path(project, campaign, test_run_id: test_run.id, nav_tab: :list, save_filter_params: true), remote: true %></li>
+    <li class='<%= "active" if active == :sets %>'><%= link_to t(:tree, scope: :test_cases), select_test_cases_project_campaign_executions_path(project, campaign, test_run_id: test_run.id, nav_tab: :sets, save_filter_params: true), remote: true %></li>
+    <% if active == :sets %>
+      <li class='pull-right'><%= present(::Tmt::TestCase).add_submit_for_checkboxes(params, project) %></li>
+    <% end %>
+  </ul>
+</nav>

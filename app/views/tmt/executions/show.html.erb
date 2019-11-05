@@ -1,0 +1,59 @@
+<%= left_navigation_for_dashboard active: [:test_run, :execution], project: @project, test_run: @test_run, execution: @execution %>
+
+<%= page_header t(:execution, scope: :executions),
+  subject: h(@version.comment)
+%>
+
+<%= breadcrumbs(
+  :projects,
+  projects_or_root_path,
+  h(@project.name),
+  project_path(@project),
+  t(:test_runs, scope: :executions),
+  project_test_runs_path(@project),
+  h(@test_run.name),
+  project_campaign_test_run_path(@project, @campaign, @test_run),
+  t(:execution, scope: :executions),
+  [@project, @campaign, @execution],
+  h(@version.comment)
+) %>
+
+<nav>
+  <ul class="nav nav-tabs">
+    <li class='active'><%= link_to t(:execution, scope: :executions), project_campaign_execution_path(@project, @campaign, @execution) %></li>
+    <li><%= link_to t(:report, scope: :executions), report_project_campaign_execution_path(@project, @campaign, @execution) %></li>
+  </ul>
+</nav>
+<div class='height-separator'></div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <dl class="dl-horizontal">
+      <dt><%= t(:id, scope: :test_case_versions) %></dt>
+      <dd><%= @version.id %></dd>
+      <dt><%= t(:file_name, scope: :test_case_versions) %></dt>
+      <dd><%= crop_string(@version.file_name) %></dd>
+      <dt><%= t(:file_size, scope: :test_case_versions)%></dt>
+      <dd><%= present(@version).file_size %></dd>
+      <dt><%= t(:author, scope: :test_case_versions) %></dt>
+      <dd><%= link_to @author.name, @author %></dd>
+      <dt>Comment</dt>
+      <dd><%= crop_string(@version.comment) %></dd>
+    </dl>
+    <% if can?(:planned_or_executing, @test_run) and @execution.can_be_executed? %>
+      <%= render 'form',
+        url: project_campaign_execution_path(@project, @execution.test_run.campaign, id: @execution.id),
+        version: @version,
+        execution: @execution
+      %>
+    <% end %>
+  </div>
+  <div class='col-lg-8'>
+    <%= present(@version).file_content %>
+    <div class='height-separator'></div>
+    <%= link_to t(:download_file, scope: :test_case_versions),
+      download_project_test_case_version_path(@project, @test_case, @version),
+      class: "btn btn-primary pull-right"
+    %>
+  </div>
+</div>

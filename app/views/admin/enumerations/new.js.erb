@@ -1,0 +1,6 @@
+app.modal.add("<%= render_modal({
+  header: t(:new_enumeration, scope: :enumerations),
+  body: render(partial: 'form',
+    locals: {enumeration: @enumeration, is_remote: true}
+  )
+}) %>")

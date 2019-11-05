@@ -1,0 +1,20 @@
+<%= left_navigation_for_admin active: :enumerations %>
+
+<%= page_header t(:enumeration_value, scope: :enumeration_values),
+ subject: 'New'
+%>
+
+<%= breadcrumbs(
+  t(:enumerations, scope: :enumeration_values),
+  admin_enumerations_path,
+  h(@enumeration.name),
+  admin_enumerations_path,
+  t(:new_value, scope: :enumeration_values)
+) %>
+
+<div class='col-lg-6'>
+  <%= render '/admin/enumeration_values/form',
+    enumeration: @enumeration,
+    value: @value
+  %>
+</div>

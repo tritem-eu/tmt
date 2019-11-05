@@ -1,0 +1,28 @@
+if($('.modal.select-test-run').size()){
+  // After create test_case script should remove existing modal window
+  app.modal.removeLast();
+
+  // when is opended tmt/executions/select_test_run
+  jSelect = $('select#test_run_id');
+  if(jSelect.length){
+    jNewOption = jSelect.find('option').first().clone();
+    jNewOption.val("<%= @test_run.id %>");
+    jNewOption.text("<%= h(@test_run.name) %>");
+    jSelect.append(jNewOption);
+    jOptions = jSelect.find('option');
+    jOptions.removeAttr("selected");
+    jOptions.last().attr("selected", "selected");
+    jSelect.parents("form").find("input[type=submit]").removeClass('hidden')
+    var twinId = jSelect.parents("form").find("input[type=submit]").data('twin-id');
+    $('.in-modal-footer[data-twin-id="' +  twinId + '"]').removeClass('disabled')
+    while(app.modal.jLastModal().size() > 0){
+      if(app.modal.jLastModal().hasClass('test-runs')){
+        app.modal.removeLast();
+      }else{
+        break;
+      }
+    }
+  }
+}else{
+  window.location.reload();
+}

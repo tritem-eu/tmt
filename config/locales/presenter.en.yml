@@ -1,0 +1,11 @@
+# encoding: utf-8
+
+en:
+  presenter:
+    create: create
+    delete: Delete
+    edit: Edit
+    new: New
+    new_set: New set
+    no_value: "---"
+    update: Update

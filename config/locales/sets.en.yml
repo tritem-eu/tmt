@@ -1,0 +1,21 @@
+# encoding: utf-8
+
+en:
+  sets:
+    add: Add
+    add_new_set: Add new set
+    add_test_case: Add test case
+    download: Download
+    edit: Edit
+    list_of_test_cases: List of test cases
+    name: Name
+    new: New
+    new_set: New set
+    no_parent: No parent
+    parent: Parent
+    projects: Projects
+    set_name: Set name
+    sets: Sets
+    test_case: Test case
+    test_cases: Test cases
+    trash: Trash

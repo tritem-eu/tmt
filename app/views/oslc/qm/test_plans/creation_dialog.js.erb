@@ -1,0 +1,19 @@
+<% if @test_plan.id %>
+  // Send message when object @test_case was created
+  var response = "<%= @response %>";
+  $('[data-response]').remove();
+  $('body').append("<div class='hidden' data-response='" + response + "'></div>");
+  app.oslc.init();
+  app.oslc.uiProvider.postMessage(response);
+  app.oslc.uiProvider.windowName(response);
+<% else %>
+  $('.oslc-creation-dialog').html("<%= j(render(partial: '/tmt/test_runs/form',
+    locals: {
+      url: creation_dialog_oslc_qm_service_provider_test_plans_url(@service_provider),
+      test_run: @test_plan,
+      project: @service_provider,
+      campaign: @campaign,
+      executors: @executors
+    }
+  )) %>")
+<% end %>

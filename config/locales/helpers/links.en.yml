@@ -1,0 +1,11 @@
+# encoding: utf-8
+
+en:
+  helpers:
+    links:
+      edit: Edit
+      delete: Delete
+      is_open: Is open
+      created_at: Created at
+      deadline_at: Deadline at
+      new: New

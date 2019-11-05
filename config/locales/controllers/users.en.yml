@@ -1,0 +1,8 @@
+en:
+  controllers:
+    users:
+      alert_for_update_role: User's role was not updated (at least one user has to have 'Admin' role)
+      notice_for_update_role: User's role was successfully updated
+      alert_for_update: Unable to update user
+      alert_for_destroy: You cannot delete yourself
+      message_for_destroy: Not authorized as an administrator

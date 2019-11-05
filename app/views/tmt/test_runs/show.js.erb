@@ -1,0 +1,12 @@
+if (app.userActivity.isToReplace()){
+  app.userActivity.replaceWith("<%= j(
+    render partial:
+      '/tmt/user_activities/history',
+      locals: {
+        activities: @test_run.user_activities,
+        is_remote: true
+      }
+  ) %>", "<%= @request_url %>");
+} else {
+  location.reload()
+}

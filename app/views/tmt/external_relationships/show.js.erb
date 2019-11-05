@@ -1,0 +1,6 @@
+app.modal.add("<%= render_modal({
+  header: t(:external_relationship, scope: :external_relationships),
+  body: render(partial: "show",
+    locals: {external_relationship: @external_relationship}
+  )
+}) %>")

@@ -1,0 +1,56 @@
+<%= form_for(custom_field, url: url, as: :custom_field, html: {class: "form-horizontal"}) do |f| %>
+  <%= hidden_field_tag :type_name, type_name %>
+  <%= hidden_field_tag :no_change_type_name, params[:no_change_type_name] %>
+  <div class="form-group required">
+    <%= f.label :type, t(:type, scope: :custom_fields), class: 'control-label col-lg-3' %>
+    <div class="col-lg-9">
+      <% if custom_field.id.nil? %>
+        <% unless params[:no_change_type_name].nil? %>
+          <%= text_field_tag '', '',  value: t_or_not(custom_field.type_name, scope: :custom_fields), disabled: :disabled, class: "form-control" %>
+        <% else %>
+          <%= text_field_tag '', '',  value: t_or_not(type_name, scope: :custom_fields), readonly: true, class: 'form-control' %>
+        <% end %>
+        <%= f.hidden_field :type_name, value: type_name, id: nil %>
+      <% else %>
+        <%= f.text_field :type_name, value: t_or_not(custom_field.type_name, scope: :custom_fields), disabled: :disabled, class: "form-control" %>
+      <% end %>
+    </div>
+  </div>
+  <div class="form-group required">
+    <%= f.label :name, t(:name, scope: :custom_fields), class: 'control-label col-lg-3' %>
+    <div class="col-lg-9">
+      <%= f.text_field :name, class: "form-control js-input-down-counter-#{Tmt::Cfg.max_name_length}" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, t(:description, scope: :custom_fields), class: 'control-label col-lg-3' %>
+    <div class="col-lg-9">
+      <%= f.text_area :description, class: "form-control no-resize-vertical" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :project, t(:project, scope: :custom_fields), class: 'control-label col-lg-3' %>
+    <div class="col-lg-9">
+      <%= f.select :project_id,
+        options_for_select(
+          projects.map{|project| [project.name, project.id]}, custom_field.project_id
+        ),
+        {include_blank: "- #{t :none, scope: :custom_fields} -"},
+        class: "form-control",
+        disabled: present(custom_field, Tmt::CustomFieldPresenter).disabled_project?
+      %>
+    </div>
+  </div>
+  <div class="change_custom_field_type">
+    <%= render partial: "/admin/custom_field_types/type_limits", locals: {
+      type_name: type_name,
+      custom_field: custom_field,
+      f: f
+    } %>
+  </div>
+  <div class="form-group">
+    <div class="col-lg-offset-3 col-lg-9">
+      <%= button_submit_for(f, custom_field, class: 'only-one-click', data: {confirm: 'Are you sure? This operation will take you a few minutes!'}) %>
+    </div>
+  </div>
+<% end %>

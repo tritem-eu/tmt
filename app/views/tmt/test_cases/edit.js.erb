@@ -1,0 +1,16 @@
+app.modal.add("<%= render_modal({
+  header: t(:test_case, scope: :test_cases),
+  subject: h(@test_case.name),
+  subject_after: present(@test_case).header_name(project: @project, steward: @test_case.steward),
+  subheader: present(@test_case).subheader,
+  body: render(partial: "form",
+    locals: {
+      project: @project,
+      url: project_test_case_path(@project, @test_case),
+      test_case: @test_case
+    }
+  )
+}) %>")
+
+app.dateTimePicker.add();
+app.testCases.init();

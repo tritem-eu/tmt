@@ -1,0 +1,42 @@
+<%= left_navigation_for_admin active: :test_case_types %>
+
+<%= page_header t(:test_case_types, scope: :test_cases),
+  right_side: link_new(new_admin_test_case_type_path, remote: false)
+%>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:test_case_types, scope: :test_case_types)
+) %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th class='crop col-lg-5'><%= t :name, scope: :test_case_types %></th>
+      <th class='crop'><%= t :has_file, scope: :test_case_types %></th>
+      <th class='crop'><%= t :file_extension, scope: :test_case_types %></th>
+      <th class='crop'><%= t :converter, scope: :test_case_types %></th>
+      <th class='crop col-lg-3'><%= t :action, scope: :test_case_types %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @test_case_types.each do |test_case_type| %>
+      <tr>
+        <td><%= h test_case_type.name %></td>
+        <td><%= show_value test_case_type.has_file %></td>
+        <td><%= content_or_none test_case_type.extension %></td>
+        <td><%= content_or_none test_case_type.converter %></td>
+        <td>
+          <%= link_edit edit_admin_test_case_type_path(test_case_type), remote: false %>
+          <% if test_case_type.is_unused? %>
+            <%= link_delete admin_test_case_type_path(test_case_type) %>
+          <% else %>
+            <%= link_delete nil, only_show: true %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

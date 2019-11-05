@@ -1,0 +1,11 @@
+app.modal.add("<%= render_modal({
+  header: t(:campaign, scope: :campaigns),
+  subject: h(@campaign.name),
+  body: render(partial: 'form',
+    locals: {
+      campaign: @campaign,
+      url: admin_campaign_path(@campaign)
+    }
+  )
+}) %>");
+app.dateTimePicker.addDateTime();

@@ -1,0 +1,30 @@
+<%= left_navigation_for_admin active: :users %>
+
+<%= page_header t(:user_roles, scope: :users),
+  subheader: add_tag { |tag|
+    tag << add_tag(:strong){t(:name, scope: :users)}
+    tag << ': '
+    tag << h(@user.name)
+    tag << ' '
+    tag << add_tag(:strong){t(:email, scope: :users)}
+    tag << ': '
+    tag << h(@user.email)
+  }
+%>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:users, scope: :users),
+  admin_users_path,
+  h(@user.name),
+  user_path(@user),
+  t(:user_roles, scope: :users).downcase
+) %>
+
+<%= render(partial: 'edit_role',
+  locals: {
+    user: @user,
+    url: admin_user_path(@user)
+  }
+) %>

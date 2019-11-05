@@ -1,0 +1,15 @@
+<div>
+  <ul class="nav nav-tabs">
+    <li class='<%= 'active' if action == 'index' %>'>
+      <%= link_to 'list', [project, :test_runs] %>
+    </li>
+    <li class='<%= 'active' if action == 'calendar' %>'>
+      <%= link_to 'calendar', [:calendar, project, :test_runs] %>
+    </li>
+    <% if action == 'calendar_day' %>
+      <li class='active'>
+        <%= link_to "day", nil %>
+      </li>
+    <% end %>
+  </ul>
+</div>

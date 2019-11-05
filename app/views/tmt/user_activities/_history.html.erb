@@ -1,0 +1,26 @@
+<% activities = activities.order(created_at: :desc).page(params[:page]).per(5)%>
+<div class="user-activity-history">
+  <hr />
+  <h5><%= t(:recent_changes, scope: :test_cases) %></h5>
+  <% unless activities.empty? %>
+    <table class='table table-bordered'>
+      <% activities.each do |activity|%>
+        <% type = nil unless defined?(type) %>
+        <% if type == :project %>
+          <%= present(activity).activity_for_project %>
+        <% elsif type == :user %>
+          <%= present(activity).activity_for_user %>
+        <% else %>
+          <%= present(activity).activity_for_observable %>
+        <% end %>
+      <% end %>
+    </table>
+    <div class='pull-right'><button type='button' class='btn btn-link hide'>More</button></div>
+    <div class="text-center">
+      <% is_remote = false unless defined?(is_remote) %>
+      <%= paginate activities, remote: is_remote %>
+    </div>
+  <% else %>
+    <%= content_or_none(nil) %>
+  <% end %>
+</div>

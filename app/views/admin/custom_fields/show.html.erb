@@ -1,0 +1,47 @@
+<%= left_navigation_for_admin active: :custom_fields %>
+
+<%= page_header t(:custom_field, scope: :custom_fields),
+  subject: " " + @custom_field.name,
+  right_side: add_tag { |tag|
+    tag << link_edit([:edit, :admin, @custom_field], remote: false)
+    tag << link_delete_for_custom_field(@custom_field)
+  }
+%>
+<% present(@custom_field, Tmt::CustomFieldPresenter) do |custom_field_present|%>
+
+  <%= breadcrumbs(
+    :admin,
+    admin_cfgs_path,
+    custom_field_present.full_model_name,
+    custom_field_present.index_path,
+    @custom_field.name
+  ) %>
+
+  <dl class="dl-horizontal col-lg-6">
+    <dt><%= t(:name, scope: :custom_fields) %></dt>
+    <dd><%= crop_string @custom_field.name %></dt>
+
+    <dt><%= t(:type, scope: :custom_fields) %></dt>
+    <dd><%= t_or_not(custom_field_present.show(:type_name), scope: :custom_fields) %></dt>
+
+    <dt><%= t(:description, scope: :custom_fields) %></dt>
+    <dd><%= custom_field_present.show(:description) %></dt>
+
+    <dt><%= t(:project, scope: :custom_fields) %></dt>
+    <dd><%= @custom_field.project ? crop_string(@custom_field.project.name) : content_or_none(nil) %></dt>
+
+    <dt><%= t(:upper_limit, scope: :custom_fields) %></dt>
+    <dd><%= custom_field_present.show(:upper_limit) %></dt>
+
+    <dt><%= t(:lower_limit, scope: :custom_fields) %></dt>
+    <dd><%= custom_field_present.show(:lower_limit) %></dt>
+
+    <dt><%= t(:default_value, scope: :custom_fields) %></dt>
+    <dd><%= custom_field_present.show(:default_value) %></dt>
+
+    <% if @custom_field.enumeration %>
+      <dt><%= t(:enum, scope: :custom_fields) %></dt>
+      <dd><%= link_to @custom_field.enumeration.name, admin_enumerations_path %></dd>
+    <% end %>
+  </dl>
+<% end %>

@@ -1,0 +1,17 @@
+<%= left_navigation_for_admin active: :projects %>
+
+<%= page_header t(:projects, scope: :projects),
+  right_side: link_new(new_admin_project_path)
+%>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:projects, scope: :projects)
+) %>
+
+<%= page_description t(:_description, scope: :projects) %>
+
+<div class='height-separator'></div>
+
+<%= render "table", projects: @projects %>

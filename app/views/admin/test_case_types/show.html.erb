@@ -1,0 +1,17 @@
+<%= left_navigation_for_admin active: :test_case_types %>
+
+<%= page_header t(:test_case_types, scope: :test_case_types),
+  subject: @test_case_type.name
+%>
+
+<%= breadcrumbs(
+  :admin,
+  admin_cfgs_path,
+  t(:test_case_types, scope: :test_case_types),
+  admin_test_case_types_path,
+  @test_case_type.name
+) %>
+
+<%= render 'admin/test_case_types/show',
+  type: @test_case_type
+%>

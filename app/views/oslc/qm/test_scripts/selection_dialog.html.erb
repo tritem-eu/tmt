@@ -1,0 +1,36 @@
+<div class="oslc-selection-dialog">
+  <div class="hidden" data-response="<%= @response %>"></div>
+
+  <%= form_tag request.original_url, class:'search-form', :method => :get do %>
+    <div class="input-group">
+      <%= text_field_tag :search, params[:search], :class => "search-query form-control", :placeholder => t(:search_test_scripts, scope: :oslc) %>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit"><%= icon('search') %></button>
+      </span>
+    </div>
+  <% end %>
+
+  <% unless @test_scripts.empty? %>
+    <table class="table table-striped">
+     <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Author</th>
+      </tr>
+    </thead>
+      <tbody>
+          <% @test_scripts.each do |test_script| %>
+            <tr>
+              <td><%= test_script.id %></td>
+              <td><%= link_to test_script.comment, project_test_case_version_url(@service_provider, test_script.test_case, test_script) %></td>
+              <td><%= test_script.author.name unless test_script.author.nil? %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </table>
+  <% else %>
+    <p class='text-muted'><%= t(:no_test_scripts_to_display, scope: :oslc) %></p>
+  <% end %>
+</div>

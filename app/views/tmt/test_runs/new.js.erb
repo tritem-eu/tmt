@@ -1,0 +1,25 @@
+app.modal.add("<%= render_modal({
+  header: present(@test_run).header_name,
+  subheader: add_tag do |tag|
+    tag << t(:campaign, scope: :test_runs)
+    tag << ": "
+    tag << campaign_link(@campaign, {target: '_blank'})
+  end,
+  body: render(partial: "form",
+    locals: {
+      url: [@project, @campaign, @test_run],
+      project: @project,
+      campaign: @campaign,
+      test_run: @test_run,
+      executors: @project_users
+    }
+  )
+} ) %>")
+
+// When user clicked on 'set' button
+name = app['requestItem']('current_set_name')
+if (name != 'undefined') {
+  $(app.modal.jLastModal).find('#test_run_name').val('<%= t(:execution_of, scope: :test_runs) %> ' + name)
+}
+
+app.dateTimePicker.add();

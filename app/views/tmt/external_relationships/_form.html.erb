@@ -1,0 +1,52 @@
+<%= form_for [source, external_relationship], as: :external_relationship, remote: true, html: {class: "form-horizontal"} do |f| %>
+  <div class="form-group">
+    <div class='col-lg-offset-3 col-lg-9'>
+      <label>
+        <%= f.radio_button :kind, Tmt::ExternalRelationship::ATTR_URL %>
+        URL
+      </label>
+      <label>
+        <%= f.radio_button :kind,  Tmt::ExternalRelationship::ATTR_RQ_ID  %>
+        <%= t(:relationship_id, scope: :external_relationships) %>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :url, "URL" , class: "control-label col-lg-3" %>
+    <div class="input-group col-lg-9" >
+      <%= f.text_field :url, class: "form-control" %>
+      <span class="input-group-addon add-on hidden">
+        <%= icon('plus') %>
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-iframe hide col-lg-offset-3 col-lg-6"></div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :value, t(:value, scope: :external_relationships), class: "control-label col-lg-3" %>
+    <div class='col-lg-9'>
+      <%= f.text_field :value,
+        placeholder: t(:relationship_value, scope: :external_relationships),
+        class: "form-control no-resize-vertical",
+        cols: 20,
+        rows: 3
+      %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :rq_id, t(:relationship_id, scope: :external_relationships), class: "control-label col-lg-3" %>
+    <div class="controls col-lg-9">
+      <%= f.text_field :rq_id, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="controls col-lg-offset-3 col-lg-9">
+      <%= button_submit_for(f, external_relationship, class: 'only-one-click') %>
+    </div>
+  </div>
+<% end %>

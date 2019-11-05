@@ -1,0 +1,66 @@
+<% if test_cases.any? %>
+  <% no_active_columns ||= [] %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <% unless campaign.nil? %>
+          <th class='col-lg-1 hide-when-js-is-disabled'>
+            <input type='checkbox' class='select-all'></input>
+          </th>
+        <% end %>
+        <th class='col-lg-3 crop'>
+          <%= t(:name, scope: :test_cases)%>
+        </th>
+        <th class='col-lg-3 crop'><%= t(:description, scope: :test_cases)%></th>
+        <th class='col-lg-3 crop'><%= t(:creator, scope: :test_cases)%></th>
+        <% unless no_active_columns.include?(:action) %>
+          <th class='col-lg-1 crop text-center'></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% test_cases.each do |test_case| %>
+        <tr>
+          <% unless campaign.nil? %>
+            <td class='hide-when-js-is-disabled'>
+              <%= present(test_case).add_checkbox %>
+            </td>
+          <% end %>
+          <% target = (defined?(is_modal) ? '_blank' : '_self') %>
+          <td>
+            <div style='display: inline-block, padding: 0px'>
+              <%= link_to(crop_string(test_case.name), project_test_case_path(project, test_case), target: target) %>
+            </div>
+          </td>
+          <td><%= crop_string test_case.description %></td>
+          <td><%= crop_string test_case.creator.name %></td>
+          <% unless no_active_columns.include?(:action) %>
+            <td class='text-center'>
+              <%= dropdown_menu_caret(ul_class: 'pull-right') do |array| %>
+                <% array << link_edit(edit_project_test_case_path(project, test_case)) %>
+                <% array << link_delete(project_test_case_path(project, test_case)) %>
+                <% array << link_with_icon([project, test_case],
+                  name: t(:properties, scope: :test_cases),
+                  fa_icon: 'file-text'
+                ) %>
+
+                <% if not params[:campaign_id].nil? and not params[:test_run_id].nil? %>
+                  <% path = select_versions_project_campaign_executions_path(project, params[:campaign_id], test_run_id: params[:test_run_id], test_case_ids: [test_case.id]) %>
+                  <% array << link_to(add_tag { |tag|
+                    tag.space icon('tasks')
+                    tag << t(:add_to_test_run, scope: :test_cases)
+                  }, path) %>
+                <% end %>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class='text-muted'><%= t(:no_test_cases_to_display, scope: :test_cases) %></p>
+<% end %>
+<div class='pull-right'>
+  <%= present(::Tmt::TestCase).add_submit_for_checkboxes(params, project) %>
+</div>

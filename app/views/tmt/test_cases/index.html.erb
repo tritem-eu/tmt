@@ -1,0 +1,38 @@
+<%= left_navigation_for_dashboard active: :test_cases, project: @project %>
+
+<%= page_header(t(:test_cases, scope: :test_cases),
+  right_side: link_new(new_project_test_case_path(@project)
+) ) %>
+
+<%= breadcrumbs(
+  t(:projects, scope: :projects),
+  projects_or_root_path,
+  @project.name,
+  project_path(@project),
+  t(:test_cases, scope: :test_cases)
+) %>
+
+<%= render 'tmt/test_cases/toggle_tab',
+  project: @project,
+  member: @member,
+  campaign: @campaign
+%>
+
+<div class='height-separator'></div>
+
+<div class='row'>
+  <div class='col-lg-3'>
+    <%= render "search_form",
+      search: @search
+    %>
+  </div>
+  <div class='col-lg-9'>
+    <%= render "/tmt/test_cases/table",
+      project: @project,
+      campaign: @project.open_campaign,
+      test_cases: @test_cases
+    %>
+    <div class='height-separator'></div>
+    <%= paginate @test_cases %>
+  </div>
+</div>

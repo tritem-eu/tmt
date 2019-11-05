@@ -1,0 +1,23 @@
+<%= left_navigation_for_admin active: :test_case_types %>
+
+<%= page_header(
+  t(:test_case_types, scope: :test_case_types),
+  subject: " "+@test_case_type.name
+) %>
+
+<%= breadcrumbs(
+  :admin,
+  admin_cfgs_path,
+  t(:test_case_types, scope: :test_case_types),
+  admin_test_case_types_path,
+  @test_case_type.name,
+  admin_test_case_types_path,
+  :edit
+) %>
+
+<div class='col-lg-6'>
+  <%= render 'form',
+    url: admin_test_case_type_path(@test_case_type),
+    test_case_type: @test_case_type
+  %>
+</div>

@@ -1,0 +1,6 @@
+<% attached_file = @execution.attached_files.first %>
+<% if attached_file.present? %>
+  <% content = attached_file[:compressed_file].decompress if attached_file[:compressed_file] %>
+  <%= raw(::Tmt::Lib::Converter.new(content, 'html_without_js').to_html) %>
+<% end %>
+

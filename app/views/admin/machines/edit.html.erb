@@ -1,0 +1,24 @@
+<%= left_navigation_for_admin machine: @machine, active: :machines %>
+
+<%= page_header(
+  t(:machine, scope: :machines),
+  subject: h(@user.name),
+  #subheader: present(@project).subheader
+) %>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:machines, scope: :machines),
+  admin_machines_url,
+  @user.name,
+  user_path(@user),
+  t(:edit, scope: :machines)
+) %>
+
+<div class='col-lg-6'>
+  <%= render 'form',
+    machine: @machine,
+    url: admin_machine_path(@machine)
+  %>
+</div>

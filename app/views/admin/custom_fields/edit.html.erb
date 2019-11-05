@@ -1,0 +1,25 @@
+<%= left_navigation_for_admin active: :custom_fields %>
+
+<% present(@custom_field, Tmt::CustomFieldPresenter) do |custom_field_present|%>
+  <%= page_header(custom_field_present.header_name) %>
+
+  <%= breadcrumbs(
+    :admin,
+    admin_cfgs_path,
+    custom_field_present.full_model_name,
+    custom_field_present.index_path,
+    h(@custom_field.name),
+    custom_field_present.show_path,
+    :edit
+  ) %>
+
+  <div class='col-lg-6'>
+    <%= render 'form',
+      custom_field: @custom_field,
+      type_names: @type_names,
+      projects: @projects,
+      url: custom_field_path(@custom_field),
+      type_name: @custom_field.type_name
+    %>
+  </div>
+<% end %>

@@ -1,0 +1,26 @@
+<% present version do |version_present|%>
+  <div class="row">
+    <div class="col-lg-3">
+      <dl class="dl-horizontal">
+        <dt><%= t(:id, scope: :test_case_versions) %></dt>
+        <dd><%= version.id %></dd>
+        <dt><%= t(:file_name, scope: :test_case_versions) %></dt>
+        <dd><%= crop_string(version.file_name) %></dd>
+        <dt><%= t(:file_size, scope: :test_case_versions)%></dt>
+        <dd><%= version_present.file_size %></dd>
+        <dt><%= t(:author, scope: :test_case_versions) %></dt>
+        <dd><%= link_to author.name, author %></dd>
+        <dt>Comment</dt>
+        <dd><%= crop_string(version.comment) %></dd>
+      </dl>
+    </div>
+    <div class='col-lg-9'>
+      <%= present(version).file_content %>
+      <div class='height-separator'></div>
+      <%= link_to t(:download_file, scope: :test_case_versions),
+        download_project_test_case_version_path(project, test_case, version),
+        class: "btn btn-primary pull-right"
+      %>
+    </div>
+  </div>
+<% end %>

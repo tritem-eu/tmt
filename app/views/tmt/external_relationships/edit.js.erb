@@ -1,0 +1,11 @@
+app.modal.onlyRemoveLast();
+app.modal.add("<%= render_modal({
+  header: t(:external_relationship, scope: :external_relationships),
+  body: render(partial: 'form',
+    locals: {
+      external_relationship: @external_relationship,
+      source: @source
+    }
+  )
+}) %>")
+app.externalRelationships.init().event.changeKind();

@@ -1,0 +1,22 @@
+<% remote = remote || false %>
+<%= form_tag request.original_url, class:'search-form', :method => :get, remote: remote do %>
+  <div class="input-group">
+    <% if defined?(test_run) and test_run %>
+      <%= hidden_field_tag :test_run_id, test_run.id %>
+    <% end %>
+    <%= text_field_tag :search, search.filter['search'], :class => "search-query form-control", :placeholder => t(:search, scope: :test_runs) %>
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="submit"><%= icon('search') %></button>
+    </span>
+  </div>
+  <br />
+  <div class="panel-group" id="accordion">
+    <%= facets t(:creator, scope: :test_cases), search.options_for_facets(:creator) %>
+    <%= facets t(:type, scope: :test_cases), search.options_for_facets(:type) %>
+    <% ::Tmt::TestCaseCustomField.where(type_name: :bool).each do |custom_field| %>
+      <%= facets custom_field.name, search.options_for_facets(:custom_field, {custom_field: custom_field}) %>
+    <% end %>
+    <div class='height-separator-20'></div>
+    <button class="btn btn-default pull-right hide-when-js-is-active" type="submit"><%= icon('search') %> <%= t(:search, scope: :test_cases) %></button>
+  </div>
+<% end %>

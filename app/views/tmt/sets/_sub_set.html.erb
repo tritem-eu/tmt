@@ -1,0 +1,129 @@
+<% nesting.increment_nesting %>
+<% set_ids ||= [] %>
+<% test_cases = hash_tree[:test_cases] || [] %>
+<% nesting.budget_in(test_cases) %>
+<% nesting.budget_in(hash_tree[:children]) %>
+<% hash_tree[:children].each do |hash| %>
+  <% set = hash[:object] %>
+    <div class="header display-table" data-path='<%= project_sets_path(project, set_ids: set_ids) %>'>
+      <% nesting.decrement_counter %>
+      <%= raw nesting.generate_indent %>
+      <div class='display-cell'>
+        <% if set_ids.include?(set.id.to_s) %>
+          <%= link_to project_sets_path(project, remove_set_id: set.id.to_s, test_run_id: params[:test_run_id]), remote: true, class: "tree-li ajax-no-background display-table crop" do %>
+            <span class='display-cell'>▾</span> <%= icon('folder-close', class: 'yellow-folder display-cell') %> <span class='display-cell'><%= h(set.name) %></span>
+          <% end %>
+        <% else %>
+          <%= link_to project_sets_path(project, add_set_id: set.id.to_s, test_run_id: params[:test_run_id]), remote: true, class: "tree-li ajax-no-background display-table crop" do %>
+            <span class='display-cell'>▸</span> <%= icon('folder-close', class: 'yellow-folder display-cell') %> <span class='display-cell'><%= h(set.name) %></span>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="display-cell display-table" style='font-size: 10px'>
+        <div class='display-cell'>&nbsp;&nbsp;</div>
+        <div class='display-cell'><%= icon('folder-close', style: 'color: #bbbbbb') %></div>
+        <div class='display-cell'><%= hash[:children].size %></div>
+        <div class='display-cell'><%= icon('list-alt', style: 'color: #bbbbbb') %></div>
+        <div class='display-cell'><%= hash[:test_cases].size %></div>
+        <div class='display-cell'>/</div>
+        <div class='display-cell'><%= ::Tmt::Set.all_test_cases_in_branch(hash) %></div>
+      </div>
+      <div class="btn-group dropdown">
+        <button class="btn btn-xs set-dropdown 'dropdown-toggle set-dropdown-toggle" style="line-height: 10px" data-toggle='dropdown', data-set-name="<%= h(set.name) %>" href="#" title='options'>
+          ▾
+        </button>
+        <ul class="dropdown-menu dropdown-menu-hover">
+          <li>
+            <%= link_to download_project_set_path(project, set) do %>
+              <%= icon('download-alt') %> <%= t(:download, scope: :sets) %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to project_sets_path(project, add_set_id: set.id.to_s, test_run_id: params[:test_run_id], with_posterity: '1'), remote: true do %>
+              <%= icon('chevron-right') %> unfold all
+            <% end %>
+          </li>
+          <% if not project.open_campaign.nil? and hash[:test_cases].size > 0 %>
+            <li >
+              <% if @test_run %>
+                <%= link_to select_versions_project_campaign_executions_path(project, project.open_campaign, test_run_id: @test_run.id, set_id: set.id), remote: true do %>
+                  <%= icon('folder-open') %> Add to test run <%= h(@test_run.name) %>
+                <% end %>
+              <% else %>
+                <%= link_to select_test_run_project_campaign_executions_path(project, project.open_campaign, test_run_id: nil, set_id: set.id), remote: true do %>
+                  <%= icon('folder-open') %> Add to test run
+                <% end %>
+              <% end %>
+            </li>
+          <% end %>
+          <% unless is_modal %>
+            <li><%= link_to new_project_set_path(project, parent_id: set.id, set_ids: set_ids + [set.id] ), remote: true do %>
+              <%= icon('plus') %> <%= t(:add_new_set, scope: :sets) %>
+            <% end %></li>
+            <li>
+              <%= link_to edit_project_set_path(project, set), remote: true do %>
+                <%= icon('pencil') %> <%= t(:edit, scope: :sets) %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_project_test_cases_set_path(project, set_id: set.id, set_ids: set_ids + [set.id]), remote: true, class: "add-test-case-set"  do %>
+                <%= icon('arrow-right') %> <%= t(:add_test_case, scope: :sets) %>
+              <% end %>
+            </li>
+            <% if hash[:children].size == 0 %>
+              <li>
+                <%= link_to project_set_path(project, set), method: :delete, remote: true, data: {confirm: 'Are you sure?'} do %>
+                  <%= icon('trash') %> <%= t(:trash, scope: :sets) %>
+                <% end %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <% if set_ids.include?(set.id.to_s) %>
+
+      <%= render "tmt/sets/sub_set",
+        is_modal: is_modal,
+        set_ids: set_ids,
+        project: project,
+        hash_tree: hash,
+        nesting: nesting
+      %>
+
+    <% end %>
+   </li>
+ <% end %>
+ <% unless hash_tree[:object].nil? %>
+   <% hash_tree[:object].test_cases_sets.each do |test_case_set| %>
+     <% test_case = test_case_set.test_case %>
+     <% if test_case.deleted_at.nil? %>
+       <!--  <li class='tree-test-case'> -->
+         <% nesting.decrement_counter %>
+         <%= raw nesting.generate_indent %>
+         &nbsp;<%= present(test_case).add_checkbox %>
+         <%= link_to crop_string(test_case.name, mode: 'inline,width'), project_test_case_path(project, test_case), target: '_blank' %>
+         &nbsp;&nbsp;&nbsp;
+         <% unless is_modal %>
+           <div class="btn-group test-cases-dropdown-toggle dropdown">
+             <button class="btn btn-xs dropdown-toggle" style="line-height: 10px" data-toggle='dropdown' href="#" title='options'>
+               ▾
+             </button>
+             <ul class="dropdown-menu dropdown-menu-hover">
+               <li>
+                 <%= link_to edit_project_test_case_path(project, test_case), remote: true do %>
+                   <%= icon('pencil') %> <%= t(:edit, scope: :sets) %>
+                 <% end %>
+               </li>
+               <li>
+                 <%= link_delete(project_test_cases_set_path(project, test_case_set.id), class: '') %>
+               </li>
+             </ul>
+           </div>
+         <% end %>
+       <!-- li -->
+       <br />
+     <% end %>
+   <% end %>
+ <% end %>
+<% nesting.decrement_nesting %>

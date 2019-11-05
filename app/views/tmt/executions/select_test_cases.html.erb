@@ -1,0 +1,44 @@
+<%= left_navigation_for_dashboard active: :test_run, project: @project, test_run: @test_run %>
+
+<%= page_header t(:select_test_cases, scope: :executions),
+  subject: add_tag { |tag|
+    tag.space t(:for_test_run, scope: :executions).downcase
+    tag << link_to(h(@test_run.name), [@project, @campaign, @test_run], target: '_blank')
+  }
+%>
+
+<%= breadcrumbs(
+  t(:projects, scope: :executions),
+  projects_or_root_path,
+  h(@project.name),
+  project_path(@project),
+  t(:test_runs, scope: :executions),
+  "",
+  h(@test_run.name),
+  project_campaign_test_run_path(@project, @campaign, @test_run),
+  t(:select_versions, scope: :executions)
+) %>
+
+<% if @member.get_nav_tab(:execution) == :sets %>
+  <%= render "select_test_case_sets",
+    campaign: @campaign,
+    project: @project,
+    test_run: @test_run,
+    member: @member,
+    sets: @sets,
+    set_ids: @set_ids,
+    hash_tree: @hash_tree
+  %>
+<% else %>
+  <%= render "select_test_case_list",
+    campaign: @campaign,
+    project: @project,
+    version_ids: @version_ids,
+    test_run: @test_run,
+    test_cases: @test_cases,
+    test_case_id: @test_case_id.to_i,
+    member: @member,
+    search: @search,
+    no_active_columns: []
+  %>
+<% end %>

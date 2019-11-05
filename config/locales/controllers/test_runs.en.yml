@@ -1,0 +1,7 @@
+en:
+  controllers:
+    test_runs:
+      notice_for_set_status_new: Test run has new status once again
+      notice_for_set_status_planned: Test run has got planned status
+      notice_for_set_status_executing: Test run has got executing status
+      notice_for_terminate: Test run was successfully terminated

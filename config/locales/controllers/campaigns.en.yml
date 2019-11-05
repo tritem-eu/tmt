@@ -1,0 +1,4 @@
+en:
+  controllers:
+    campaigns:
+      alert_for_close: Campaign cannot be closed because at least one test run is active

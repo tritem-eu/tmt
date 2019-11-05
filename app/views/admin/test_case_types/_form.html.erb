@@ -1,0 +1,39 @@
+<%= form_for(test_case_type, url: url, as: :test_case_type, html: {class: "form-horizontal"}) do |f| %>
+  <div class="form-group required">
+    <label class="control-label col-lg-3">
+      <%= t(:name, scope: :test_case_types) %>
+    </label>
+    <div class="controls col-lg-9">
+      <%= f.text_field :name, class: "form-control js-input-down-counter-#{Tmt::Cfg.max_name_length}" %>
+    </div>
+  </div>
+  <div class="form-group required">
+    <label class="control-label col-lg-3">
+      <%= t(:has_file, scope: :test_case_types) %>
+    </label>
+    <div class="controls col-lg-9">
+       <%= f.check_box :has_file, class: 'switch-small' %>
+    </div>
+  </div>
+ <div class="form-group">
+    <label class="control-label col-lg-3">
+      <%= t(:extension, scope: :test_case_types) %>
+    </label>
+    <div class="controls col-lg-9">
+      <%= f.text_field :extension, class: "form-control" %>
+    </div>
+  </div>
+ <div class="form-group required">
+    <label class="control-label col-lg-3">
+      <%= :converter %>
+    </label>
+    <div class="controls col-lg-9">
+      <%= f.select :converter, ::Tmt::Lib::Converter.list.unshift([t(:none, scope: :test_case_types), nil]), {}, {class: "form-control"} %>
+    </div>
+  </div>
+  <div class='form-group'>
+    <div class='controls col-lg-offset-3 col-lg-9'>
+      <%= button_submit_for(f, test_case_type, class: 'only-one-click') %>
+    </div>
+  </div>
+<% end %>

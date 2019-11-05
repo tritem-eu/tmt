@@ -1,0 +1,10 @@
+app.modal.add("<%= render_modal({
+  header: t(:machine, scope: :machines),
+  subject: h(@adapter.name),
+  body: render(partial: "form",
+    locals: {
+      adapter: @adapter,
+      url: admin_automation_adapter_path(@adapter)
+    }
+  )
+})%>")

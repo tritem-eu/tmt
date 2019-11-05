@@ -1,0 +1,43 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th class='crop col-lg-1'><%= t(:identifier, scope: :test_cases) %></th>
+      <th class='crop col-lg-1'><%= t(:version_id, scope: :test_cases) %></th>
+      <th class='crop col-lg-4'><%= t(:test_run, scope: :test_cases) %></th>
+      <th class='crop col-lg-2'><%= t(:executor, scope: :test_cases) %></th>
+      <th class='crop col-lg-2'><%= t(:status, scope: :test_cases) %></th>
+      <th class='crop col-lg-2'><%= t(:created_at, scope: :test_cases) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% executions.each do |execution| %>
+      <% test_run = execution.test_run %>
+      <tr>
+        <td class='crop'><%= link_to execution.id, project_campaign_execution_path(project, 1, execution) %></td>
+        <td class='crop'><%= execution.version_id %> </td>
+        <td class='crop'><%= test_run_link(test_run, [project, test_run]) %></td>
+        <td class='crop'><%= present(test_run).link_executor %></td>
+        <td class='crop'><%= present(execution).result_label(project) %></td>
+        <td class='crop'><%= l(execution.created_at, format: :medium) %></td>
+      </tr>
+    <% end %>
+    <% if dispenser_executions.more? %>
+      <tr>
+        <td colspan="6">
+          <%= link_to t(:more_dots, scope: :test_case_versions),
+            more_dots_path
+          %>
+        </td>
+      </tr>
+    <% end %>
+    <% if dispenser_executions.less? %>
+      <tr>
+        <td colspan="6">
+          <%= link_to t(:less_dots, scope: :test_case_versions),
+            less_dots_path
+          %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

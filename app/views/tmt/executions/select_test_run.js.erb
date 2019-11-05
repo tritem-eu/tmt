@@ -1,0 +1,33 @@
+app.modal.add("<%= render_modal({
+  header: t(:select_test_run, scope: :executions),
+  subheader: crop_text(h("Project"), project_link(@project, {target: '_blank'}), h("Campaign"), campaign_link(@campaign, {target: '_blank'})),
+  class_name: 'col-lg-6 sets',
+  body: render(partial: "select_test_run", locals: {
+    campaign: @campaign,
+    project: @project,
+    test_cases: @test_cases,
+    test_run: @test_run,
+    test_runs: @test_runs
+  })
+}) %>")
+app.executions.event.showHiddenVersions();
+app.executions.event.keyUpSearchTestCase();
+
+app.executions.showHiddenButton = function() {
+  jForm = $(this).parents('form');
+  jFormSubmit = jForm.find("input[type=submit]");
+  jFooterSubmit = jForm.parents('.modal').find('.in-modal-footer')
+  if($(this).val() == ""){
+    jFormSubmit.addClass("hidden");
+    jFooterSubmit.addClass('hidden');
+  }else{
+    jFormSubmit.removeClass("hidden");
+    jFooterSubmit.removeClass('hidden');
+  }
+}
+
+app.executions.showHiddenButton();
+
+$('.modal #versions_run_test_run_id').change(function(){
+  app.executions.showHiddenButton();
+})

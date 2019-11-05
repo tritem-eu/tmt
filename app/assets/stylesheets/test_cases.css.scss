@@ -1,0 +1,16 @@
+.test-cases {
+  tr.active td{
+    background: #f8f8f8 !important;
+  }
+
+  .tree-test-cases {
+    height: 200px;
+    width: 400px;
+    overflow-x: auto;
+    overflow-y: auto;
+    .header span:hover {
+      color: #abcdef;
+      cursor: pointer;
+    }
+  }
+}

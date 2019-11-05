@@ -1,0 +1,5 @@
+en:
+  cfgs:
+    instance_configuration: Instance configuration
+    save: Save
+    unable_to_save: prohibited this cfg from being saved

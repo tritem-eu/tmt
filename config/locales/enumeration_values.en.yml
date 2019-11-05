@@ -1,0 +1,10 @@
+# encoding: utf-8
+
+en:
+  enumeration_values:
+    edit_value: Edit value
+    enumerations: Enumerations
+    new_value: New value
+    new_enumeration_value: New enumeration value
+    enumeration_value: enumeration value
+    value: Value

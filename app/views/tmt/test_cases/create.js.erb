@@ -1,0 +1,21 @@
+<% if @test_case.id %>
+  var url = "<%= project_test_case_url(@project, @test_case) %>"
+  window.location.href = url;
+<% else %>
+  app.modal.onlyRemoveLast();
+  app.modal.add("<%= render_modal({
+    header: "#{t(:test_case, scope: :test_cases)}",
+    body: render(partial: 'form',
+      locals: {
+        url: project_test_cases_path(@project),
+        project: @project,
+        test_case: @test_case
+      }
+    )
+  }) %>")
+  app.dateTimePicker.add();
+  app.testCases.init().event.versionComment();
+  app.testCases.init().event.form.changeType();
+  app.testCases.init().event.form.getDatafile();
+  app.testCases.init().event.form.datafile.afterChangeDatafileOrComment()
+<% end %>

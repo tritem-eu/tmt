@@ -1,0 +1,14 @@
+<% converter = @version.test_case.type.converter %>
+<% tmt_converter = Tmt::Lib::Converter.new(@version.content, converter) %>
+<% content_html = tmt_converter.to_html %>
+<span class='file-name' style='background: #fff'>
+  <%= fa_icon('file-text', class: 'color-gray') %>
+  <%= @version.file_name %>
+  <%= icon('transfer') %>
+  <%= content_or_none(converter) %>
+  <% if content_html.nil? or not tmt_converter.error.nil? %>
+    <%= icon('ban-circle', class: 'color-red') %>
+    <%= add_tag(:span, t(:unreadable, scope: :test_cases), class: 'color-red') %>
+  <% end %>
+</span>
+<%= content_html %>

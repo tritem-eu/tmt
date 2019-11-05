@@ -1,0 +1,16 @@
+app.modal.add("<%= render_modal({
+  header: "#{t(:test_case, scope: :test_cases)}",
+  body: render(partial: 'form',
+    locals: {
+      url: project_test_cases_path(@project),
+      project: @project,
+      test_case: @test_case
+    }
+  )
+}) %>")
+app.dateTimePicker.add();
+app.testCases.init().event.versionComment();
+app.testCases.init().event.form.changeType();
+app.testCases.init().event.form.saveDatafile();
+app.testCases.init().event.form.getDatafile();
+app.testCases.init().event.form.datafile.afterChangeDatafileOrComment()

@@ -1,0 +1,11 @@
+# encoding: utf-8
+
+en:
+  oslc:
+    no_test_scripts_to_display: No Test Scripts to display
+    no_execution_records_to_display: No Test Execution Records to display
+    search_test_scripts: Search Test Scripts
+    search_test_cases: Search Test Cases
+    search_test_plans: Search Test Plans
+    search_test_results: Search Test Results
+    search_test_execute_records: Search Test Execute Records

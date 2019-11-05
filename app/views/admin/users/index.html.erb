@@ -1,0 +1,53 @@
+<%= left_navigation_for_admin active: :users %>
+
+<%= page_header t(:users, scope: :users),
+ right_side: link_new(new_admin_user_path, remote: false)
+%>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:users, scope: :users),
+  admin_users_path
+) %>
+
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th class='col-lg-2'>Name</th>
+      <th class='col-lg-2'>Email</th>
+      <th class='col-lg-2'>Role</th>
+      <th class='col-lg-1'>Machine?</th>
+      <th class='col-lg-2'>Registered</th>
+      <th class='col-lg-2'>Deleted</th>
+      <th class='col-lg-1'></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <% if user.deleted? %>
+      <tr class="background-light-red">
+    <% else %>
+      <tr>
+    <% end %>
+      <td><%= link_to crop_string(user.name), user %></td>
+      <td><%= crop_string user.email %></td>
+      <td>
+        <%= user.roles.map { |role| role.name.titleize }.join(', ') %> &nbsp;&nbsp;
+        <% unless user.deleted? %>
+          <%= link_edit edit_role_admin_user_path(user) %>
+        <% end %>
+      </td>
+      <td><%= show_value(user.machine?) %></td>
+      <td><%= l(user.created_at, format: :medium) %></td>
+      <% unless user.deleted? %>
+        <td><%= link_to(t(:delete_user, scope: :users), admin_user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-xs btn-danger') unless user == current_user %>
+        <td><%= link_edit(edit_admin_user_path(user), remote: false) %></td>
+      <% else %>
+        <td><%= l(user.deleted_at, format: :medium) %></td>
+        <td></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

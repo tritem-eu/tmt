@@ -1,0 +1,17 @@
+<%= form_tag request.original_url, method: :get, class: 'form-inline search-form' do %>
+  <div class="input-group">
+    <%= text_field_tag :search, search.filter['search'], :class => "search-query form-control", :placeholder => t(:search, scope: :test_runs) %>
+    <span class="input-group-btn">
+      <button class="btn btn-default" type="submit"><%= icon('search') %></button>
+    </span>
+  </div>
+  <br />
+  <div class="panel-group" id="accordion">
+    <%= facets t(:campaign, scope: :test_runs), search.options_for_facets(:campaign) %>
+    <%= facets t(:status, scope: :test_runs), search.options_for_facets(:status) %>
+    <%= facets t(:creator, scope: :test_runs), search.options_for_facets(:creator) %>
+    <% ::Tmt::TestRunCustomField.where(type_name: :bool).each do |custom_field| %>
+      <%= facets custom_field.name, search.options_for_facets(:custom_field, {custom_field: custom_field}) %>
+    <% end %>
+  </div>
+<% end %>

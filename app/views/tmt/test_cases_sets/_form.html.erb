@@ -1,0 +1,20 @@
+<%= form_for("", url: project_test_cases_sets_path(project, set_ids: set_ids), as: :set, remote: true, html: {class: "form-horizontal"}) do |f| %>
+  <div class="form-group">
+    <%= label_tag :set_id, t(:set_name, scope: :sets), class: 'col-lg-3' %>
+    <div class="controls col-lg-9">
+      <%= hidden_field_tag :set_id, "", value: set.id %>
+      <%= text_field_tag "", "", value: h(set.name), disabled: true, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= label_tag :test_case_id, t(:test_case, scope: :sets), class: 'col-lg-3' %>
+    <div class='controls col-lg-9'>
+      <%= select_tag :test_case_id, options_from_collection_for_select(test_cases, :id, :name, params[:test_case_id]), {class: 'form-control'} %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="controls col-lg-offset-3 col-lg-9">
+      <%= submit_tag t(:add, scope: :sets), class: 'btn btn-primary in-modal-footer only-one-click' %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,33 @@
+<%= left_navigation_for_dashboard active: :test_run, project: @project, test_run: @test_run %>
+
+<%= page_header t(:test_run, scope: :executions),
+  subject: h(@test_run.name),
+  right_side: link_edit(select_test_run_project_campaign_executions_path(@project, @campaign, test_case_ids: @test_cases.map(&:id), test_run_id: params[:test_run_id]), name: t(:change_test_run, scope: :executions), class: 'hide-when-js-is-disabled'),
+  subheader: add_tag { |tag|
+    tag.space add_tag(:strong) { t(:project, scope: :executions) }
+    tag.space link_to(h(@project.name), project_path(@project))
+    tag.space add_tag(:strong) { t(:campaign, scope: :executions) }
+    tag.space campaign_link(@campaign)
+  }
+%>
+
+<%= breadcrumbs(
+  t(:projects, scope: :executions),
+  projects_or_root_path,
+  h(@project.name),
+  project_path(@project),
+  t(:test_runs, scope: :executions),
+  project_test_runs_path(@project),
+  h(@test_run.name),
+  project_test_run_path(@project, @test_run),
+  t(:select, scope: :executions)
+) %>
+
+<%= render "select_versions",
+  campaign: @campaign,
+  project: @project,
+  used_version_ids: @used_version_ids,
+  version_ids: @version_ids,
+  test_cases: @test_cases,
+  test_run: @test_run
+%>

@@ -1,0 +1,37 @@
+# encoding: utf-8
+
+en:
+  campaigns:
+    action: Action
+    test_runs: test runs
+    campaign: Campaign
+    campaigns: Campaigns
+    campaigns_for_selected_project: Campaigns for selected project
+    close: Close
+    content_of_table_is_empty: Content of table is empty
+    create: Create
+    created: Created
+    created_at: Created at
+    deadline: Deadline
+    deadline_at: Deadline at
+    done_test_runs: Done test runs
+    edit: Edit
+    edit_campaign: Edit campaign
+    false_value: False
+    is_closed: Is closed
+    is_open: Is open
+    list_of_campaigns_for_project: List of campaigns for project
+    list_of_projects: "Projects on this instance:"
+    list_of_test_run_is_empty: List of test run is empty
+    name: Name
+    new_campaign: New campaign
+    please_contact_admin_to_create_new_campaign: Please contact admin to create new campaign
+    project: Project
+    projects: Projects
+    save: Save
+    select: Select
+    show: Show
+    test_runs: Test runs
+    true_value: True
+    update: Update
+

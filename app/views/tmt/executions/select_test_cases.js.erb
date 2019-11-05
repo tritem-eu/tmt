@@ -1,0 +1,41 @@
+<% if @member.get_nav_tab(:execution) == :sets %>
+  <% body = render(partial: 'select_test_case_sets', locals: {
+    test_run: @test_run,
+    set_ids: @set_ids,
+    sets: @sets,
+    project: @project,
+    hash_tree: @hash_tree,
+    member: @member,
+    campaign: @campaign
+  }) %>
+<% else %>
+  <% body = render(partial: 'select_test_case_list', locals: {
+    campaign: @campaign,
+    project: @project,
+    version_ids: @version_ids,
+    test_case: @test_case,
+    test_run: @test_run,
+    test_cases: @test_cases,
+    test_case_id: @test_case_id.to_i,
+    member: @member,
+    search: @search,
+    no_active_columns: [:action]
+  }) %>
+<% end %>
+app.modal.add("<%= render_modal({
+  header: t(:select_test_cases, scope: :executions),
+  subject: "#{t(:for_test_run, scope: :executions).downcase} #{link_to h(@test_run.name), [@project, @campaign, @test_run], target: '_blank'}",
+  subheader: crop_text(h("Project: "), project_link(@project, {target: '_blank'}), h(" Campaign: "), campaign_link(@campaign, {target: '_blank'})),
+  class_name: 'col-lg-8 sets',
+  body: body
+}) %>", function(){
+  $(function(){
+    app.testCases.init().event.changeCheckbox();
+    $('.modal .list-sets').height('auto');
+    $('.modal .list-sets-content').height('auto');
+  })
+})
+app.sets.init().event.findPlaceForDropdownMenu();
+app.testRuns.init().event.clickFacetsName();
+app.testRuns.init().event.changeFacetsCheckbox();
+app._bootstrap.dropdownMenu();

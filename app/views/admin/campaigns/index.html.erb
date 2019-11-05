@@ -1,0 +1,49 @@
+<%= left_navigation_for_admin active: :campaigns %>
+
+<%= page_header t(:campaigns, scope: :campaigns),
+  right_side: add_tag {
+    present(@project).link_to_new_campaign if @project
+  }
+%>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:campaigns, scope: :campaigns),
+  admin_campaigns_path
+) %>
+
+<%= page_description t(:campaigns_for_selected_project, scope: :campaigns) %>
+<div class='height-separator-20'></div>
+<div class='row'>
+  <% if @projects.any? %>
+    <div class='col-lg-3'>
+      <div class="list-group">
+        <div class="list-group-item active">
+          <%= t(:list_of_projects, scope: :campaigns) %>
+        </div>
+        <% @projects.each do |project| %>
+          <% class_name = ''%>
+          <% if @project_id.to_s == project.id.to_s %>
+            <% class_name = 'disabled' %>
+          <% end %>
+          <%= link_to project.name, admin_campaigns_path(project_id: project.id), class: "list-group-item #{class_name}" %>
+        <% end %>
+      </div>
+    </div>
+    <div class='col-lg-9'>
+      <%= render "table",
+        campaigns: @campaigns,
+        project: @project
+      %>
+    </div>
+  <% else %>
+    <%= info_empty({
+      name: 'Project',
+      admin_block: add_tag do |tag|
+        tag << "Before using this section, please create at least one "
+        tag << link_to("project", new_admin_project_path, remote: true)
+      end
+    }) %>
+  <% end %>
+</div>

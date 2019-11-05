@@ -1,0 +1,16 @@
+# encoding: utf-8
+
+en:
+  helpers:
+    left_navigation:
+      are_you_sure: Are you sure?
+      back: Back
+      campaign: Campaign
+      dashboard: Dashboard
+      delete: Delete
+      edit: Edit
+      forward: Forward
+      home: Home
+      machines: Machines
+      test_runs: Test runs
+      test_cases: Test Cases

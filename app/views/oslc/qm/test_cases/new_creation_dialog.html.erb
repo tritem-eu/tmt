@@ -1,0 +1,8 @@
+<%= render partial: '/tmt/test_cases/form',
+  locals: {
+    url: creation_dialog_oslc_qm_service_provider_test_cases_url(@service_provider),
+    project: @service_provider,
+    custom_fields: @custom_fields,
+    remote: true
+  }
+%>

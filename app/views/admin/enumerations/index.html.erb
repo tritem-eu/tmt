@@ -1,0 +1,25 @@
+<%= left_navigation_for_admin active: :enumerations %>
+
+<%= page_header t(:enumerations, scope: :enumerations),
+  right_side: link_new(new_admin_enumeration_path)
+%>
+
+<%= breadcrumbs(
+  :admin,
+  admin_path,
+  t(:enumerations, scope: :enumerations)
+) %>
+
+<div class="row">
+  <% if @enumerations.any? %>
+    <% @enumerations.each do |enumeration| %>
+      <%= render 'show',
+        enumeration: enumeration
+      %>
+    <% end %>
+  <% else %>
+    <%= info_empty({
+      name: t(:enumeration, scope: :enumerations).downcase
+    }) %>
+  <% end %>
+</div>

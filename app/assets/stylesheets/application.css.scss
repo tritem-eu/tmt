@@ -1,0 +1,572 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require bootstrap
+ *= require sb-admin
+ *= require bootstrap-datetimepicker
+ *= require bootstrap-switch.min
+ *= require font-awesome
+ *= require_tree .
+*/
+
+.bootstrap-datetimepicker-widget {
+  z-index: 1050 !important;
+  ul {
+    padding: 0px;
+  }
+}
+
+.crop {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+.valign-middle {
+  vertical-align: middle;
+}
+
+.content {
+  background-color: #fff;
+  padding: 30px;
+  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+  /*
+  -webkit-border-radius: 0 0 6px 6px;
+  -moz-border-radius: 0 0 6px 6px;
+  border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  */
+}
+
+.datetimepicker {
+  input {
+    width: 179px;
+  }
+}
+
+.file-content {
+  background: #f5f5f5;
+  overflow: auto;
+  word-break: normal;
+  word-wrap: normal;
+  white-space: pre;
+  height: 500px;
+  padding: 10px;
+
+  .file-name {
+    background: #fff;
+    border-radius: 4px 0px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    position: relative;
+    top: -10px;
+    left: -11px
+  }
+
+  a.screen-size {
+    padding: 7px 7px 0 7px;
+    top: 10px;
+    right: 40px;
+    position: absolute;
+    font-size: 30px;
+  }
+
+  a.screen-size:hover {
+    background: #f9f9f9;
+  }
+
+  .with-border-bottom {
+    border-bottom: 1px solid #fff;
+  }
+
+  li {
+    dl {
+      margin: 4px;
+    }
+    dd {
+      margin-left: 15px;
+    }
+  }
+}
+
+.file-content.full-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: auto;
+  width: 100%;
+  z-index: 2000;
+
+  a.screen-size {
+    position: fixed;
+  }
+}
+
+.height-separator {
+  height: 30px;
+}
+
+.height-separator-20 {
+  height: 20px;
+}
+
+.height-separator-10 {
+  height: 10px;
+}
+
+.clear-both {
+  clear: both
+}
+
+.tree-li {
+  color: #000;
+  padding: 0 3px 0 0 !important;
+}
+
+.tree-li:hover {
+  text-decoration: none !important;
+}
+
+.default-cursor {
+  cursor: default !important;
+}
+
+.load-icon {
+  display: block;
+  width: 17px;
+  height: 17px;
+  background: asset-url('loading.gif', image);
+  background-size: 17px;
+}
+
+.load-icon-50 {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background: asset-url('loading.gif', image);
+  background-size: 50px;
+}
+
+.link {
+  background: #fff !important;
+  border: 0;
+  color: #428bca !important;
+}
+
+.link:hover {
+  text-decoration: underline
+}
+
+.new_test_case_version {
+  border-radius: 4px;
+
+  .grey-background {
+    background: #f5f5f5;
+  }
+
+  .file-name {
+    background: #fff;
+    border-radius: 4px 0px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    position: relative;
+    top: 4px;
+  }
+
+  textarea {
+    background: #fff;
+    display: block;
+    height: 500px;
+    position: relative;
+    top: 10px;
+  }
+
+  #test_case_versions_attributes_0_comment {
+    margin-bottom: 0px;
+  }
+}
+
+.modal {
+  overflow: visible !important;
+  width: 600px;
+}
+
+.modal-backdrop {
+  background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.nav-tabs {
+
+  li > input.link {
+    border: 0px solid #ddd;
+    padding: 10px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-color: rgba(0, 0, 0, 0);
+  }
+
+  li.active > input.link {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-color: rgba(0, 0, 0, 0);
+  }
+
+}
+
+.padding-left-5px {
+  padding-left: 5px;
+}
+
+.padding-5px {
+  padding: 5px;
+}
+
+.padding-0px {
+  padding: 0 !important;
+}
+
+.panel {
+  .panel-heading {
+    .panel-title {
+      display: inline;
+    }
+
+    .right-title {
+      float: right;
+      position: relative;
+      top: 0px;
+      font-size: 12px;
+
+      a {
+        color: #bbbbff !important;
+      }
+    }
+  }
+}
+
+pre {
+  .file-name {
+    background: #fff;
+    border-radius: 4px 0px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    position: relative;
+    top: -7px;
+    left: -11px
+  }
+}
+
+table.table {
+  th {
+    background: #d9edf7;
+    color: #3a87ad;
+  }
+
+  td, th {
+    vertical-align: middle !important;
+  }
+
+}
+
+.test-case-content {
+  overflow: auto;
+  word-break: normal;
+  word-wrap: normal;
+  white-space: pre;
+  height: 500px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.navbar-nav, .navbar-collapse {
+  background: #34495e !important;
+ // overflow-x: hidden;
+
+  .open > a {
+    background: #456 !important;
+  }
+
+  .active > a {
+    background: #2c3e58 !important;
+  }
+
+  li > a:hover {
+    background: #456 !important;
+  }
+}
+
+.navbar-inverse {
+  background: #34495e !important;
+}
+
+.navbar-nav li.navbar-panel{
+  border-top: 1px solid #54677a;
+  border-bottom: 1px solid #142638 !important;
+  background: #34495e !important;
+}
+
+.navbar-fixed-top {
+  border-bottom: 1px solid #54677a !important;
+  .side-nav {
+    border-top: 1px solid #142638 !important;
+  }
+}
+
+//.navbar-corner, .navbar-corner-background {
+//  position: fixed;
+//  top: 50px;
+//  left: 225px;
+//  width: 15px;
+//  height: 15px;
+//  background: #34495e;
+//  border-top: 1px solid #54677a;
+//}
+
+//.navbar-corner {
+//  background: #ffffff;
+//  -webkit-border-top-left-radius: 25px;
+//  -moz-border-radius-topleft: 25px;
+//  border-top-left-radius: 25px;
+//}
+
+p.description {
+  padding: 10px 20px;
+  margin: 0px;
+  border-left: 5px solid #eeeeee;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.list-input-radio {
+  input[type='radio'] {
+    height: 20px;
+    width: 20px;
+  }
+
+  a {
+    margin-left: -30px;
+    padding-left: 35px;
+    font-size: 20px;
+  }
+}
+
+.is-deleted {
+  text-decoration: line-through;
+  color: #aa0000;
+}
+
+.is-deleted:hover {
+  text-decoration: line-through;
+
+  color: #ff0000;
+}
+
+.break-word {
+  word-wrap: break-word;
+}
+
+.panel-tmt {
+  border: 0px !important;
+  box-shadow: none !important;
+  .panel-heading {
+    color: #ffffff;
+    background-color: #789abc;
+
+    .btn-primary {
+      background-color: #789abc;
+    }
+  }
+
+  .panel-body {
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+    border-color: #ededed !important;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
+.wrapper-padding-left {
+  padding-left: 0px !important;
+}
+
+.without-padding {
+  padding: 0px !important;
+}
+
+.no-resize-vertical {
+  resize: vertical;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.display-table {
+  display: table;
+}
+
+.display-cell {
+  display: table-cell;
+}
+
+// Using dopdown-menu without javascript
+.dropdown:hover > .dropdown-menu-hover {
+  display: block;
+}
+
+.dropdown > .dropdown-menu-hover {
+  margin-top: 0 !important;
+}
+
+.dropdown-menu {
+  li {
+    a {
+      text-align: left;
+    }
+  }
+}
+.page-header {
+  padding-bottom: 0px !important;
+  margin: 0 !important;
+  border-bottom: 0px solid #eeeeee !important;
+
+  .page-header-attributes {
+    padding: 20px 0 0 0;
+  }
+
+  .page-header-title {
+    width: 70%;
+  }
+
+  .page-header-subject {
+    color: #999;
+    font-size: 20px;
+    padding: 9px 0 0 5px;
+  }
+}
+.max-width20 {
+  max-width: 20%;
+}
+
+.only-for-js {
+  display: none;
+}
+
+.form-group.required .control-label {
+  padding-right: 5px !important;
+}
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
+
+.no-left-padding {
+  padding-left: 0 !important;
+}
+
+.hide-when-js-is-disabled {
+  display: none !important;
+}
+
+.side-nav {
+  /* Firefox */
+  height: -moz-calc(100% - 50px) !important;
+  /* WebKit */
+  height: -webkit-calc(100% - 50px) !important;
+  /* Opera */
+  height: -o-calc(100% - 50px) !important;
+  /* Standard */
+  height: calc(100% - 50px) !important;
+
+  overflow-x: hidden
+}
+
+a:hover ~ .popover-info {
+  display: block;
+  -webkit-animation: fade-in .3s linear 1, move-up .3s linear 1;
+  -moz-animation: fade-in .3s linear 1, move-up .3s linear 1;
+  -ms-animation: fade-in .3s linear 1, move-up .3s linear 1;
+}
+
+.popover-info {
+  background-color: #ffffff;
+  border-radius: 5px;
+  top: auto;
+  box-shadow: 0 0px 12px rgba(0,0,0,0.175);
+  color: #333333;
+  display: none;
+  font-size: 12px;
+  padding: 0px 10px;
+  position: absolute;
+  z-index: 4;
+}
+
+.popover-info-content {
+  padding: 5px;
+  margin: 0px;
+  min-width: 200px;
+  max-width: 400px;
+}
+
+@media (min-width: 768px) {
+  .dl-vertical dt {
+    float: none !important;
+    width: auto !important;
+    text-align: left !important;
+  }
+  .dl-vertical dd {
+    margin-left: 0px !important;
+  }
+}
+
+.add-on-info {
+  float: right;
+  height: 0px;
+
+  span {
+    float: right;
+    top: -25px;
+    left: 25px;
+  }
+}
+
+.empty-line {
+  height: 0px;
+  display: block;
+}
+
+.nonselectable {
+  -webkit-user-select: none;
+  -khtml-user-drag: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.background-light-red {
+  background-color: #f9f2f4;
+}

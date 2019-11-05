@@ -1,0 +1,51 @@
+<%= form_tag request.original_url, method: :get, class: 'form-inline search-form' do %>
+  <%= hidden_field_tag :active_tab, active_tab %>
+  <%= hidden_field_tag :campaign_id, params[:campaign_id] %>
+
+
+  <div class='<%= 'hide' unless show_part == :search %>'>
+    <div class="input-group">
+      <%= text_field_tag :search, params[:search], :class => "search-query form-control", :placeholder => t(:search, scope: :test_runs) %>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit"><%= icon('search') %></button>
+      </span>
+    </div>
+    <br>
+    <% if params[:campaign_id] %>
+      <div class="col-lg-12">
+        <div class='checkbox'>
+          <% if params[:all_campaigns] %>
+            <input type='checkbox'>
+            <%= link_to 'Current campaign', params.select { |key| not key.to_s == 'all_campaigns'}, style: "margin-left: -20px; padding-left: 20px" %>
+          <% else %>
+            <input type='checkbox' checked>
+            <%= link_to 'Current campaign', params.merge({all_campaigns: true}), style: "margin-left: -20px; padding-left: 20px" %>
+          <% end %>
+        </div>
+        <div class='height-separator'> </div>
+      </div>
+    <% end %>
+    <% unless search_object.nil? || search_object.results.empty? %>
+      <div class="panel-group" id="accordion">
+        <%= render partial: "layouts/facets", locals: {search: search_object, facet_name: :creator_name, param_name: :creator} %>
+        <%= render partial: "layouts/facets", locals: {search: search_object, facet_name: :status_name, param_name: :status} %>
+      </div>
+    <% end %>
+  </div>
+  <div class='<%= 'hide' unless [:calendar, :calendar_day].include?(show_part) %>'>
+    <%= submit_tag '<', class: 'btn btn-primary', name: 'button[previous]' %>
+    <div class="form-group">
+      <%= select_year(@year, {}, {class: 'form-control'}) %>
+    </div>
+    <div class="form-group">
+      <%= select_month(@month, {}, {class: 'form-control'}) %>
+    </div>
+    <% if active_tab == 'calendar-day' %>
+      <div class="form-group">
+        <%= select_day(@day, {}, {class: 'form-control'}) %>
+      </div>
+    <% end %>
+    <%= submit_tag t(:show, scope: :test_runs), class: 'btn btn-primary' %>
+    <%= submit_tag '>', class: 'btn btn-primary', name: 'button[next]' %>
+  </div>
+<% end %>

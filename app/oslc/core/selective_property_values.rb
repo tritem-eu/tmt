@@ -1,0 +1,1 @@
+require_relative 'selective_property_values/properties'

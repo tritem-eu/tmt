@@ -1,0 +1,41 @@
+<table class='table table-bordered calendar calendar-day-table'>
+  <thead>
+    <tr >
+      <th class='text-center'><%= t(:day_names, scope: :date)[date.wday] %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div class='calendar-day-number'>
+          <div class='pull-right'>
+            <%= date %>
+          </div>
+          <div class='clear-both'></div>
+        </div>
+        <div>
+          <% test_runs ||= [] %>
+          <% unless test_runs.empty? %>
+            <ul>
+              <% test_runs.each do |test_run| %>
+                <% present(test_run) do |test_run_present| %>
+                  <li class='crop <%= test_run_present.background_css %>', style='margin-top: 1px'>
+                    <b><%= test_run_present.due_time %></b>
+                    <%= link_to test_run.name, project_test_run_path(project, test_run) %>
+                  </li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% else %>
+            <div class='text-muted text-center'>
+              <div class='height-separator'></div>
+              <%= t(:empty_list, scope: :test_runs) %>
+              <div class='height-separator'></div>
+              <div class='height-separator'></div>
+            </div>
+          <% end %>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

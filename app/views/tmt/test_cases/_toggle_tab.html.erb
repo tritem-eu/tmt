@@ -1,0 +1,13 @@
+<%
+  if member
+    active = member.get_nav_tab(:test_case)
+  else
+    active = nil
+  end
+%>
+<nav>
+  <ul class="nav nav-tabs">
+    <li class='<%= "active" if [:flat, nil].include?(active) %>'><%= link_to t(:flat, scope: :test_cases), project_test_cases_path(project, save_filter_params: true) %></li>
+    <li class='<%= "active" if active == :tree %>'><%= link_to t(:tree, scope: :test_cases), project_sets_path(project, save_filter_params: true) %></li>
+  </ul>
+</nav>

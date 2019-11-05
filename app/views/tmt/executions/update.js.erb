@@ -1,0 +1,11 @@
+<% if can? :planned_or_executing, @execution.test_run %>
+  $('.edit_execution').replaceWith(
+    '<%= j(render 'form',
+      url: project_campaign_execution_path(@project, @execution.test_run.campaign, id: @execution.id),
+      version: @version,
+      execution: @execution)
+    %>'
+  )
+<% else %>
+  $('.edit_execution').replaceWith('')
+<% end %>

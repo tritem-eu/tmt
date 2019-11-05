@@ -1,0 +1,27 @@
+<%= page_header t(:new_automation_request, scope: :oslc_automation_requests) %>
+
+<%= breadcrumbs(
+  :projects,
+  projects_or_root_path,
+  @project.name,
+  project_path(@project),
+  t(:automation_request, scope: :oslc_automation_requests),
+  :new
+) %>
+
+<div class='col-lg-8'>
+  <%= form_for(@automation_request, url: oslc_automation_service_provider_requests_url(@project), html: {class: 'form-horizontal'}) do |f| %>
+    <%= f.hidden_field :project_id %>
+    <div class="form-group required">
+      <%= f.label :title, t(:name, scope: :campaigns), class: 'control-label col-lg-3' %>
+      <div class="col-lg-9">
+        <%= f.text_field :title, placeholder: t(:name, scope: :campaigns), class: "form-control js-input-down-counter-#{Tmt::Cfg.max_name_length}" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class='col-lg-offset-3 col-lg-9'>
+        <%= f.submit %>
+      </div>
+    </div>
+  <% end %>
+</div>

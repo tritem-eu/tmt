@@ -1,0 +1,16 @@
+<%= left_navigation_for_admin active: :users %>
+
+<%= page_header t(:new_user, scope: :users) %>
+
+<%= breadcrumbs(
+  :admin,
+  admin_cfgs_path,
+  t(:users, scope: :users),
+  admin_users_path,
+  :new
+) %>
+
+<%= render 'form',
+  url: admin_user_path(@user),
+  user: @user
+%>

@@ -1,0 +1,37 @@
+# encoding: utf-8
+en:
+  projects:
+    _description: On this page you can create and edit projects.
+    add_name_of_project: Add name of project
+    add_test_run: New Test Run
+    all_projects: All projects
+    all_test_cases: More...
+    all_test_runs: Test Runs
+    ask_your_admin_to_create: Ask your admin to create
+    back: Back
+    before_using_this_section_: Before using this section, please create at least one
+    campaign: Campaign
+    created_at: Created at
+    created_by: Created by
+    custom_fields: Custom fields
+    dashboard: Dashboard
+    default_type: Default Test Case type
+    description: Description
+    edit: Edit
+    listing_projects: All projects
+    listing_test_case: Test Cases
+    listing_test_runs: Test Runs
+    name: Name
+    new: New
+    new_project: New project
+    no_active_campaign: No active campaign - please define one.
+    no_projects_to_display: No projects to display
+    no_test_cases_to_display: No Test Cases to display
+    none: None
+    or_activate_your_membership_: or activate your membership in an existing project
+    project: Project
+    projects: Projects
+    recent_test_cases: Recent Test Cases
+    recent_test_runs: Recent Test Runs
+    test_cases: Test Cases
+    updated_at: Updated at

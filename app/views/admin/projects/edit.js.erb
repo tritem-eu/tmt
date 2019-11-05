@@ -1,0 +1,12 @@
+app.modal.add("<%= render_modal({
+  header: t(:project, scope: :projects),
+  subject: h(@project.name),
+  subheader: present(@project).subheader,
+  body: render(partial: "form",
+    locals: {
+      project: @project,
+      url: admin_project_path(@project),
+      test_case_types: @test_case_types
+    }
+  )
+})%>")

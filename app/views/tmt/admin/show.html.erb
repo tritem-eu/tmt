@@ -1,0 +1,96 @@
+<%= left_navigation_for_admin active: :admin %>
+
+<%= page_header t(:administration, scope: :admin), {
+  right_side: alert_icons_for(:agent, :sunspot)
+} %>
+
+<div class='height-separator'></div>
+<%= page_description(t :administration_intro, scope: :admin) %>
+
+<div class='height-separator'></div>
+
+<div class="row">
+  <%= link_with_description(
+    name: t(:instance_configuration, scope: :admin),
+    path: admin_cfgs_path,
+    icon: 'cog',
+    description: t(:instance_configuration, scope: [:admin, :_description])
+  ) %>
+
+  <%= link_with_description(
+    name: t(:custom_fields, scope: :admin),
+    path: admin_test_case_custom_fields_path,
+    icon: 'unchecked',
+    description: t(:custom_fields, scope: [:admin, :_description])
+  ) %>
+
+  <%= link_with_description(
+    name: t(:enumerations, scope: :admin),
+    path: admin_enumerations_path,
+    icon: 'sort-by-attributes',
+    description: t(:enumerations, scope: [:admin, :_description])
+  ) %>
+</div>
+
+<div class="row">
+  <%= link_with_description(
+    name: t(:test_case_types, scope: [:admin, :_description]),
+    path: admin_test_case_types_path,
+    icon: 'file',
+    description: t(:test_case_types, scope: [:admin, :_description])
+  ) %>
+
+  <%= link_with_description(
+    name: t(:users, scope: :admin),
+    path: admin_users_path,
+    icon: 'user',
+    description: t(:users, scope: [:admin, :_description])
+  ) %>
+
+  <%= link_with_description(
+    name: t(:members, scope: :admin),
+    path: admin_members_path,
+    icon: 'link',
+    description: t(:members, scope: [:admin, :_description])
+  ) %>
+</div>
+
+<div class="row">
+  <%= link_with_description(
+    name: t(:projects, scope: :admin),
+    path: admin_projects_path,
+    icon: 'folder-open',
+    description: t(:projects, scope: [:admin, :_description])
+  ) %>
+
+  <%= link_with_description(
+    name: t(:campaigns, scope: :admin),
+    path: admin_campaigns_path,
+    icon: 'road',
+    description: t(:campaigns, scope: [:admin, :_description])
+  ) %>
+
+  <%= link_with_description(
+    name: t(:oslc_configuration, scope: :admin),
+    path: admin_oslc_cfgs_path,
+    icon: 'cog',
+    description: t(:oslc_configuration, scope: [:admin, :_description])
+  ) %>
+</div>
+
+<div class="row">
+  <%= link_with_description(
+    name: t(:machines, scope: :admin),
+    path: admin_machines_path,
+    icon: 'hdd',
+    description: t(:machines, scope: [:admin, :_description])
+  ) %>
+
+  <%= link_with_description(
+    name: t(:automation_adapters, scope: :admin),
+    path: admin_automation_adapters_path,
+    icon: 'facetime-video',
+    description: t(:automation_adapters, scope: [:admin, :_description])
+  ) %>
+
+</div>

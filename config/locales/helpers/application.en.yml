@@ -1,0 +1,16 @@
+# encoding: utf-8
+
+en:
+  helpers:
+    application:
+      admin: admin
+      new: New
+      edit: Edit
+      home: Home
+      administration: Administration
+      campaigns: Campaigns
+      campaign: Campaign
+      create: Create
+      projects: Projects
+      update: Update
+      test_runs: Test runs

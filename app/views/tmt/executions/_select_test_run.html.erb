@@ -1,0 +1,21 @@
+<div class="test-cases">
+  <div class='form-horizontal'>
+    <%= form_for("", url: select_versions_project_campaign_executions_path(project, campaign), html: {class: 'form-select-test-cases'}, remote: true) do |f| %>
+      <% (test_cases || []).each do |test_case| %>
+        <%= hidden_field_tag 'test_case_ids[]', test_case.id %>
+      <% end %>
+      <label class='control-label col-lg-3'>List of test runs
+        <%= link_new new_project_campaign_test_run_path(project, campaign), name: t(:new_test_run, scope: :executions) %>
+      </label>
+      <div class='col-lg-9'>
+        <%= select_tag "test_run_id", options_from_collection_for_select(test_runs, :id, :name, params['test_run_id'] || params[:old_test_run_id]), {prompt: t(:select_test_run, scope: :executions), class: 'form-control button-active-after-select'} %>
+        <div class="hight-separator"></div>
+      </div>
+      <div class="form-group">
+        <div class='col-lg-12'>
+          <%= f.submit t(:next, scope: :executions), class: "btn btn-primary in-modal-footer" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

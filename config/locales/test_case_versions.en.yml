@@ -1,0 +1,31 @@
+# encoding: utf-8
+
+en:
+  test_case_versions:
+    author: Author
+    back: Back
+    created_at: Created at
+    created_by: Created by
+    comment: Comment
+    converter: Converter
+    create: Create
+    datafile: Data file
+    default_comment: Default comment
+    download_file: Download file
+    id: Id
+    is_binary: Is binary
+    file_name: File name
+    file_size: File size
+    less_dots: "Less ..."
+    more_dots: "More ..."
+    progress: Upload
+    projects: Projects
+    save: Save
+    test_case: Test case
+    test_case_version: Test case version
+    upload: Upload
+    uploaded_file: Uploaded file
+    set_execution_result: "Set result"
+    version: Version
+    name: Name
+    new_version_of: as a new version of

@@ -1,0 +1,74 @@
+<div class="test-cases">
+  <form class='text-center hide-when-js-is-disabled'>
+    <% uuid = SecureRandom.uuid %>
+    <input type="radio" name="options" class="execution-select-newest-versions" id='<%= uuid %>' checked> <label for='<%= uuid %>'><%= t(:take_newest_versions_of_all_test_cases, scope: :executions) %></label>
+    <% uuid = SecureRandom.uuid %>
+    <input type="radio" name="options" class="execution-select-versions-manually" id='<%= uuid %>'> <label for='<%= uuid %>'><%= t(:select_versions_manually, scope: :executions) %></label>
+  </form>
+  <div class='height-separator hide-when-js-is-disabled'></div>
+  <div class='form-horizontal'>
+    <%= form_for("", url: push_versions_project_campaign_executions_path(project, campaign), html: {class: 'form-select-test-cases'}, remote: true) do |f| %>
+      <% (test_cases || []).each do |test_case| %>
+        <%= hidden_field_tag 'test_case_ids[]', test_case.id %>
+      <% end %>
+      <%= hidden_field_tag 'test_run_id', test_run.id %>
+
+      <div class="form-group hide-when-js-is-disabled">
+        <div class='form-search-test-case'>
+          <div class="input-group">
+            <input type="text" class="form-control search-field" placeholder="Enter searching text">
+            <span class="input-group-addon"><%= icon('search') %></span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group hide-when-js-is-disabled">
+        <div class="input-group col-lg-12">
+          <input type="checkbox" class='select-test-case-versions-show-all-versions'> <%= t(:show_all_versions, scope: :executions) %>
+          <input type="checkbox" class='select-test-case-versions-unselect-all-versions'> <%= t(:unselect_all_versions, scope: :executions) %>
+        </div>
+      </div>
+
+      <div class="form-group col-lg-12">
+        <br />
+        <ul class="list-style-none col-lg-6">
+          <% test_cases.each do |test_case| %>
+            <% class_name = (test_case.versions.size == 0 ? 'text-muted' : 'text-primary') %>
+
+            <li>
+              <% if test_run %>
+                <%= link_to select_test_cases_project_campaign_executions_path(project, campaign, test_run_id: test_run.id, test_case_id: test_case.id) do %>
+                  ▸ <%= h test_case.name %>
+                <% end %>
+              <% else %>
+                <a>▸ <%= h test_case.name %></a>
+              <% end %>
+              (<span class='<%= class_name %>'><b><%= test_case.versions.size %></b></span>)
+              <ul>
+                <% if test_case.versions.empty? %>
+                  <li>Empty</li>
+                <% end %>
+                <% class_name = "" %>
+                <% test_case.versions.sort{ |a, b| b.id <=> a.id }.each_with_index do |version, index| %>
+                  <li>
+                    <% if (index == 0 and version_ids.nil?) or (version_ids and version_ids.include?(version.id.to_s)) %>
+                      <%= check_box_tag "version_ids[]", version.id, true %>
+                    <% else %>
+                      <%= check_box_tag "version_ids[]", version.id, false %>
+                    <% end %>
+                    (<span class='counter'><%= used_version_ids.count(version.id) %></span>)
+                    <%= h(version.comment) %>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="form-group">
+        <div class='col-lg-12'>
+          <%= f.submit t(:add, scope: :executions), class: "btn btn-primary in-modal-footer only-one-click" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

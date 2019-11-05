@@ -1,0 +1,17 @@
+<%= page_header t(:select_test_run, scope: :executions) %>
+
+<%= breadcrumbs(
+  t(:projects, scope: :executions),
+  projects_or_root_path,
+  h(@project.name),
+  project_path(@project),
+  t(:select_test_run, scope: :executions)
+) %>
+
+<%= render "select_test_run",
+  campaign: @campaign,
+  project: @project,
+  test_cases: @test_cases,
+  test_run: @test_run,
+  test_runs: @test_runs
+%>

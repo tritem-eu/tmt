@@ -1,0 +1,46 @@
+<div class='container col-lg-4'>
+  <div class="panel panel-tmt", data-enumeration-id='<%= enumeration.id %>'>
+    <div class="panel-heading">
+      <h5 class="panel-title col-lg-5 padding-0px"><%= crop_string enumeration.name %></h5>
+      <% if !enumeration.unassigned? %>
+        <div class='col-lg-2 col-lg-offset-1 padding-0px'><%=  "used by" %></div>
+        <div class='col-lg-4 padding-0px'><%= link_to(crop_string(enumeration.related_custom_field.name), [:admin, enumeration.related_custom_field]) %></div>
+      <% end %>
+      <div class='height-separator-20'></div>
+    </div>
+    <div class="panel-body">
+      <%= link_edit [:edit, :admin, enumeration], remote: true %>
+      <span class='pull-right'><%= link_delete [:admin, enumeration], only_show: !enumeration.unassigned? %></span>
+      <table class="table table-condensed table-hover">
+        <thead>
+          <tr>
+            <th class='col-lg-4'><%= t(:value, scope: :enumerations) %></th>
+            <th class='col-lg-6'><%= t(:name, scope: :enumerations) %></th>
+            <th class='col-lg-2'><%= t(:action, scope: :enumerations) %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% enumeration.values.each do |val| %>
+            <tr>
+              <td><%= crop_string(val.numerical_value) %></td>
+              <td><%= crop_string(val.text_value) %><td>
+                <%= dropdown_menu_caret(ul_class: 'pull-right', popover: t(:no_actions, scope: :test_runs)) do |array| %>
+                  <% array << link_edit([:edit, :admin, enumeration, val], remote: true) %>
+                  <% if enumeration.unassigned? %>
+                    <% array << link_delete([:admin, enumeration, val]) %>
+                  <% end %>
+                <% end %>
+            </tr>
+          <% end %>
+          <td></td>
+          <td></td>
+          <td class='text-center'>
+            <%= link_to new_admin_enumeration_enumeration_value_path(enumeration), remote: true, "data-toggle" => "modal" do %>
+              <%= icon('plus-sign') %>
+            <% end %>
+          </td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

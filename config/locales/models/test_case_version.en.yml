@@ -1,0 +1,10 @@
+# encoding: utf-8
+
+en:
+  models:
+    test_case_version:
+      dont_added_file: don't added file
+      file_couldnt_be_larger_than_mb: "File couldn't be larger than %{file_size} MB"
+      has_the_same_content_as_: has the same content as last uploaded file
+      should_has_got_extension: "should has got '%{type}' extension"
+      was_saved: was saved

@@ -1,0 +1,23 @@
+<% present(@custom_field, Tmt::CustomFieldPresenter) do |custom_field_present|%>
+  <%= page_header(custom_field_present.header_name) %>
+
+  <%= breadcrumbs(
+    :admin,
+    admin_cfgs_path,
+    custom_field_present.full_model_name,
+    custom_field_present.index_path,
+    :new
+  ) %>
+
+  <div class='col-lg-6', data-type-name='<%= @type_name %>'>
+    <%= render 'form',
+      custom_field: @custom_field,
+      type_names: [@type_name],
+      projects: @projects,
+      url: custom_fields_path(@custom_field),
+      type_name: @type_name
+    %>
+  </div>
+
+  <%= select_tag 'type_name', options_for_select(@type_names.map {|type_name| [type_name, type_name]}), class: "change-custom-field-type hidden"  %>
+<% end %>

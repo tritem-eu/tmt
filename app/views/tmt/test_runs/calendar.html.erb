@@ -1,0 +1,54 @@
+<%= left_navigation_for_dashboard active: :test_runs, project: @project %>
+
+<%= page_header(
+  t(:test_runs, scope: :test_runs),
+  right_side: present(@project).link_to_new_test_run
+) %>
+
+<%= breadcrumbs(
+  :projects,
+  root_path,
+  @project.name,
+  project_path(@project),
+  t(:test_runs, scope: :test_runs)
+) %>
+
+<div class='row'>
+  <div class='col-lg-3'>
+    <%= render 'search_form',
+      active_tab: @active_tab,
+      search: @search
+    %>
+  </div>
+  <div class='col-lg-9'>
+    <%= render 'toggle_tab',
+      action: params['action'],
+      project: @project,
+      campaign: @campaign
+    %>
+
+    <div class='height-separator'></div>
+    <div class='text-center'>
+      <div class="form-group">
+      <%= form_tag [:calendar, @project, :test_runs], method: :get, class: 'form-inline search-calendar-form' do %>
+        <%= submit_tag '◀', class: 'btn btn-primary', name: 'button[previous]' %>
+        <%= select_year(@year, {}, {class: 'form-control'}) %>
+        <%= select_month(@month, {}, {class: 'form-control'}) %>
+        <%= submit_tag t(:show, scope: :test_runs), class: 'btn btn-primary' %>
+        <%= submit_tag '▶', class: 'btn btn-primary', name: 'button[next]' %>
+      <% end %>
+      </div>
+      <div class="form-group">
+      </div>
+    </div>
+    <div class='height-separator'></div>
+
+    <%= render 'calendar',
+      test_runs: @test_runs,
+      project: @project,
+      campaign: @campaign,
+      month: @month,
+      year: @year
+    %>
+  </div>
+</div>

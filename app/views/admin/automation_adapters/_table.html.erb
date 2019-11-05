@@ -1,0 +1,34 @@
+<% if adapters.any? %>
+  <table class="table table-hover project-table">
+    <thead>
+      <tr>
+        <th class='col-lg-2'><%= t(:user, scope: :automation_adapters) %></th>
+        <th class='col-lg-2'><%= t(:project, scope: :automation_adapters)%></th>
+        <th class='col-lg-3'><%= t(:name, scope: :automation_adapters)%></th>
+        <th class='col-lg-3'><%= t(:type, scope: :automation_adapters)%></th>
+        <th class='col-lg-1'><%= t(:polling_interval, scope: :automation_adapters)%></th>
+        <th class='col-lg-3'><%= t(:description, scope: :automation_adapters)%></th>
+        <th class='col-lg-1'><%= t(:action, scope: :automation_adapters)%></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% adapters.each do |adapter| %>
+        <tr>
+          <% present adapter do |presenter| %>
+            <td class='crop'><%= presenter.link_user %></td>
+            <td class='crop'><%= presenter.link_project %></td>
+            <td class='crop'><%= presenter.name %></td>
+            <td class='crop'><%= presenter.type %></td>
+            <td class='crop'><%= presenter.polling_interval %></td>
+            <td class='crop'><%= presenter.description %></td>
+            <td class='crop'><%= presenter.link_update %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <%= info({
+    head: t(:list_of_automation_adapter_is_empty, scope: :automation_adapters)
+  }) %>
+<% end %>

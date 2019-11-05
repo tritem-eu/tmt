@@ -1,0 +1,75 @@
+<%= left_navigation_for_dashboard active: :dashboard, project: @project %>
+
+<% present @project do |project_present| %>
+  <%= page_header(
+    t(:project, scope: :projects),
+    subject: h(@project.name),
+    subheader: project_present.subheader
+  ) %>
+<% end %>
+
+<%= breadcrumbs(
+  t(:projects, scope: :projects),
+  projects_or_root_path,
+  @project.name
+) %>
+
+<%= page_description @project.description %>
+
+<div class='height-separator'></div>
+
+<div class='row hide-when-js-is-disabled'>
+  <div class='col-lg-6'>
+    <div class="panel panel-tmt">
+      <div class="panel-heading">
+        <h5 class="panel-title"><%= icon('stats') %> Created Test Cases per day</h5>
+      </div>
+      <div class="panel-body">
+        <div id="test-case-graph-last-month" data-data='' style='height: 150px;'>
+          <% @test_case_graph.each do |key, value| %>
+            <div class='graph-point' data-xvalue='<%= key %>', data-yvalue='<%= value %>'></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-lg-6'>
+    <div class="panel panel-tmt">
+      <div class="panel-heading">
+        <h5 class="panel-title"><%= icon('stats') %> Executed Test Runs per day</h5>
+      </div>
+      <div class="panel-body">
+        <div id="test-run-graph-last-month" data-data='' style='height: 150px;'>
+          <% @test_run_graph.each do |key, value| %>
+            <div class='graph-point' data-xvalue='<%= key %>', data-yvalue='<%= value %>'></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='height-separator'></div>
+
+<div class='row'>
+  <div class='col-lg-6'>
+    <%= render "/tmt/test_cases/table_in_panel",
+      project:@project,
+      campaign: @campaign,
+      test_cases: @test_cases,
+      title: t(:recent_test_cases, scope: :projects)
+    %>
+  </div>
+  <div class='col-lg-6'>
+    <%= render partial: "/tmt/test_runs/table_in_panel",
+      locals: {
+        project: @project,
+        campaign: @campaign,
+        test_runs: @test_runs,
+        title: t(:recent_test_cases, scope: :projects)
+      }
+    %>
+  </div>
+</div>
+<%= render partial: 'tmt/user_activities/history', locals: {activities: @project.user_activities, type: :project, is_remote: true } %>
