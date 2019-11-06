@@ -5,8 +5,7 @@ module Tmt
         admin = ::User.admins.first
         ::Tmt::Project.where(name: 'sandbox tests').first_or_create(creator_id: admin.id, description: "First use of the system in a real-world environment")
 
-        [
-        ].each do |name, type_name, default_value, enum_values|
+        [].each do |name, type_name, default_value, enum_values|
           if type_name == :enum
             enumeration = ::Tmt::Enumeration.where(name: name).first_or_create(default: default_value)
             enum_values.each_with_index do |text_value, index|

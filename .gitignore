@@ -39,7 +39,6 @@ db/schema.rb
 /versions
 /solr
 /store_versions
-/config/database.yml
 /coverage.data
 /coverage/
 /db/*.javadb/
@@ -94,7 +93,4 @@ zeus.sh
 
 # vim artifacts
 **.swp
-
-# Ignore application configuration
-/config/application.yml
 
