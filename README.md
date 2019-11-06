@@ -8,12 +8,12 @@ TMT is designed to run on Linux system. The other systems are not supported.
 
 ## Installation ##
 
-	Before laucnhing TMT you need to prepare your workstation by installing the following tools:
-	* GIT,
-	* Ruby v2.0.0p648,
-	* libmysqlclient-dev library
-	
-	In terminal you can go to location where will be installed TMT. Next you should use the following commands:
+Before laucnhing TMT you need to prepare your workstation by installing the following tools:
+* GIT,
+* Ruby v2.0.0p648,
+* libmysqlclient-dev library
+
+In terminal you can go to location where will be installed TMT. Next you should use the following commands:
 
 	```bash
 	git clone https://github.com/tritem-eu/TMT.git
@@ -23,8 +23,8 @@ TMT is designed to run on Linux system. The other systems are not supported.
 	rails s
 	```
 	
-	After installing the application you can open Browser and go to http://localhost:3000/users/sign_in page.
-	In the view you will see two fields "Email" and "Password" where you should fill in respectively "admin@example.com" and "top-secret".
+After installing the application you can open Browser and go to http://localhost:3000/users/sign_in page.
+In the view you will see two fields "Email" and "Password" where you should fill in respectively "admin@example.com" and "top-secret".
 	
 ## Tools ##
  * git: true
