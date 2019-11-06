@@ -2,30 +2,40 @@
 
   TMT is tool which manages the automatic tests.
 
+## Supported Operating Systems ##
+
+TMT is designed to run on Linux system. The other systems are not supported.
+
+## Installation ##
+
+	Before laucnhing TMT you need to prepare your workstation by installing the following tools:
+	* GIT,
+	* Ruby v2.0.0p648,
+	* libmysqlclient-dev library
+	
+	In terminal you can go to location where will be installed TMT. Next you should use the following commands:
+
+	```bash
+	git clone https://github.com/tritem-eu/TMT.git
+	bundle
+	rake db:migrate RAILS_ENV=development
+    rake db:seed RAILS_ENV=development
+	rails s
+	```
+	
+	After installing the application you can open Browser and go to http://localhost:3000/users/sign_in page.
+	In the view you will see two fields "Email" and "Password" where you should fill in respectively "admin@example.com" and "top-secret".
+	
 ## Tools ##
  * git: true
  * dev_webserver: webrick
  * prod_webserver: thin
  * database: sqlite, mysql
- * templates: erb
  * tests: rspec
  * frontend: bootstrap
  * email: smtp
  * authentication: devise
  * authorization: cancan
- * rvm: true
-
-## Requirements
-
-System should have:
- * '/tmp' directory
-
-System should have installed libmysqlclient-dev library
-
-## How to run sunspot ##
-
-bundle exec rake sunspot:solr:start
-
 
 ## Booting application ##
 
@@ -47,14 +57,7 @@ Step by step
      RAILS_ENV=production TMT_DB=sandbox rake tmt:seed:sandbox
 
 4. Upload Scripts with Set structure for projec sandbox
-    Running sunspot if it is not running
-
-      RAILS_ENV=production TMT_DB=sandbox rake sunspot:solr:start
-
     Adding directories with files into directory 'tmp/script-peron-production'. After it you should run commands
-
-      RAILS_ENV=production TMT_DB=sandbox rake sunspot:solr:start
-
       RAILS_ENV=production TMT_DB=sandbox rake tmt:script:upload_test_cases
 
 5. Running application
@@ -102,27 +105,7 @@ Imporant commands:
 
     rake tmt:seed:sandbox
 
-* Drop and then reindex all solr models that are located in your application's models directory
-
-    rake sunspot:reindex[batch_size,models]
-
-* Start the Solr instance
-
-    rake sunspot:solr:start
-
-* Stop the Solr instance
-
-    rake sunspot:solr:stop
-
 * Show all commands
 
     rake -T
 
-## Curl ##
-    internal server:
-
-    curl -X PUT --user bench@example.com http://10.11.0.155:3001/tmt_test/oslc/qm/service-proviplans/3/set-status-executing.json
-
-    external server:
-
-    curl -X PUT --user bench@example.com -x '' 10.11.0.155:3001/tmt_test/oslc/qm/service-providers/1/test-plans/4/set-status-executing.json
