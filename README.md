@@ -72,15 +72,11 @@ Step by step
 
 ## Tests ##
 
-Application has got three type commands to run test for:
+Application has got two type commands to run test for:
 
 * An unit test and an integration
 
-    rspec spec
-
-* Browser tests
-
-    rspec spec --tag @js
+    bundle exec rspec spec
 
 * javaScript language
 
