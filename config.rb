@@ -21,7 +21,7 @@ module Tmt
           description: ''
         }
       }
-      @@config[:expiration_date] = [2020, 1, 1]
+      @@config[:expiration_date] = [3000, 1, 1]
     end
 
     def @@config.value(*args)
@@ -61,16 +61,6 @@ module Tmt
           host: 'localhost:3000'
         }
       },
-      db: "
-        adapter: mysql2
-        encoding: utf8
-        database: tmt_development
-        username: guest
-        reconnect: true
-        password: top-secret
-        host: localhost
-        port: 
-      ",
       url_options: {
         host: 'localhost',
         port: 3000,
@@ -87,12 +77,6 @@ module Tmt
         protocol: 'https',
         script_name: '/tmt_production'
       },
-      db: "
-        adapter: sqlite3
-        database: db/production.sqlite3
-        pool: 5
-        timeout: 5000
-      ",
       mailer: {
         default_from: 'from@example.com',
         default_url_options: {
@@ -132,5 +116,4 @@ module Tmt
       }
     end
   end
-
 end

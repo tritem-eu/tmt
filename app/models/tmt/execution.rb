@@ -50,10 +50,10 @@ module Tmt
     end
 
     # Return records of individual statues like
-    # :none, :executing, :passed, :failed, :error
-    statuses.each do |status|
-      scope status, -> { where(status: status) }
-    end
+      scope STATUS_EXECUTING, -> { where(status: STATUS_EXECUTING) }
+      scope STATUS_PASSED, -> { where(status: STATUS_PASSED) }
+      scope STATUS_FAILED, -> { where(status: STATUS_FAILED) }
+      scope STATUS_ERROR, -> { where(status: STATUS_ERROR) }
 
     def attached_files
       Dir[File.join(self.directory_path, "*")].map do |path|

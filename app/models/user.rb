@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
   # return member with ids that same like self.id and project_id
   def member_for_project(project_or_id)
     entry = nil
-    if project_or_id.class == Fixnum
+    if project_or_id.class == Integer
       entry = members.where(project_id: project_or_id)
     else
       entry = members.where(project: project_or_id)

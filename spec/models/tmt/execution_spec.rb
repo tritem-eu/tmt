@@ -26,9 +26,9 @@ describe Tmt::Execution do
 
     it "should validate for result from 'executing' to 'none'" do
       execution.update(status: :executing)
-      execution.status.should eq :executing
+      execution.status.should eq "executing"
       execution.update(status: :none).should be true
-      execution.status.should eq :none
+      execution.status.should eq "none"
     end
 
   end
@@ -102,7 +102,7 @@ describe Tmt::Execution do
 
   it "update_for_user" do
     execution = create(:execution_for_failed)
-    execution.status.should eq :failed
+    execution.status.should eq "failed"
     execution.progress.should eq 0
 
     execution.update_for_user(progress: 13, status: 'passed')
