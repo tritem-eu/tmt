@@ -95,6 +95,9 @@ module Tmt
     # Add form wher user can edit last content
     # present(new_version).edit_file_content(active_version)
     def edit_file_content(project, test_case, active_version)
+      if version.id == null
+        return nil
+      end
       form_for(version, url: project_test_case_version_path(project, test_case, version), as: :test_case_version) do |f|
         add_tag do |tag|
           tag << f.hidden_field(:test_case_id)

@@ -25,7 +25,7 @@ module ActionDispatch
           else
             method, args = builder.handle_model record_or_hash_or_array
           end
-          method = method.gsub("tmt_", "").gsub("tmt_", "")
+          method = method.gsub("tmt_", "").gsub("tmt_", "").gsub("tmt_", "")
           if options.empty?
             recipient.send(method, *args)
           else

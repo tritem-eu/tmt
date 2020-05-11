@@ -22,6 +22,8 @@ class Tmt::TestCaseSearcher < ApplicationSearcher
       custom_field_value = Tmt::TestCaseCustomFieldValue.arel_table
       custom_field = nil
       @filter['custom_fields'].each do |custom_field_id, values|
+        p "********************&"
+        p custom_field_value
         ids = Tmt::TestCaseCustomFieldValue.where(custom_field_value[:custom_field_id].eq(custom_field_id).and(custom_field_value[:bool_value].in(values))).map(&:test_case_id)
         custom_field ||= ids
         custom_field = custom_field & ids
@@ -68,6 +70,8 @@ class Tmt::TestCaseSearcher < ApplicationSearcher
   end
 
   def options_for_facets(category, options={})
+    p "**********^^"
+    p category
     case category
     when :creator
       {
@@ -84,6 +88,7 @@ class Tmt::TestCaseSearcher < ApplicationSearcher
         ids_and_names: array_to_hash(Tmt::TestCaseType.undeleted.pluck :id, :name)
       }
     when :custom_field
+      return {}
       custom_field = options[:custom_field]
       if custom_field.type_name == 'bool'
         ids_and_amount = without_filter.where(Tmt::TestCaseCustomFieldValue.arel_table[:custom_field_id].eq(custom_field.id)).group(:bool_value).count

@@ -10,7 +10,7 @@ gem 'rake'#, '~> 11.0'
 gem 'json'
 
 # sudo apt-get install libmysqlclient-dev
-gem 'mysql2', '0.3.18'
+gem 'mysql2', '0.4.9'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -79,7 +79,7 @@ end
 
 group :production do
   # the app server
-	gem 'thin', '1.6.4'
+  gem 'thin', '1.7.2'
 end
 
 group :test do

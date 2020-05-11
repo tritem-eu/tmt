@@ -72,7 +72,7 @@ module LinksHelper
 
   def link_user(user)
     return unless user
-    user = User.where(id: user).first if user.class == ::Fixnum
+    user = User.where(id: user).first if user.class == ::Integer
     if user
       add_link user_path(user) do |tag|
         tag.space(user.machine? ? icon("th") : icon("user"))

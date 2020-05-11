@@ -117,6 +117,7 @@ class Tmt::TestRunSearcher < ApplicationSearcher
         ids_and_names: array_to_hash(Tmt::TestRun.statuses.to_a)
       }
     when :custom_field
+      return {}
       custom_field = options[:custom_field]
       if custom_field.type_name == 'bool'
         ids_and_amount = without_filter.where(Tmt::TestRunCustomFieldValue.arel_table[:custom_field_id].eq(custom_field.id)).group(:bool_value).count
