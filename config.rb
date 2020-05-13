@@ -21,6 +21,10 @@ module Tmt
       @@config[:smtp_settings]
     end
 
+    def @@config.ROLES
+      ["admin", "user"]
+    end
+
     def @@config.MAILER_DEFAULT_FROM
       @@config[:mailer][:default_options][:from]
     end

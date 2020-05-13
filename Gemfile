@@ -46,7 +46,6 @@ gem 'devise_invitable'
 gem 'ptools', '1.3.3'
 
 # Simple Rails app configuration
-#gem 'figaro', '1.0.0'
 gem 'rolify', '3.3.0.rc4'
 gem 'base_presenter', '~> 0.1.0'
 gem 'rails_extras', '0.1.5', :require => [

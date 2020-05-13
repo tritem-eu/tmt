@@ -15,7 +15,7 @@ module Tmt
 
         def roles
           puts 'ROLES:'
-          YAML.load(ENV['ROLES']).each do |role|
+          Tmt.config.ROLES.each do |role|
             Role.where(name: role).first_or_create
             puts '  role: ' << role
           end

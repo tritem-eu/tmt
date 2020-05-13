@@ -7,11 +7,11 @@ module Tmt
 
         def person_bench
           password = "top-secret"
-          users = User.where(email: 'michal@example.com')
+          users = User.where(email: 'tmt@example.com')
           if users.size > 0
             user = users.first
           else
-            user = User.create(name: 'michal', email: 'michal@example.com', password: password, password_confirmation: password, is_machine: false)
+            user = User.create(name: 'tmt', email: 'tmt@example.com', password: password, password_confirmation: password, is_machine: false)
           end
           puts 'user: ' << user.name
           user.confirm!
