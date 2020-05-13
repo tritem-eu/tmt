@@ -1,13 +1,16 @@
 development:
-  default_from: 'tmt@example.com'
+  default_options:
+    from: 'tmt@example.com'
   default_url_options:
     host: 'localhost:3000'
 test:
-  default_from: 'tmt@example.com'
+  default_options:
+    from: 'tmt@example.com'
   default_url_options:
     host: 'localhost:3000'
 production:
-  default_from: <%= ENV["MAILER_DEFAULT_FROM"] %>
+  default_options:
+    from: <%= ENV["MAILER_DEFAULT_FROM"] %>
   default_url_options:
     host: <%= ENV["MAILER_URL_OPTIONS_HOST"] %>
     port: <%= ENV["MAILER_URL_OPTIONS_PORT"] %>

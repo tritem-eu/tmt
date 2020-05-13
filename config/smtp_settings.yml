@@ -1,0 +1,5 @@
+development: {}
+test: {}
+production:
+  address: <%= ENV["SMTP_ADDRESS"] %>
+  openssl_verify_mode: <%= ENV["SMTP_OPENSSL_VERIFY_MODE"] %>

@@ -3,7 +3,7 @@ app.modal.add("<%= render_modal({
   body: render(partial: "form",
     locals: {
       project: @project,
-      url: admin_project_path(@project),
+      url: admin_projects_path(),
       test_case_types: @test_case_types
     }
   )

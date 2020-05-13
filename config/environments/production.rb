@@ -69,18 +69,9 @@ Tmt::Application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = Tmt.config[:mailer][:default_url_options]
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.1und1.de',
-    port:                 587,
-    domain:               'tritem.eu',
-    user_name:            'example@tritem.eu',
-    password:             'password',
-    authentication:       'plain',
-    enable_starttls_auto:  true
-  }
-  config.action_mailer.default_options = {from: 'no-replay@example.com'}
+  config.action_mailer.smtp_settings Tmt.config.SMTP_SETTINGS
+  config.action_mailer.default_options = Tmt.config.MAILER_DEFAULT_OPTIONS
   config.action_mailer.default_url_options = Tmt.config.MAILER_DEFAULT_URL_OPTIONS
   # change to true to allow email to be sent during development
   config.action_mailer.perform_deliveries = true
