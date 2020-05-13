@@ -70,7 +70,7 @@ Tmt::Application.configure do
 
   # ActionMailer Config
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings Tmt.config.SMTP_SETTINGS
+  config.action_mailer.smtp_settings = Tmt.config.SMTP_SETTINGS
   config.action_mailer.default_options = Tmt.config.MAILER_DEFAULT_OPTIONS
   config.action_mailer.default_url_options = Tmt.config.MAILER_DEFAULT_URL_OPTIONS
   # change to true to allow email to be sent during development

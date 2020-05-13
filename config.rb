@@ -9,7 +9,7 @@ module Tmt
       @@config[:smtp_settings] = Rails.application.config_for(:smtp_settings).to_h.deep_symbolize_keys
       @@config[:oslc] = {
         execution_adapter_type: {
-          id: 'de.tritem.adapter',
+          id: 'eu.tritem.katowice.tmt.adapter',
           name: 'Tritem type',
           description: ''
         }
