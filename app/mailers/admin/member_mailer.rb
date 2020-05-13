@@ -1,5 +1,5 @@
 class Admin::MemberMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: Tmt.config.MAILER_DEFAULT_FROM
 
   def attached_to_project(sender, recipient, project)
     @sender = sender

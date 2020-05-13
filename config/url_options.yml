@@ -1,0 +1,13 @@
+development:
+  host: 'localhost'
+  port: 3000
+  protocol: 'http'
+test:
+  host: 'localhost'
+  port: 3000
+  protocol: 'http'
+production:
+  host: <%= ENV["URL_OPTIONS_HOST"] %>
+  port: <%= ENV["URL_OPTIONS_PORT"] %>
+  protocol: <%= ENV["URL_OPTIONS_PROTOCOL"] %>
+  script_name: <%= ENV["URL_OPTIONS_SCRIPTNAME"] %>

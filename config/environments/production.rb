@@ -81,6 +81,7 @@ Tmt::Application.configure do
     enable_starttls_auto:  true
   }
   config.action_mailer.default_options = {from: 'no-replay@example.com'}
+  config.action_mailer.default_url_options = Tmt.config.MAILER_DEFAULT_URL_OPTIONS
   # change to true to allow email to be sent during development
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
